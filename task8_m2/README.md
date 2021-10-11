@@ -32,6 +32,9 @@ http://localhost:8080/app/task8m2
 4. Paste it into the address bar
 5. Click the "Go" button or press `[Enter]`
 
+### The result:
+![Result][3]
+
 <!--
 * [Maven configuration][1]
 * [Build project via Maven][2]
@@ -39,3 +42,4 @@ http://localhost:8080/app/task8m2
 
 [1]: https://github.com/yoricsv/001_JMaven_/blob/master/res/read/Maven_Configuration.md
 [2]: https://github.com/yoricsv/002_JMvnWebapp_/blob/master/README.md
+[3]:tmp/img/task8_mod2.png
