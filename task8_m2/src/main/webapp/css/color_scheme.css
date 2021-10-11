@@ -1,0 +1,12 @@
+:root{
+    /* --------------------- SERVLET COLOR SCHEME ---------------------- */
+
+    /* BACKGROUND */
+    --bg_color-white                  : rgb(255, 255, 255); /* #ffffff */
+    --bg_color-whitesmoke             : rgb(245, 245, 245); /* #f5f5f5 */
+    --bg_color-moccasin               : rgb(255, 228, 181); /* #FFE4B5 */
+    --bg_color-steelblue              : rgb(70,  130, 180); /* #4682b4 */
+
+    /* TEXT */
+    --text_color-black                : rgb(0,   0,   0);   /* #000000 */
+}

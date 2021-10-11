@@ -1,0 +1,41 @@
+:root{
+	--color-black:          #000000  /* rgb(0,   0,   0)   */ ;
+	--color-dimgray:        #696969  /* rgb(105, 105, 105) */ ;
+	--color-gray:           #808080  /* rgb(80,  80,  80)  */ ;
+	--color-darkgray:       #a9a9a9  /* rgb(169, 169, 169) */ ;
+	--color-saddlebrown:    #8b4513  /* rgb(139, 69,  19)  */ ;
+	--color-maroon:         #800000  /* rgb(128, 0,   0)   */ ;
+    --color-crimson:        #dc143c  /* rgb(220, 20,  60)  */ ;
+	--color-red:            #ff0000  /* rgb(255, 0,   0)   */ ;
+	--color-darkorange:     #ff8c00  /* rgb(255, 140, 0)   */ ;
+    --color-orange:         #ffa500  /* rgb(255, 165, 0)   */ ;
+    --color-moccasin:       #FFE4B5  /* rgb(255, 228, 181) */ ;
+    --color-white:          #ffffff  /* rgb(255, 255, 255) */ ;
+    --color-whitesmoke:     #f5f5f5  /* rgb(245, 245, 245) */ ;
+    --color-linen:          #faf0e6  /* rgb(250, 240, 230) */ ;
+	--color-beige:          #f5f5dc  /* rgb(245, 245, 220) */ ;
+    --color-lightcyan:      #e0ffff  /* rgb(224, 255, 255) */ ;
+    --color-lavender:       #e6e6fa  /* rgb(230, 230, 250) */ ;
+    --color-yellow:         #ffff00  /* rgb(255, 255, 0)   */ ;
+	--color-gold:           #ffd700  /* rgb(255, 215, 0)   */ ;
+    --color-goldrod:        #daa520  /* rgb(218, 165, 32)  */ ;
+    --color-forestgreen:    #228b22  /* rgb(34,  139, 34)  */ ;
+	--color-seagreen:       #2e8b57  /* rgb(46,  139, 87)  */ ;
+	--color-steelblue:      #4682b4  /* rgb(70,  130, 180) */ ;
+    --color-slateblue:      #6a5acd  /* rgb(106, 90,  205) */ ;
+    --color-darkslateblue:  #483d8b  /* rgb(72,  61,  139) */ ;
+    --color-mediumblue:     #0000cd  /* rgb(0,   0,   200) */ ;
+	--color-midnightblue:   #191970  /* rgb(25,  25,  112) */ ;
+
+
+    /* --------------------- PARKING COLOR SCHEME ---------------------- */
+
+    /* BACKGROUND */
+    --bg_color-white                  : rgb(255, 255, 255); /* #ffffff */
+    --bg_color-whitesmoke             : rgb(245, 245, 245); /* #f5f5f5 */
+    --bg_color-moccasin               : rgb(255, 228, 181); /* #FFE4B5 */
+    --bg_color-steelblue              : rgb(70,  130, 180); /* #4682b4 */
+
+    /* TEXT */
+    --text_color-black                : rgb(0,   0,   0);   /* #000000 */
+}
