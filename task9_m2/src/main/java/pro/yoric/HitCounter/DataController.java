@@ -27,24 +27,19 @@ public class DataController
     }
 
     @Override
-    public boolean setInfo()
+    public void setInfo()
         throws IOException
     {
-        FileWriter fw = new FileWriter(file);
+        BufferedWriter fbw =
+            new BufferedWriter(
+                 new FileWriter(file)
+        );
 
-//        if (fw.write(0))
-//            return false;
+        fbw.write(getInfo());
 
-//        fw.write(str.charAt(i));          // System.out.println("Writing successful");
-
-        fw.close();
-        return false;
+        fbw.flush();
+        fbw.close();
     }
-
-//    public DataController(String pathname) throws IOException { super(pathname); }
-//    public DataController(String parent, String child) throws IOException { super(parent, child); }
-//    public DataController(File parent, String child) throws IOException { super(parent, child); }
-//    public DataController(URI uri) throws IOException { super(uri); }
 
     private int    quantity;
     private String content;

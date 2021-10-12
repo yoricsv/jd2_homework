@@ -1,22 +1,33 @@
 package pro.yoric.HitCounter;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.annotation.*;
 
-
 class FileInstance
 {
-    static FileInstance instance = null;                // IMPORTANT!!!
+    static FileInstance instance = null;                    // IMPORTANT!!!
 
-    private FileInstance(File f)                        // PRIVATE CONSTRUCTOR
+    private FileInstance(File f)                            // PRIVATE CONSTRUCTOR
     {
         try
         {
-            if (f.createNewFile())
-                shortFilePath = f.getAbsolutePath();
+            if (!f.createNewFile())
+            {
+                BufferedWriter fbw =
+                    new BufferedWriter(
+                        new FileWriter(f)
+                );
+                fbw.write(0);
+                fbw.flush();
+                fbw.close();
+                shortFilePath = f.getPath();
+            }
             else
-                System.out.println("Can't create file");
+                shortFilePath = f.getAbsolutePath();
+
         }
         catch (IOException e)
         {
@@ -31,8 +42,8 @@ class FileInstance
             File f = new File(FILEPATH, FILENAME);
 
             if (   f.exists()
-                    && f.canRead()
-                    && f.canWrite())
+                && f.canRead()
+                && f.canWrite())
                 return shortFilePath = f.getAbsolutePath();
             else
             {
