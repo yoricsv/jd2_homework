@@ -1,20 +1,21 @@
 package pro.yoric.HitCounter;
 
-import jakarta.servlet.ServletContext;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-
-import java.io.File;
-import java.io.IOException;
-
 public class HitCounter
-    implements IDataController
+    implements IHitCounter
 {
+    public void init()
+    {
+        visitsCounter = 0;
+    }
+
+    @Override
+    public void addVisit()
+    {
+
+    }
 
 
-
-//    public void doGet(HttpServletRequest req,
+    //    public void doGet(HttpServletRequest req,
 //                      HttpServletResponse response)
 //        throws ServletException,
 //            IOException
@@ -33,19 +34,7 @@ public class HitCounter
 //            count++;
 //        }
 //    }
-
-
-    @Override
-    public int getInfo()
-    {
-        return 0;
-    }
-
-    @Override
-    public boolean setInfo()
-    {
-        return false;
-    }
+    private int visitsCounter = 0;
 
 
 }

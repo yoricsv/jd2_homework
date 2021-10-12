@@ -20,6 +20,8 @@ public class HitCounterServlet extends HttpServlet
         throws ServletException,
                IOException
     {
+        //IHitCounter.addVisit();
+
         try
         {
             PrintWriter out = resp.getWriter();

@@ -1,89 +1,81 @@
 package pro.yoric.HitCounter;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URI;
-
-
-class FileInstance
-{
-    static FileInstance instance = null;                 // IMPORTANT!!!
-
-    private FileInstance(String fileName)                // PRIVATE CONSTRUCTOR
-    {
-        try
-        {
-            File f = new File(fileName);
-
-            if (!f.createNewFile())
-                this.filePath = f.getPath();             // File already exists
-            else
-                this.filePath = f.getAbsolutePath();
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-    static public FileInstance getInstance()             // FACTORY METHOD (can provide the instance)
-    {
-        if (instance == null)
-            instance = new FileInstance(FILENAME);
-
-        return instance;
-    }
-
-    public String getPath()
-    {
-        return this.filePath;
-    }
-
-    private static final String       FILENAME = "visit.dat";
-    private              String       filePath = "";
-}
-//    File visits = FileInstance.getInstance(); // GET FILE INSTANCE
-//
-//        visits.addPath(FILEPATH);
-//
-//                if()
-//                {
-//                try
-//                {
-//                visits.createNewFile();
-//                }
-//                catch (IOException e)
-//                {
-//                e.printStackTrace();
-//                }
-//
-//                }
-
-
-
-
+import java.io.*;
 
 public class DataController
-    extends File
+    implements IDataController
 {
-    public DataController(String pathname)
-    {
+    String file = FileInstance.getPath();
 
-        super(pathname);
+    @Override
+    public int getInfo()
+        throws FileNotFoundException
+    {
+        FileReader fr = new FileReader(file);
+        return 0;
     }
 
-    public DataController(String parent, String child)
+    @Override
+    public boolean setInfo()
+        throws IOException
     {
-        super(parent, child);
+        FileWriter fw = new FileWriter(file);
+        return false;
     }
 
-    public DataController(File parent, String child)
+
+
+
+
+
+    public DataController()
+        throws IOException
     {
-        super(parent, child);
+
     }
 
-    public DataController(URI uri)
-    {
-        super(uri);
-    }
+//        fw.write(str.charAt(i));
+//    // System.out.println("Writing successful");
+//            fw.close();                                 // close the file
+//
+//
+//    int quantity;                                     // variable declaration
+//    FileReader fr = null;                       // check if File exists or not
+//
+//    try
+//    {
+//        fr = new FileReader(file);
+//    }
+//    catch (FileNotFoundException fe)
+//    {
+//        System.out.println("File not found");
+//    }
+//
+//    public DataController() throws IOException {
+//    }
+//
+//    while((quantity = fr.read()) != -1)              // read from FileReader till the end of file
+//        System.out.print((char)quantity);
+//
+//    fr.close();                                 // close the file
+
+
+
+
+//    public DataController(String pathname) throws IOException {
+//
+//        super(pathname);
+//    }
+//
+//    public DataController(String parent, String child) throws IOException {
+//        super(parent, child);
+//    }
+//
+//    public DataController(File parent, String child) throws IOException {
+//        super(parent, child);
+//    }
+//
+//    public DataController(URI uri) throws IOException {
+//        super(uri);
+//    }
 }
