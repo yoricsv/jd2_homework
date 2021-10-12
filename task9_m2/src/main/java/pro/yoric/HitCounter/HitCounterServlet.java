@@ -9,21 +9,20 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "HitCounterServlet", urlPatterns = "/task9m2")
-public class HitCounterServlet extends HttpServlet
+@WebServlet(name        = "HitCounterServlet",
+            urlPatterns = "/task9m2")
+public class HitCounterServlet
+     extends HttpServlet
 {
-    private static final long serialVersionUID = 1L;
-
     @Override
     protected void doGet(HttpServletRequest  req,
                          HttpServletResponse resp)
         throws ServletException,
                IOException
     {
-        //IHitCounter.addVisit();
-
         try
         {
+
             PrintWriter out = resp.getWriter();
 
             out.println(
@@ -58,7 +57,10 @@ public class HitCounterServlet extends HttpServlet
                 "            <p>\n"
             );
 
-            out.println("");
+//            out.println(
+//                "The number of visits is: " +
+//                quantity
+//            );
 
             out.println(
                 "            </p>\n" +
@@ -103,9 +105,14 @@ public class HitCounterServlet extends HttpServlet
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-        throws ServletException, IOException
+    protected void doPost(HttpServletRequest  req,
+                          HttpServletResponse resp)
+        throws ServletException,
+               IOException
     {
         doGet(req, resp);
     }
+
+    private static final long serialVersionUID = 1L;
+//    private               int quantity         = IHitCounter.getVisits();
 }

@@ -14,6 +14,11 @@ public class HitCounter
 
     }
 
+    @Override
+    public int getVisits()
+    {
+        return 0;
+    }
 
     //    public void doGet(HttpServletRequest req,
 //                      HttpServletResponse response)
@@ -35,6 +40,4 @@ public class HitCounter
 //        }
 //    }
     private int visitsCounter = 0;
-
-
 }

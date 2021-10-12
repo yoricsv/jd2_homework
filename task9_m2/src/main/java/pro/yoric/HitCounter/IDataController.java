@@ -5,6 +5,6 @@ import java.io.IOException;
 
 public interface IDataController
 {
-    int     getInfo() throws FileNotFoundException;
+    int     getInfo() throws IOException;
     boolean setInfo() throws IOException;
 }
