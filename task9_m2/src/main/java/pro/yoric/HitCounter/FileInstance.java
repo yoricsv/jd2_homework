@@ -4,7 +4,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.annotation.*;
 
 class FileInstance
 {
@@ -14,19 +13,19 @@ class FileInstance
     {
         try
         {
-            if (!f.createNewFile())
-            {
-                BufferedWriter fbw =
-                    new BufferedWriter(
-                        new FileWriter(f)
-                );
-                fbw.write(0);
-                fbw.flush();
-                fbw.close();
+
+            if (!f.createNewFile())                         // TODO: Need Check this!
                 shortFilePath = f.getPath();
-            }
             else
                 shortFilePath = f.getAbsolutePath();
+
+            BufferedWriter fbw =
+                new BufferedWriter(
+                        new FileWriter(f)
+            );
+            fbw.write(init());
+            fbw.flush();
+            fbw.close();
 
         }
         catch (IOException e)
@@ -55,7 +54,13 @@ class FileInstance
         return shortFilePath = FILEPATH + FILENAME;
     }
 
+    public int init()
+    {
+        return this.visitsCounter;
+    }
+
     private static final String FILENAME      = "visit.dat";
     private static final String FILEPATH      = "resources/";
     private static       String shortFilePath = "";
+    private              int    visitsCounter = 0;
 }
