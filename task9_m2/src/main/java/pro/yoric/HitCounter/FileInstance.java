@@ -8,7 +8,7 @@ import java.io.IOException;
 public class FileInstance
     implements IFileInstance
 {
-    private FileInstance()                              // PRIVATE CONSTRUCTOR
+    private FileInstance()                                      // PRIVATE CONSTRUCTOR
     {
         try
         {
@@ -18,7 +18,9 @@ public class FileInstance
             {
                 f.createNewFile();
                 if (!checkAccessToFile(f))
-                    logger.error("Error! Check The Path or Access rights");
+                    logger.error(
+                        "Error! Check The Path or Access rights"
+                    );
                 else
                 {
                     BufferedWriter fbw =
@@ -29,11 +31,11 @@ public class FileInstance
                     fbw.flush();
                     fbw.close();
 
-                    realFilePath = f.getAbsolutePath();
+                    this.realFilePath = f.getAbsolutePath();
                 }
             }
             else
-                realFilePath = f.getAbsolutePath();
+                this.realFilePath = f.getAbsolutePath();
         }
         catch (IOException e)
         {
@@ -44,8 +46,8 @@ public class FileInstance
     private boolean checkAccessToFile(File fileObj)
     {
         if (   fileObj.exists()
-                && fileObj.canRead()
-                && fileObj.canWrite())
+            && fileObj.canRead()
+            && fileObj.canWrite())
             return true;
         else
             return false;
@@ -54,7 +56,7 @@ public class FileInstance
     public static FileInstance getInstance()
     {
         if (instance == null)
-             return instance = new FileInstance();
+            instance = new FileInstance();
 
         return instance;
     }
@@ -63,21 +65,9 @@ public class FileInstance
     public String getPath()
     {
         if (instance == null)
-        {
-            File f = new File(instancePath, FILE_NAME);
+            getInstance();
 
-            if (f.exists()
-                    && f.canRead()
-                    && f.canWrite())
-                return realFilePath = f.getAbsolutePath();
-            else
-            {
-                instance = new FileInstance();
-                return realFilePath;
-            }
-        }
-
-        return realFilePath = instancePath + FILE_NAME;
+        return this.realFilePath;
     }
 
     @Override
