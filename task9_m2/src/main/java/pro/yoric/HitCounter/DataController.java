@@ -42,6 +42,12 @@ public class DataController
         fbw.close();
     }
 
+    @Override
+    public void doInit(String initValue)
+    {
+        FileInstance.doInit(initValue);
+    }
+
     private int    quantity;
     private String content;
 }

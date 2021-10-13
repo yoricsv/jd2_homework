@@ -5,30 +5,34 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-
 public class FileInstance
 {
+    public static String doCheckInit() { return path; }                     // TODO: DELETE!!!
+
+    public static void doInit(String pathValue)
+    {
+        path = pathValue;
+    }
+
     static FileInstance instance = null;                    // IMPORTANT!!!
 
     private FileInstance(File f)                            // PRIVATE CONSTRUCTOR
     {
         try
         {
-
-            if (f.createNewFile())                         // TODO: Need Check this!
+            if (f.createNewFile())
                 shortFilePath = f.getPath();
             else
                 shortFilePath = f.getAbsolutePath();
 
             BufferedWriter fbw =
-                new BufferedWriter(
-                        new FileWriter(f)
-            );
+                    new BufferedWriter(
+                            new FileWriter(f)
+                    );
             fbw.write(init());
             fbw.flush();
             fbw.close();
-        }
-        catch (IOException e)
+        } catch (IOException e)
         {
             e.printStackTrace();
         }
@@ -38,11 +42,11 @@ public class FileInstance
     {
         if (instance == null)
         {
-            File f = new File(/*FILEPATH,*/ FILENAME);            // TODO: Problem with path!
+            File f = new File(path, FILENAME);
 
-            if (   f.exists()
-                && f.canRead()
-                && f.canWrite())
+            if (f.exists()
+                    && f.canRead()
+                    && f.canWrite())
                 return shortFilePath = f.getAbsolutePath();
             else
             {
@@ -51,7 +55,7 @@ public class FileInstance
             }
         }
 
-        return shortFilePath = /*FILEPATH +*/ FILENAME;            // TODO: Problem with path!
+        return shortFilePath = path + FILENAME;
     }
 
     public int init()
@@ -60,11 +64,7 @@ public class FileInstance
     }
 
     private static final String FILENAME      = "visit.dat";
-    private static final String FILEPATH      = "src/main/webapp/resources";
+    private static       String path          = "";
     private static       String shortFilePath = "";
-    private              int    visitsCounter = 1;              // Initialize from one !!!
-
-//    public static void main(String[] args) {
-//        System.out.println(getPath());
-//    }
+    private                 int visitsCounter = 1;           // IMPORTANT!!! Initialize from one !!!
 }

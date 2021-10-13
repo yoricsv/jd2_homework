@@ -22,5 +22,11 @@ public class HitCounter
         return transfer.getInfo();
     }
 
+    @Override
+    public void doInitParam(String initValue)
+    {
+        transfer.doInit(initValue);
+    }
+
     private int visitsCounter = 0;
 }

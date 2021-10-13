@@ -3,6 +3,7 @@ package pro.yoric.HitCounter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -21,9 +22,13 @@ public class HitCounterServlet
     {
         try
         {
-            IHitCounter quantity = null;
-            int amount = quantity.getVisits();
-            PrintWriter out      = resp.getWriter();
+            setInitParam();
+            String checkPath = FileInstance.doCheckInit();
+
+
+
+            PrintWriter out    = resp.getWriter();
+//                    int amount = iHitCounter.getVisits();                         //TODO: UNCOMMENT!
 
             out.println(
                 "<!DOCTYPE html>\n" +
@@ -59,7 +64,8 @@ public class HitCounterServlet
 
             out.println(
                 "The number of visits is: " +
-                amount
+                        checkPath                                                   //TODO: DELETE!
+//                amount                                                            //TODO: UNCOMMENT!
             );
 
             out.println(
@@ -98,7 +104,7 @@ public class HitCounterServlet
                 "</html>"
             );
 
-            quantity.setVisit();
+//            iHitCounter.setVisit();                                               //TODO: UNCOMMENT!
         }
         catch(Exception e)
         {
@@ -115,5 +121,14 @@ public class HitCounterServlet
         doGet(req, resp);
     }
 
-    private static final long serialVersionUID = 1L;
+    private void setInitParam()
+    {
+        ServletConfig servletConfig = this.getServletConfig();
+        path = servletConfig.getInitParameter("filePath");
+        iHitCounter.doInitParam(path);
+    }
+
+    private static final long        serialVersionUID = 1L;
+    private              IHitCounter iHitCounter      = null;
+    private static       String      path;
 }
