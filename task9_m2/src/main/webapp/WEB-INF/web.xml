@@ -13,12 +13,14 @@
         <servlet-name>HitCounterServlet</servlet-name>
         <servlet-class>pro.yoric.HitCounter.HitCounterServlet</servlet-class>
         <init-param>
+            <description>RESOURCE PATH FOR LOCAL PROJECT REPOSITORY</description>
             <param-name>localFilePath</param-name>
-            <param-value>src\\main\\resources\\img\\</param-value> <!-- FOR LOCAL PROJECT REPOSITORY -->
+            <param-value>src\\main\\resources\\</param-value>
         </init-param>
         <init-param>
+            <description>RESOURCE PATH FOR DEPLOY</description>
             <param-name>webFilePath</param-name>
-            <param-value>resources/img/</param-value> <!-- FOR DEPLOY-->
+            <param-value>resources/test.html</param-value>
         </init-param>
     </servlet>
 

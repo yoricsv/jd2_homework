@@ -5,7 +5,7 @@ import java.io.IOException;
 public class HitCounter
     implements IHitCounter
 {
-    IDataController transfer;
+    IDataController transfer = new DataController();
 
     @Override
     public void setVisit()

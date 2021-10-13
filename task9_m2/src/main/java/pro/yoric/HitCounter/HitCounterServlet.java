@@ -14,6 +14,8 @@ import jakarta.servlet.http.HttpServletResponse;
 public class HitCounterServlet
      extends HttpServlet
 {
+    IHitCounter iHitCounter = new HitCounter();
+
     @Override
     protected void doGet(HttpServletRequest  req,
                          HttpServletResponse resp)
@@ -22,13 +24,11 @@ public class HitCounterServlet
     {
         try
         {
-//            setInitParam();
-            String checkPath = FileInstance.doCheckInit();
-
-
+            setInitParam();
+//            FileInstance checkPath = FileInstance();                          //TODO: DELETE!
 
             PrintWriter out    = resp.getWriter();
-//                    int amount = iHitCounter.getVisits();                         //TODO: UNCOMMENT!
+//                    int amount = iHitCounter.getVisits();                         //TODO: After debugging - UNCOMMENT!
 
             out.println(
                 "<!DOCTYPE html>\n" +
@@ -62,11 +62,9 @@ public class HitCounterServlet
                 "            <p>\n"
             );
 
-            String imgUrl = setInitParam() + "test.png";                          //TODO: DELETE!
             out.println(
-                "<img alt=\"\" href=\"" + imgUrl + "\"/>"                         //TODO: DELETE!
-//                "The number of visits is: " +                                     //TODO: UNCOMMENT!
-//                amount                                                            //TODO: UNCOMMENT!
+//                "Init path is: " + checkPath//setInitParam()                                 //TODO: DELETE!
+//                "The number of visits is: " + amount                              //TODO: After debugging - UNCOMMENT!
             );
 
             out.println(
@@ -105,7 +103,7 @@ public class HitCounterServlet
                 "</html>"
             );
 
-//            iHitCounter.setVisit();                                               //TODO: UNCOMMENT!
+//            iHitCounter.setVisit();                                               //TODO: After debugging - UNCOMMENT!
         }
         catch(Exception e)
         {
@@ -122,15 +120,16 @@ public class HitCounterServlet
         doGet(req, resp);
     }
 
-    private String setInitParam()//void setInitParam()
+//    private String setInitParam()                                                   //TODO: DELETE!
+    private void setInitParam()                                                     //TODO: To check - comment this!
     {
         ServletConfig conf = getServletConfig();
-        path = conf.getInitParameter("webFilePath");
-        return path;
-//        iHitCounter.doInitParam(path);
+        String path = conf.getInitParameter("webFilePath");
+        iHitCounter.doInitParam(path);                                              //TODO: To check - comment this!
+//        return path;                                                                //TODO: DELETE!
     }
 
     private static final long        serialVersionUID = 1L;
-    private              IHitCounter iHitCounter      = null;
-    private static       String      path;
+//    private              IHitCounter iHitCounter      = null;
+//    private static       String      path;
 }

@@ -5,7 +5,7 @@ import java.io.*;
 public class DataController
     implements IDataController
 {
-    String file = FileInstance.getPath();
+    String file = "";
 
     @Override
     public int getInfo()
@@ -45,7 +45,7 @@ public class DataController
     @Override
     public void doInit(String initValue)
     {
-        FileInstance.doInit(initValue);
+//        IFileInstance.doInit(initValue);
     }
 
     private int    quantity;

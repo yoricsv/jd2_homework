@@ -6,65 +6,100 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class FileInstance
+    implements IFileInstance
 {
-    public static String doCheckInit() { return path; }                     // TODO: DELETE!!!
-
-    public static void doInit(String pathValue)
-    {
-        path = pathValue;
-    }
-
-    static FileInstance instance = null;                    // IMPORTANT!!!
-
-    private FileInstance(File f)                            // PRIVATE CONSTRUCTOR
+    private FileInstance()                              // PRIVATE CONSTRUCTOR
     {
         try
         {
-            if (f.createNewFile())
-                shortFilePath = f.getPath();
-            else
-                shortFilePath = f.getAbsolutePath();
+            File f = new File(instancePath, FILE_NAME);
 
-            BufferedWriter fbw =
-                    new BufferedWriter(
+            if (!checkAccessToFile(f))
+            {
+                f.createNewFile();
+                if (!checkAccessToFile(f))
+                    logger.error("Error! Check The Path or Access rights");
+                else
+                {
+                    BufferedWriter fbw =
+                        new BufferedWriter(
                             new FileWriter(f)
                     );
-            fbw.write(init());
-            fbw.flush();
-            fbw.close();
-        } catch (IOException e)
+                    fbw.write(THE_FIRST_HIT);
+                    fbw.flush();
+                    fbw.close();
+
+                    realFilePath = f.getAbsolutePath();
+                }
+            }
+            else
+                realFilePath = f.getAbsolutePath();
+        }
+        catch (IOException e)
         {
-            e.printStackTrace();
+            logger.debug(e.toString(), e);
         }
     }
 
-    public static String getPath()
+    private boolean checkAccessToFile(File fileObj)
+    {
+        if (   fileObj.exists()
+                && fileObj.canRead()
+                && fileObj.canWrite())
+            return true;
+        else
+            return false;
+    }
+
+    public static FileInstance getInstance()
+    {
+        if (instance == null)
+             return instance = new FileInstance();
+
+        return instance;
+    }
+
+    @Override
+    public String getPath()
     {
         if (instance == null)
         {
-            File f = new File(path, FILENAME);
+            File f = new File(instancePath, FILE_NAME);
 
             if (f.exists()
                     && f.canRead()
                     && f.canWrite())
-                return shortFilePath = f.getAbsolutePath();
+                return realFilePath = f.getAbsolutePath();
             else
             {
-                instance = new FileInstance(f);
-                return shortFilePath;
+                instance = new FileInstance();
+                return realFilePath;
             }
         }
 
-        return shortFilePath = path + FILENAME;
+        return realFilePath = instancePath + FILE_NAME;
     }
 
-    public int init()
+    @Override
+    public void doInit(String pathValue)
     {
-        return this.visitsCounter;
+        instancePath = pathValue;
     }
 
-    private static final String FILENAME      = "visit.dat";
-    private static       String path          = "";
-    private static       String shortFilePath = "";
-    private                 int visitsCounter = 1;           // IMPORTANT!!! Initialize from one !!!
+    @Override
+    public String checkInit() { return instancePath; }          // TODO: DELETE!!!
+
+    private static FileInstance instance      = null;           // IMPORTANT!!!
+    private static final String FILE_NAME     = "visit.dat";
+    private        final    int THE_FIRST_HIT = 1;
+    private              String instancePath  = "";
+    private              String realFilePath  = "";
+
+    private static final org.slf4j.Logger logger =
+        org
+        .slf4j
+        .LoggerFactory
+        .getLogger(
+            FileInstance.class
+    );
 }
