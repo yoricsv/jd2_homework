@@ -12,10 +12,10 @@
     <servlet>
         <servlet-name>HitCounterServlet</servlet-name>
         <servlet-class>pro.yoric.HitCounter.HitCounterServlet</servlet-class>
-        <!--init-param>
+        <init-param>
             <param-name>filePath</param-name>
-            <param-value>src/main/webapp/WEB-INF/</param-value>
-        </init-param-->
+            <param-value>/src/main/webapps/WEB-INF/resources</param-value>
+        </init-param>
     </servlet>
 
     <servlet-mapping>

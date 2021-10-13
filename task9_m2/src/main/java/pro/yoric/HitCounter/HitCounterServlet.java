@@ -22,7 +22,7 @@ public class HitCounterServlet
     {
         try
         {
-            setInitParam();
+//            setInitParam();
             String checkPath = FileInstance.doCheckInit();
 
 
@@ -63,8 +63,10 @@ public class HitCounterServlet
             );
 
             out.println(
-                "The number of visits is: " +
-                        checkPath                                                   //TODO: DELETE!
+//                "The number of visits is: " +
+                        "'filePath' contains: " +
+                        setInitParam()
+//                        checkPath                                                   //TODO: DELETE!
 //                amount                                                            //TODO: UNCOMMENT!
             );
 
@@ -121,11 +123,12 @@ public class HitCounterServlet
         doGet(req, resp);
     }
 
-    private void setInitParam()
+    private String setInitParam()//void setInitParam()
     {
-        ServletConfig servletConfig = this.getServletConfig();
-        path = servletConfig.getInitParameter("filePath");
-        iHitCounter.doInitParam(path);
+        ServletConfig conf = getServletConfig();
+        path = conf.getInitParameter("filePath");
+        return path;
+//        iHitCounter.doInitParam(path);
     }
 
     private static final long        serialVersionUID = 1L;
