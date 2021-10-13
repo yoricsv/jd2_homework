@@ -62,11 +62,10 @@ public class HitCounterServlet
                 "            <p>\n"
             );
 
+            String imgUrl = setInitParam() + "test.png";                          //TODO: DELETE!
             out.println(
-//                "The number of visits is: " +
-                        "'filePath' contains: " +
-                        setInitParam()
-//                        checkPath                                                   //TODO: DELETE!
+                "<img alt=\"\" href=\"" + imgUrl + "\"/>"                         //TODO: DELETE!
+//                "The number of visits is: " +                                     //TODO: UNCOMMENT!
 //                amount                                                            //TODO: UNCOMMENT!
             );
 
