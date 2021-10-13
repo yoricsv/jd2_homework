@@ -12,6 +12,10 @@
     <servlet>
         <servlet-name>HitCounterServlet</servlet-name>
         <servlet-class>pro.yoric.HitCounter.HitCounterServlet</servlet-class>
+        <init-param>
+            <param-name>shortFilePath</param-name>
+            <param-value>/src/main/webapp/resources/visit.dat</param-value>
+        </init-param>
     </servlet>
 
     <servlet-mapping>

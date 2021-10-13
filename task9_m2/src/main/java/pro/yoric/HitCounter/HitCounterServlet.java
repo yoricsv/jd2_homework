@@ -9,8 +9,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet(name        = "HitCounterServlet",
-            urlPatterns = "/task9m2")
+@WebServlet(name = "HitCounterServlet", urlPatterns = "/task9m2")
 public class HitCounterServlet
      extends HttpServlet
 {
@@ -22,8 +21,9 @@ public class HitCounterServlet
     {
         try
         {
-
-            PrintWriter out = resp.getWriter();
+            IHitCounter quantity = null;
+            int amount = quantity.getVisits();
+            PrintWriter out      = resp.getWriter();
 
             out.println(
                 "<!DOCTYPE html>\n" +
@@ -57,10 +57,10 @@ public class HitCounterServlet
                 "            <p>\n"
             );
 
-//            out.println(
-//                "The number of visits is: " +
-//                quantity
-//            );
+            out.println(
+                "The number of visits is: " +
+                amount
+            );
 
             out.println(
                 "            </p>\n" +
@@ -97,6 +97,8 @@ public class HitCounterServlet
                 "</body>\n" +
                 "</html>"
             );
+
+            quantity.setVisit();
         }
         catch(Exception e)
         {
@@ -114,5 +116,4 @@ public class HitCounterServlet
     }
 
     private static final long serialVersionUID = 1L;
-//    private               int quantity         = IHitCounter.getVisits();
 }

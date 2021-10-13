@@ -4,6 +4,6 @@ import java.io.IOException;
 
 public interface IDataController
 {
-    int  getInfo() throws IOException;
-    void setInfo() throws IOException;
+    int  getInfo()             throws IOException;
+    void setInfo(int newValue) throws IOException;
 }

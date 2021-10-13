@@ -11,9 +11,10 @@ public class DataController
     public int getInfo()
         throws IOException
     {
-        BufferedReader fbr = new BufferedReader(
-                                new FileReader(file)
-                            );
+        BufferedReader fbr =
+            new BufferedReader(
+                new FileReader(file)
+        );
 
         int max = Integer.MIN_VALUE;                    // TODO: Delete if the file will be rewritable
 
@@ -27,7 +28,7 @@ public class DataController
     }
 
     @Override
-    public void setInfo()
+    public void setInfo(int newValue)
         throws IOException
     {
         BufferedWriter fbw =
@@ -35,7 +36,7 @@ public class DataController
                  new FileWriter(file)
         );
 
-        fbw.write(getInfo());
+        fbw.write(newValue);
 
         fbw.flush();
         fbw.close();

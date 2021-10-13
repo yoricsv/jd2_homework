@@ -5,7 +5,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-class FileInstance
+
+public class FileInstance
 {
     static FileInstance instance = null;                    // IMPORTANT!!!
 
@@ -14,7 +15,7 @@ class FileInstance
         try
         {
 
-            if (!f.createNewFile())                         // TODO: Need Check this!
+            if (f.createNewFile())                         // TODO: Need Check this!
                 shortFilePath = f.getPath();
             else
                 shortFilePath = f.getAbsolutePath();
@@ -26,7 +27,6 @@ class FileInstance
             fbw.write(init());
             fbw.flush();
             fbw.close();
-
         }
         catch (IOException e)
         {
@@ -38,7 +38,7 @@ class FileInstance
     {
         if (instance == null)
         {
-            File f = new File(FILEPATH, FILENAME);
+            File f = new File(/*FILEPATH,*/ FILENAME);            // TODO: Problem with path!
 
             if (   f.exists()
                 && f.canRead()
@@ -51,7 +51,7 @@ class FileInstance
             }
         }
 
-        return shortFilePath = FILEPATH + FILENAME;
+        return shortFilePath = /*FILEPATH +*/ FILENAME;            // TODO: Problem with path!
     }
 
     public int init()
@@ -60,7 +60,11 @@ class FileInstance
     }
 
     private static final String FILENAME      = "visit.dat";
-    private static final String FILEPATH      = "resources/";
+    private static final String FILEPATH      = "src/main/webapp/resources";
     private static       String shortFilePath = "";
-    private              int    visitsCounter = 0;
+    private              int    visitsCounter = 1;              // Initialize from one !!!
+
+//    public static void main(String[] args) {
+//        System.out.println(getPath());
+//    }
 }

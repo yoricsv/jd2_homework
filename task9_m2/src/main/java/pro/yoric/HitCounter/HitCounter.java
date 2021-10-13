@@ -1,37 +1,26 @@
 package pro.yoric.HitCounter;
 
+import java.io.IOException;
+
 public class HitCounter
     implements IHitCounter
 {
-    public void init()
-    {
-        visitsCounter = 0;
-    }
+    IDataController transfer;
 
     @Override
-    public void addVisit()
+    public void setVisit()
+        throws IOException
     {
-
+        visitsCounter = transfer.getInfo();
+        transfer.setInfo(++visitsCounter);
     }
 
     @Override
     public int getVisits()
+        throws IOException
     {
-        return 0;
+        return transfer.getInfo();
     }
-
-
-//        ServletContext context = getServletContext();
-//
-//        // Получаем атрибут count из контекста и переводим его в Integer
-//        Object countObj = context.getAttribute("count");
-//        Integer count = (Integer) countObj;
-//
-//        if (count == null) {
-//            count = 1;
-//        } else {
-//            count++;
-//        }
 
     private int visitsCounter = 0;
 }
