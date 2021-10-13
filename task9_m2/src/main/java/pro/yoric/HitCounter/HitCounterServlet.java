@@ -125,7 +125,7 @@ public class HitCounterServlet
     private String setInitParam()//void setInitParam()
     {
         ServletConfig conf = getServletConfig();
-        path = conf.getInitParameter("filePath");
+        path = conf.getInitParameter("webFilePath");
         return path;
 //        iHitCounter.doInitParam(path);
     }

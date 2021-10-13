@@ -14,7 +14,7 @@
         <servlet-class>pro.yoric.HitCounter.HitCounterServlet</servlet-class>
         <init-param>
             <param-name>localFilePath</param-name>
-            <param-value>src/main/resources/img/</param-value> <!-- FOR LOCAL PROJECT REPOSITORY -->
+            <param-value>src\\main\\resources\\img\\</param-value> <!-- FOR LOCAL PROJECT REPOSITORY -->
         </init-param>
         <init-param>
             <param-name>webFilePath</param-name>
