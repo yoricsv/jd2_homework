@@ -8,25 +8,21 @@ public class HitCounter
     IDataController transfer = new DataController();
 
     @Override
-    public void setVisit()
-        throws IOException
+    public void doInit(String initValue)
     {
-        visitsCounter = transfer.getInfo();
-        transfer.setInfo(++visitsCounter);
+        transfer.doInit(initValue);
     }
 
     @Override
-    public int getVisits()
-        throws IOException
+    public int getCalls() throws IOException
     {
         return transfer.getInfo();
     }
 
     @Override
-    public void doInitParam(String initValue)
+    public void setCall() throws IOException
     {
-        transfer.doInit(initValue);
+        int visitsCounter = transfer.getInfo();
+        transfer.setInfo(++visitsCounter);
     }
-
-    private int visitsCounter = 0;
 }

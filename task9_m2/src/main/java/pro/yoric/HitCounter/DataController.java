@@ -5,7 +5,13 @@ import java.io.*;
 public class DataController
     implements IDataController
 {
-    String file = "";
+    IFileInstance file = FileInstance.getInstance();
+
+    @Override
+    public void doInit(String initValue)
+    {
+        file.doInit(initValue);
+    }
 
     @Override
     public int getInfo()
@@ -13,7 +19,7 @@ public class DataController
     {
         BufferedReader fbr =
             new BufferedReader(
-                new FileReader(file)
+                new FileReader(file.getPath())
         );
 
         int max = Integer.MIN_VALUE;                    // TODO: Delete if the file will be rewritable
@@ -33,19 +39,13 @@ public class DataController
     {
         BufferedWriter fbw =
             new BufferedWriter(
-                 new FileWriter(file)
+                 new FileWriter(file.getPath())
         );
 
         fbw.write(newValue);
 
         fbw.flush();
         fbw.close();
-    }
-
-    @Override
-    public void doInit(String initValue)
-    {
-//        IFileInstance.doInit(initValue);
     }
 
     private int    quantity;

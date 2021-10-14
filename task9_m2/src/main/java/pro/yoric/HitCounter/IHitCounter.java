@@ -4,7 +4,7 @@ import java.io.IOException;
 
 public interface IHitCounter
 {
-    int  getVisits() throws IOException;
-    void setVisit()  throws IOException;
-    void doInitParam(String initValue);
+    int  getCalls() throws IOException;
+    void setCall()  throws IOException;
+    void doInit(String initValue);
 }

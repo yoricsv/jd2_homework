@@ -8,6 +8,14 @@ import java.io.IOException;
 public class FileInstance
     implements IFileInstance
 {
+    @Override
+    public void doInit(String pathValue)
+    {
+        instancePath = pathValue;
+    }
+
+    @Override public String checkInit() { return instancePath; }          // TODO: DELETE!!!
+
     private FileInstance()                                      // PRIVATE CONSTRUCTOR
     {
         try
@@ -69,15 +77,6 @@ public class FileInstance
 
         return this.realFilePath;
     }
-
-    @Override
-    public void doInit(String pathValue)
-    {
-        instancePath = pathValue;
-    }
-
-    @Override
-    public String checkInit() { return instancePath; }          // TODO: DELETE!!!
 
     private static FileInstance instance      = null;           // IMPORTANT!!!
     private static final String FILE_NAME     = "visit.dat";

@@ -9,26 +9,30 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @WebServlet(name = "HitCounterServlet", urlPatterns = "/task9m2")
 public class HitCounterServlet
      extends HttpServlet
 {
     IHitCounter iHitCounter = new HitCounter();
+    FileInstance checkPath  = FileInstance.getInstance();;                          //TODO: DELETE!
 
     @Override
-    protected void doGet(HttpServletRequest  req,
-                         HttpServletResponse resp)
+    protected void doGet(
+        HttpServletRequest  req,
+        HttpServletResponse resp
+    )
         throws ServletException,
                IOException
     {
         try
         {
             setInitParam();
-//            FileInstance checkPath = FileInstance();                          //TODO: DELETE!
 
             PrintWriter out    = resp.getWriter();
-//                    int amount = iHitCounter.getVisits();                         //TODO: After debugging - UNCOMMENT!
+//                    int amount = iHitCounter.getCalls();                         //TODO: After debugging - UNCOMMENT!
 
             out.println(
                 "<!DOCTYPE html>\n" +
@@ -54,7 +58,7 @@ public class HitCounterServlet
                 "\n" +
                 "        <header>\n" +
                 "            <h1>\n" +
-                "                This is First Servlet!\n" +
+                "                The visits counter via file\n" +
                 "            </h1>\n" +
                 "        </header>\n" +
                 "\n" +
@@ -63,7 +67,7 @@ public class HitCounterServlet
             );
 
             out.println(
-//                "Init path is: " + checkPath//setInitParam()                                 //TODO: DELETE!
+//                "Initialization path is: " + checkPath//setInitParam()                                 //TODO: DELETE!
 //                "The number of visits is: " + amount                              //TODO: After debugging - UNCOMMENT!
             );
 
@@ -103,17 +107,19 @@ public class HitCounterServlet
                 "</html>"
             );
 
-//            iHitCounter.setVisit();                                               //TODO: After debugging - UNCOMMENT!
+//            iHitCounter.setCall();                                               //TODO: After debugging - UNCOMMENT!
         }
         catch(Exception e)
         {
-            e.printStackTrace();
+            logger.error(e.toString(), e);
         }
     }
 
     @Override
-    protected void doPost(HttpServletRequest  req,
-                          HttpServletResponse resp)
+    protected void doPost(
+        HttpServletRequest  req,
+        HttpServletResponse resp
+    )
         throws ServletException,
                IOException
     {
@@ -124,12 +130,15 @@ public class HitCounterServlet
     private void setInitParam()                                                     //TODO: To check - comment this!
     {
         ServletConfig conf = getServletConfig();
-        String path = conf.getInitParameter("webFilePath");
-        iHitCounter.doInitParam(path);                                              //TODO: To check - comment this!
+        String path = conf.getInitParameter("WEB_FILE_PATH");
+        iHitCounter.doInit(path);                                                   //TODO: To check - comment this!
 //        return path;                                                                //TODO: DELETE!
     }
 
-    private static final long        serialVersionUID = 1L;
-//    private              IHitCounter iHitCounter      = null;
-//    private static       String      path;
+    private static final long   serialVersionUID = 1L;
+    private static final Logger logger =
+        LoggerFactory
+        .getLogger(
+            HitCounterServlet.class
+    );
 }
