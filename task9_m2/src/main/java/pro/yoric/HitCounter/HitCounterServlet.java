@@ -67,7 +67,7 @@ public class HitCounterServlet
             );
 
             out.println(
-//                "Initialization path is: " + checkPath//setInitParam()                                 //TODO: DELETE!
+                "Initialization path is: " + checkPath//setInitParam()                                 //TODO: DELETE!
 //                "The number of visits is: " + amount                              //TODO: After debugging - UNCOMMENT!
             );
 
@@ -126,13 +126,13 @@ public class HitCounterServlet
         doGet(req, resp);
     }
 
-//    private String setInitParam()                                                   //TODO: DELETE!
-    private void setInitParam()                                                     //TODO: To check - comment this!
+    private String setInitParam()                                                   //TODO: DELETE!
+//    private void setInitParam()                                                     //TODO: To check - comment this!
     {
         ServletConfig conf = getServletConfig();
         String path = conf.getInitParameter("WEB_FILE_PATH");
         iHitCounter.doInit(path);                                                   //TODO: To check - comment this!
-//        return path;                                                                //TODO: DELETE!
+        return path;                                                                //TODO: DELETE!
     }
 
     private static final long   serialVersionUID = 1L;
