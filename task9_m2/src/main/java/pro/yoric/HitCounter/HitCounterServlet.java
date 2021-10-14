@@ -17,7 +17,7 @@ public class HitCounterServlet
      extends HttpServlet
 {
     IHitCounter iHitCounter = new HitCounter();
-    FileInstance checkPath  = FileInstance.getInstance();;                          //TODO: DELETE!
+    FileInstance checkPath  = FileInstance.getInstance();                          //TODO: DELETE!
 
     @Override
     protected void doGet(
@@ -67,7 +67,7 @@ public class HitCounterServlet
             );
 
             out.println(
-                "Initialization path is: " + checkPath//setInitParam()                                 //TODO: DELETE!
+                "Initialization path is: " + checkPath.getPath()//setInitParam()                                 //TODO: DELETE!
 //                "The number of visits is: " + amount                              //TODO: After debugging - UNCOMMENT!
             );
 
