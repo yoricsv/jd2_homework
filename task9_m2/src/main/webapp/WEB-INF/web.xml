@@ -9,16 +9,21 @@
          version = "4.0"
 >
 
+    <!--context-param>
+        <param-name>WEB_FILE_PATH</param-name>
+        <param-value>C:\\Users\\СергейВладимирович\\OneDrive\\Desctop\\001_PROJECTS_\\001_Java_Projects_\\#_HOMEWORKS_\\#_JavaEnterprise_\\jd2_homework\\task9_m2\\src\\main\\webapp\\resources\\visit.dat</param-value>
+    </context-param-->
+
     <servlet>
         <servlet-name>HitCounterServlet</servlet-name>
         <servlet-class>pro.yoric.HitCounter.HitCounterServlet</servlet-class>
+        <init-param>
+           <param-name>WEB_FILE_PATH</param-name>
+           <param-value>src/main/webapp/resources/visit.dat</param-value>
+           <!--param-value>C:\Users\Сергей Владимирович\OneDrive\Desctop\001_PROJECTS_\001_Java_Projects_\#_HOMEWORKS_\#_JavaEnterprise_\jd2_homework\task9_m2\src\main\webapp\resources\visit.dat</param-value-->
+           <!--param-value>C:\Users\Сергей Владимирович\OneDrive\Desctop\001_PROJECTS_\001_Java_Projects_\#_HOMEWORKS_\#_JavaEnterprise_\jd2_homework\task9_m2\src\main\webapp\resources\visit.dat</param-value-->
+        </init-param>
     </servlet>
-
-    <context-param>
-        <param-name>LOCAL_FILE_PATH</param-name>
-        <param-value>${USERPROFILE}\\OneDrive\\Desctop\\001_PROJECTS_\\001_Java_Projects_\\#_HOMEWORKS_\\#_JavaEnterprise_\\jd2_homework\\task9_m2\\src\\main\\resources\\visit.dat</param-value>
-    </context-param>
-
     <servlet-mapping>
         <servlet-name>HitCounterServlet</servlet-name>
         <url-pattern>/task9m2</url-pattern>

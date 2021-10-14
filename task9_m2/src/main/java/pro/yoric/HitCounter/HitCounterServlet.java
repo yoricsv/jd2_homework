@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletContainerInitializer;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -130,8 +131,8 @@ public class HitCounterServlet
     private String setInitParam()                                                   //TODO: DELETE!
 //    private void setInitParam()                                                     //TODO: To check - comment this!
     {
-        ServletConfig conf = getServletConfig();
-        String path = conf.getInitParameter("LOCAL_FILE_PATH");
+        ServletConfig conf = this.getServletConfig();
+        String path = conf.getInitParameter("WEB_FILE_PATH");
         iHitCounter.doInit(path);                                                   //TODO: To check - comment this!
         return path;                                                                //TODO: DELETE!
     }
