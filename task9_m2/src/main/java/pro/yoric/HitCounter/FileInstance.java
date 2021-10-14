@@ -14,8 +14,6 @@ public class FileInstance
         instancePath = pathValue;
     }
 
-    @Override public String checkInit() { return instancePath; }          // TODO: DELETE!!!
-
     private FileInstance()                                      // PRIVATE CONSTRUCTOR
     {
         try

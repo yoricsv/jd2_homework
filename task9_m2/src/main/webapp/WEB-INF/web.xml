@@ -12,17 +12,12 @@
     <servlet>
         <servlet-name>HitCounterServlet</servlet-name>
         <servlet-class>pro.yoric.HitCounter.HitCounterServlet</servlet-class>
-        <init-param>
-            <description>RESOURCE PATH FOR LOCAL PROJECT REPOSITORY</description>
-            <param-name>LOCAL_FILE_PATH</param-name>
-            <param-value>src/main/resources/</param-value>
-        </init-param>
-        <init-param>
-            <description>RESOURCE PATH FOR DEPLOY</description>
-            <param-name>WEB_FILE_PATH</param-name>
-            <param-value>resources/test.html</param-value>
-        </init-param>
     </servlet>
+
+    <context-param>
+        <param-name>LOCAL_FILE_PATH</param-name>
+        <param-value>${USERPROFILE}\\OneDrive\\Desctop\\001_PROJECTS_\\001_Java_Projects_\\#_HOMEWORKS_\\#_JavaEnterprise_\\jd2_homework\\task9_m2\\src\\main\\resources\\visit.dat</param-value>
+    </context-param>
 
     <servlet-mapping>
         <servlet-name>HitCounterServlet</servlet-name>

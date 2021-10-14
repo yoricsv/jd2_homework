@@ -67,7 +67,8 @@ public class HitCounterServlet
             );
 
             out.println(
-                "Initialization path is: " + checkPath.getPath()//setInitParam()                                 //TODO: DELETE!
+                "Initialization path is: " + checkPath.getPath()                  //TODO: DELETE!
+//                "Initialization path is: " + setInitParam()                       //TODO: DELETE!
 //                "The number of visits is: " + amount                              //TODO: After debugging - UNCOMMENT!
             );
 
@@ -130,7 +131,7 @@ public class HitCounterServlet
 //    private void setInitParam()                                                     //TODO: To check - comment this!
     {
         ServletConfig conf = getServletConfig();
-        String path = conf.getInitParameter("WEB_FILE_PATH");
+        String path = conf.getInitParameter("LOCAL_FILE_PATH");
         iHitCounter.doInit(path);                                                   //TODO: To check - comment this!
         return path;                                                                //TODO: DELETE!
     }
