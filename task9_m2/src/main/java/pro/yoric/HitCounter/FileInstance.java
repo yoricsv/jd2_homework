@@ -77,7 +77,7 @@ public class FileInstance
     }
 
     private static FileInstance instance      = null;           // IMPORTANT!!!
-    private static final String FILE_NAME     = "visit.dat";
+    private static final String FILE_NAME     = "visits.txt";
     private        final    int THE_FIRST_HIT = 1;
     private              String instancePath  = "";
     private              String realFilePath  = "";

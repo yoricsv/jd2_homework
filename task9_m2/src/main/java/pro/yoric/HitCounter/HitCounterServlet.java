@@ -9,8 +9,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Enumeration;
 
 @WebServlet(name = "HitCounterServlet", urlPatterns = "/task9m2")
 public class HitCounterServlet
@@ -48,7 +52,7 @@ public class HitCounterServlet
                 "    <meta   content     = \"ie=edge\"\n" +
                 "            http-equiv  = \"x-ua-compatible\"/>\n" +
                 "\n" +
-                "    <link   href        = \"/resources/css/style.css\"\n" +
+                "    <link   href        = \"resources/css/style.css\"\n" +
                 "            media       = \"all\"\n" +
                 "            rel         = \"stylesheet\"\n" +
                 "            type        = \"text/css\"/>\n" +
@@ -73,7 +77,7 @@ public class HitCounterServlet
 
             out.println(
                 "Initialization path after init: " + checkPath.getPath() + "<br/>"+                 //TODO: DELETE!
-                "Initialization path is: " + setInitParam()                       //TODO: DELETE!
+                "Initialization path is: " + setInitParam()                        //TODO: DELETE!
 //                "The number of visits is: " + amount                              //TODO: After debugging - UNCOMMENT!
             );
 
@@ -132,14 +136,59 @@ public class HitCounterServlet
         doGet(req, resp);
     }
 
+    private String getAllInitParamFromContext()                                     //TODO: DELETE!
+    {
+        Enumeration <String> initParamNames =
+            getServletConfig()
+               .getInitParameterNames();
+
+        String paramList = "";
+
+        while (initParamNames.hasMoreElements())
+        {
+            String param = initParamNames.nextElement();
+
+            paramList +=
+                "[ "  + param +
+                " = " + getServletConfig()
+                            .getInitParameter(param) +
+                " ]\n";
+        }
+         return paramList;
+    }
+
+
+
     private String setInitParam()                                                   //TODO: DELETE!
 //    private void setInitParam()                                                     //TODO: To check - comment this!
-    {//getRealPath()
+    {
+//        String absoluteAppPath = req.getServletContext().getRealPath("");
+//        String instanceFilePath = absoluteAppPath + File.separator + "resources\\data\\" + FILENAME;
+//        File fileLocation = new File (instanceFilePath);
+//        if(!fileLocation.exists())
+//            fileLocation.mkdir();
+
+        InitialContext initialContext = null;
+        try {
+            initialContext = new InitialContext();
+            String path = (String) initialContext.lookup("java:comp/env/ENV_FILE_PATH");
+            iHitCounter.doInit(path);                                                   //TODO: To check - comment this!
+            return path;
+
+        } catch (NamingException e) {
+            e.printStackTrace();
+        }
+
+
+
+
         ServletConfig conf = this.getServletConfig();
-        String path = conf.getInitParameter("WEB_FILE_PATH");
-        iHitCounter.doInit(path);                                                   //TODO: To check - comment this!
-        return path;                                                                //TODO: DELETE!
+//        String path        = conf.getInitParameter("WEB_FILE_PATH");
+//        iHitCounter.doInit(path);                                                   //TODO: To check - comment this!
+//        return path;                                                               //TODO: DELETE!
+        return "";
     }
+
 
     private static final long   serialVersionUID = 1L;
     private static final Logger logger =
