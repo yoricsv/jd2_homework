@@ -1,10 +1,6 @@
 package pro.yoric.HitCounter;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-
 import jakarta.servlet.ServletConfig;
-import jakarta.servlet.ServletContainerInitializer;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,12 +9,21 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
 @WebServlet(name = "HitCounterServlet", urlPatterns = "/task9m2")
 public class HitCounterServlet
      extends HttpServlet
 {
     IHitCounter iHitCounter = new HitCounter();
     FileInstance checkPath  = FileInstance.getInstance();                          //TODO: DELETE!
+
+    @Override
+    public void init() throws ServletException
+    {
+        setInitParam();
+    }
 
     @Override
     protected void doGet(
@@ -30,7 +35,6 @@ public class HitCounterServlet
     {
         try
         {
-            setInitParam();
 
             PrintWriter out    = resp.getWriter();
 //                    int amount = iHitCounter.getCalls();                         //TODO: After debugging - UNCOMMENT!
@@ -44,7 +48,7 @@ public class HitCounterServlet
                 "    <meta   content     = \"ie=edge\"\n" +
                 "            http-equiv  = \"x-ua-compatible\"/>\n" +
                 "\n" +
-                "    <link   href        = \"css/style.css\"\n" +
+                "    <link   href        = \"/resources/css/style.css\"\n" +
                 "            media       = \"all\"\n" +
                 "            rel         = \"stylesheet\"\n" +
                 "            type        = \"text/css\"/>\n" +
@@ -68,8 +72,8 @@ public class HitCounterServlet
             );
 
             out.println(
-                "Initialization path is: " + checkPath.getPath()                  //TODO: DELETE!
-//                "Initialization path is: " + setInitParam()                       //TODO: DELETE!
+                "Initialization path after init: " + checkPath.getPath() + "<br/>"+                 //TODO: DELETE!
+                "Initialization path is: " + setInitParam()                       //TODO: DELETE!
 //                "The number of visits is: " + amount                              //TODO: After debugging - UNCOMMENT!
             );
 
@@ -130,7 +134,7 @@ public class HitCounterServlet
 
     private String setInitParam()                                                   //TODO: DELETE!
 //    private void setInitParam()                                                     //TODO: To check - comment this!
-    {
+    {//getRealPath()
         ServletConfig conf = this.getServletConfig();
         String path = conf.getInitParameter("WEB_FILE_PATH");
         iHitCounter.doInit(path);                                                   //TODO: To check - comment this!
