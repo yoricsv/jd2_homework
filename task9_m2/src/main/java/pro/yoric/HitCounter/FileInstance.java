@@ -58,7 +58,8 @@ public class FileInstance
             return     fileObj.canRead()
                     && fileObj.canWrite();
         else
-            return !fileObj.mkdir();
+            return     fileObj.mkdir()
+                    && fileObj.exists();
     }
 
     public static FileInstance getInstance()
