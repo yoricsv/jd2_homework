@@ -11,9 +11,7 @@ public class FileInstance
     @Override
     public void doInit(String path)
     {
-        String instanceFilePath = path + FILE_NAME;
-
-        instancePath = instanceFilePath;
+        instancePath = path + FILE_NAME;
     }
 
     private FileInstance()                                      // PRIVATE CONSTRUCTOR
@@ -22,29 +20,26 @@ public class FileInstance
         {
             File f = new File(instancePath, FILE_NAME);
 
-            if (checkAccessToFile(f))
-            {
-                f.createNewFile();
-                if (checkAccessToFile(f))
+            if (!checkAccessToFile(f))
+                if (!f.createNewFile())
+                {
                     logger.error(
                         "ERROR!\t File or Directory creation fault!\n" +
-                        "\t\tCheck The Path or Access rights"
+                        "\t\tCheck The Path and Access rights"
                     );
-                else
-                {
-                    BufferedWriter fbw =
-                        new BufferedWriter(
-                            new FileWriter(f)
-                    );
-                    fbw.write(THE_FIRST_HIT);
-                    fbw.flush();
-                    fbw.close();
 
-                    this.realFilePath = f.getAbsolutePath();
+                    instance = null;
                 }
-            }
-            else
-                this.realFilePath = f.getAbsolutePath();
+
+            BufferedWriter fbw =
+                new BufferedWriter(
+                    new FileWriter(f)
+                );
+            fbw.write(THE_FIRST_HIT);
+            fbw.flush();
+            fbw.close();
+
+            this.realFilePath = f.getAbsolutePath();
         }
         catch (IOException e)
         {
