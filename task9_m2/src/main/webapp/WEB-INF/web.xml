@@ -19,7 +19,7 @@
         <servlet-class>pro.yoric.HitCounter.HitCounterServlet</servlet-class>
         <init-param>
            <param-name>WEB_FILE_PATH</param-name>
-           <param-value>resources/data/visits.dat</param-value>
+           <param-value>resources${file.separator}data</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>
@@ -29,7 +29,7 @@
 
     <env-entry>
         <env-entry-name>ENV_FILE_PATH</env-entry-name>
-        <env-entry-value>resources/data/visits.dat</env-entry-value>
+        <env-entry-value>resources${file.separator}data${file.separator}visits.dat</env-entry-value>
         <env-entry-type>java.lang.String</env-entry-type>
     </env-entry>
 

@@ -62,7 +62,7 @@ http://localhost:8080/app/task9m2
 `${java.vm.vendor}` | Oracle Corporation
 `${java.vm.name}` | OpenJDK 64-Bit Server VM
 
-### Template strukture of web.xml:
+### web.xml structure template:
 ```xml
 <?xml version    = "1.0"
       encoding   = "UTF-8"

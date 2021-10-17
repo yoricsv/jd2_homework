@@ -11,15 +11,9 @@ public class FileInstance
     @Override
     public void doInit(String path)
     {
+        String instanceFilePath = path + FILE_NAME;
 
-        String absoluteAppPath = req.getServletContext().getRealPath("");
-
-        String instanceFilePath = absoluteAppPath + File.separator + "resources\\data\\" + FILE_NAME;
-
-        File fileLocation = new File (instanceFilePath);
-        if(!fileLocation.exists())
-            fileLocation.mkdir();
-        instancePath = path;
+        instancePath = instanceFilePath;
     }
 
     private FileInstance()                                      // PRIVATE CONSTRUCTOR
@@ -28,12 +22,13 @@ public class FileInstance
         {
             File f = new File(instancePath, FILE_NAME);
 
-            if (!checkAccessToFile(f))
+            if (checkAccessToFile(f))
             {
                 f.createNewFile();
-                if (!checkAccessToFile(f))
+                if (checkAccessToFile(f))
                     logger.error(
-                        "Error! Check The Path or Access rights"
+                        "ERROR!\t File or Directory creation fault!\n" +
+                        "\t\tCheck The Path or Access rights"
                     );
                 else
                 {
@@ -59,12 +54,11 @@ public class FileInstance
 
     private boolean checkAccessToFile(File fileObj)
     {
-        if (   fileObj.exists()
-            && fileObj.canRead()
-            && fileObj.canWrite())
-            return true;
+        if(fileObj.exists())
+            return     fileObj.canRead()
+                    && fileObj.canWrite();
         else
-            return false;
+            return !fileObj.mkdir();
     }
 
     public static FileInstance getInstance()

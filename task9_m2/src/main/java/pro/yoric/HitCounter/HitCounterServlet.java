@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -24,7 +25,11 @@ public class HitCounterServlet
     @Override
     public void init() throws ServletException
     {
-        setInitParam();
+        try {
+            setInitParam();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -134,33 +139,34 @@ public class HitCounterServlet
     }
 
 
-    private String setInitParam()                                                   //TODO: DELETE!
+    private String setInitParam() throws IOException                                                   //TODO: DELETE!
 //    private void setInitParam()                                                     //TODO: To check - comment this!
     {
-//        String absoluteAppPath = req.getServletContext().getRealPath("");
-//        String instanceFilePath = absoluteAppPath + File.separator + "resources\\data\\" + FILENAME;
-//        File fileLocation = new File (instanceFilePath);
+        String absoluteAppPath = getServletConfig().getServletContext().getRealPath("");
 
 
-        InitialContext initialContext = null;
-        
-        try
-        {
-            initialContext = new InitialContext();
-            String path = (String) initialContext.lookup("java:comp/env/ENV_FILE_PATH");
-            iHitCounter.doInit(path);                                                   //TODO: To check - comment this!
-            return path;
-        }
-        catch (NamingException e)
-        {
-            e.printStackTrace();
-        }
+//        try
+//        {
+//            initialContext = new InitialContext();
+//            String path = (String) initialContext.lookup("java:comp/env/ENV_FILE_PATH");
+//            iHitCounter.doInit(path);                                                   //TODO: To check - comment this!
+//            return path;
+//        }
+//        catch (NamingException e)
+//        {
+//            e.printStackTrace();
+//        }
 
         ServletConfig conf = this.getServletConfig();
-//        String path        = conf.getInitParameter("WEB_FILE_PATH");
+        String path        = conf.getInitParameter("WEB_FILE_PATH");
+
+        String instanceFilePath = absoluteAppPath + path + File.separator;
 //        iHitCounter.doInit(path);                                                   //TODO: To check - comment this!
 //        return path;                                                               //TODO: DELETE!
-        return "";
+        File filePath = new File(absoluteAppPath + path);
+        String canonical = filePath.getAbsolutePath();
+        return canonical;
+//        return absoluteAppPath;
     }
 
 
@@ -170,4 +176,5 @@ public class HitCounterServlet
         .getLogger(
             HitCounterServlet.class
     );
+    private      InitialContext initialContext   = null;
 }
