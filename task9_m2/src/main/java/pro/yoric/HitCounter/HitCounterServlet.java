@@ -11,10 +11,8 @@ import org.slf4j.LoggerFactory;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Enumeration;
 
 @WebServlet(name = "HitCounterServlet", urlPatterns = "/task9m2")
 public class HitCounterServlet
@@ -39,7 +37,6 @@ public class HitCounterServlet
     {
         try
         {
-
             PrintWriter out    = resp.getWriter();
 //                    int amount = iHitCounter.getCalls();                         //TODO: After debugging - UNCOMMENT!
 
@@ -136,28 +133,6 @@ public class HitCounterServlet
         doGet(req, resp);
     }
 
-    private String getAllInitParamFromContext()                                     //TODO: DELETE!
-    {
-        Enumeration <String> initParamNames =
-            getServletConfig()
-               .getInitParameterNames();
-
-        String paramList = "";
-
-        while (initParamNames.hasMoreElements())
-        {
-            String param = initParamNames.nextElement();
-
-            paramList +=
-                "[ "  + param +
-                " = " + getServletConfig()
-                            .getInitParameter(param) +
-                " ]\n";
-        }
-         return paramList;
-    }
-
-
 
     private String setInitParam()                                                   //TODO: DELETE!
 //    private void setInitParam()                                                     //TODO: To check - comment this!
@@ -165,22 +140,21 @@ public class HitCounterServlet
 //        String absoluteAppPath = req.getServletContext().getRealPath("");
 //        String instanceFilePath = absoluteAppPath + File.separator + "resources\\data\\" + FILENAME;
 //        File fileLocation = new File (instanceFilePath);
-//        if(!fileLocation.exists())
-//            fileLocation.mkdir();
+
 
         InitialContext initialContext = null;
-        try {
+        
+        try
+        {
             initialContext = new InitialContext();
             String path = (String) initialContext.lookup("java:comp/env/ENV_FILE_PATH");
             iHitCounter.doInit(path);                                                   //TODO: To check - comment this!
             return path;
-
-        } catch (NamingException e) {
+        }
+        catch (NamingException e)
+        {
             e.printStackTrace();
         }
-
-
-
 
         ServletConfig conf = this.getServletConfig();
 //        String path        = conf.getInitParameter("WEB_FILE_PATH");

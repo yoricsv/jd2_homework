@@ -19,12 +19,8 @@
         <servlet-class>pro.yoric.HitCounter.HitCounterServlet</servlet-class>
         <init-param>
            <param-name>WEB_FILE_PATH</param-name>
-           <!--param-value>/WEB-INF/classes/data/visits.txt</param-value-->
-           <param-value>/resources/data/visits.txt</param-value>
-<!--            <param-value>http://localhost:8080/app/resources/data/visits.txt</param-value>-->
-<!--           <param-value>${catalina.base}${file.separator}webapps${file.separator}app${file.separator}resources${file.separator}data${file.separator}visits.txt</param-value>-->
-           <!--param-value>C:\\Users\\Сергей Владимирович\\OneDrive\\Desctop\\001_PROJECTS_\\001_Java_Projects_\\#_HOMEWORKS_\\#_JavaEnterprise_\\jd2_homework\\task9_m2\\src\\main\\resources\\data\\visits.txt</param-value-->
-         </init-param>
+           <param-value>resources/data/visits.dat</param-value>
+        </init-param>
     </servlet>
     <servlet-mapping>
         <servlet-name>HitCounterServlet</servlet-name>
@@ -33,7 +29,7 @@
 
     <env-entry>
         <env-entry-name>ENV_FILE_PATH</env-entry-name>
-        <env-entry-value>/resources/data/visits.txt</env-entry-value>
+        <env-entry-value>resources/data/visits.dat</env-entry-value>
         <env-entry-type>java.lang.String</env-entry-type>
     </env-entry>
 

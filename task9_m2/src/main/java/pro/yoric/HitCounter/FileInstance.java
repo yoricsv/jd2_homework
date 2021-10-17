@@ -9,9 +9,17 @@ public class FileInstance
     implements IFileInstance
 {
     @Override
-    public void doInit(String pathValue)
+    public void doInit(String path)
     {
-        instancePath = pathValue;
+
+        String absoluteAppPath = req.getServletContext().getRealPath("");
+
+        String instanceFilePath = absoluteAppPath + File.separator + "resources\\data\\" + FILE_NAME;
+
+        File fileLocation = new File (instanceFilePath);
+        if(!fileLocation.exists())
+            fileLocation.mkdir();
+        instancePath = path;
     }
 
     private FileInstance()                                      // PRIVATE CONSTRUCTOR
@@ -77,7 +85,7 @@ public class FileInstance
     }
 
     private static FileInstance instance      = null;           // IMPORTANT!!!
-    private static final String FILE_NAME     = "visits.txt";
+    private static final String FILE_NAME     = "visits.dat";
     private        final    int THE_FIRST_HIT = 1;
     private              String instancePath  = "";
     private              String realFilePath  = "";
