@@ -20,30 +20,28 @@ public class FileInstance
         {
             File f = new File(instancePath, FILE_NAME);
 
-            if (!checkAccessToFile(f))
-                if (!f.createNewFile())
-                {
-                    logger.error(
-                        "ERROR!\t File or Directory creation fault!\n" +
-                        "\t\tCheck The Path and Access rights"
+            if (!f.createNewFile())
+                if (!checkAccessToFile(f))
+                    instanceFault();
+
+            if(checkAccessToFile(f))
+            {
+                BufferedWriter fbw =
+                    new BufferedWriter(
+                        new FileWriter(f)
                     );
+                fbw.write(THE_FIRST_HIT);
+                fbw.flush();
+                fbw.close();
 
-                    instance = null;
-                }
-
-            BufferedWriter fbw =
-                new BufferedWriter(
-                    new FileWriter(f)
-                );
-            fbw.write(THE_FIRST_HIT);
-            fbw.flush();
-            fbw.close();
-
-            this.realFilePath = f.getAbsolutePath();
+                this.realFilePath = f.getAbsolutePath();
+            }
+            else
+                instanceFault();
         }
         catch (IOException e)
         {
-            logger.debug(e.toString(), e);
+            logger.error(e.toString(), e);
         }
     }
 
@@ -53,7 +51,7 @@ public class FileInstance
             return     fileObj.canRead()
                     && fileObj.canWrite();
         else
-            return     fileObj.mkdir()
+            return     fileObj.getParentFile().mkdir()
                     && fileObj.exists();
     }
 
@@ -63,6 +61,15 @@ public class FileInstance
             instance = new FileInstance();
 
         return instance;
+    }
+
+    private void instanceFault()
+    {
+        logger.error(
+            "ERROR!\t File or Directory creation fault!\n" +
+            "\t\tCheck The Path and Access rights"
+        );
+        instance = null;
     }
 
     @Override

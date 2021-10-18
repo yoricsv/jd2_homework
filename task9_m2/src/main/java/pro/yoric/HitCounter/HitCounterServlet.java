@@ -23,13 +23,9 @@ public class HitCounterServlet
     FileInstance checkPath  = FileInstance.getInstance();                          //TODO: DELETE!
 
     @Override
-    public void init() throws ServletException
+    public void init()
     {
-        try {
-            setInitParam();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        setInitParam();
     }
 
     @Override
@@ -139,7 +135,7 @@ public class HitCounterServlet
     }
 
 
-    private String setInitParam() throws IOException                                                   //TODO: DELETE!
+    private String setInitParam()                                                   //TODO: DELETE!
 //    private void setInitParam()                                                     //TODO: To check - comment this!
     {
         String absoluteAppPath = getServletConfig().getServletContext().getRealPath("");
@@ -165,7 +161,8 @@ public class HitCounterServlet
 //        return path;                                                               //TODO: DELETE!
         File filePath = new File(absoluteAppPath + path);
         String canonical = filePath.getAbsolutePath();
-        return canonical;
+//        return canonical;
+        return instanceFilePath;
 //        return absoluteAppPath;
     }
 
