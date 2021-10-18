@@ -19,7 +19,7 @@ public class HitCounterServlet
      extends HttpServlet
 {
     IHitCounter iHitCounter = new HitCounter();
-    FileInstance checkPath  = FileInstance.getInstance();                          //TODO: DELETE!
+    FileInstance checkPath  = FileInstance.getInstance();       //TODO: DELETE!
 
     @Override
     public void init()
@@ -38,7 +38,7 @@ public class HitCounterServlet
         try
         {
             PrintWriter out    = resp.getWriter();
-//                    int amount = iHitCounter.getCalls();                         //TODO: After debugging - UNCOMMENT!
+//                    int amount = iHitCounter.getCalls();      //TODO: After debugging - UNCOMMENT!
 
             out.println(
                 "<!DOCTYPE html>\n" +
@@ -79,7 +79,7 @@ public class HitCounterServlet
 //                "The Path before Instance (instanceFilePath): " + checkPath.getInstancePath() + "<br/>"+
                 "The Path after Instance (realFilePath): " + checkPath.getPath() + "<br/>"
 
-//                "The number of visits is: " + amount                              //TODO: After debugging - UNCOMMENT!
+//                "The number of visits is: " + amount          //TODO: After debugging - UNCOMMENT!
             );
 
             out.println(
@@ -118,7 +118,7 @@ public class HitCounterServlet
                 "</html>"
             );
 
-//            iHitCounter.setCall();                                               //TODO: After debugging - UNCOMMENT!
+//            iHitCounter.setCall();                            //TODO: After debugging - UNCOMMENT!
         }
         catch(Exception e)
         {
@@ -138,30 +138,15 @@ public class HitCounterServlet
     }
 
 
-    private String setInitParam()                                                   //TODO: DELETE!
-//    private void setInitParam()                                                     //TODO: To check - comment this!
+    private String setInitParam()                               //TODO: DELETE!
+//    private void setInitParam()                               //TODO: To check - comment this!
     {
 
-
-
-//        try
-//        {
-//            initialContext = new InitialContext();
-//            String path = (String) initialContext.lookup("java:comp/env/ENV_FILE_PATH");
-//            iHitCounter.doInit(path);                                                   //TODO: To check - comment this!
-//            return path;
-//        }
-//        catch (NamingException e)
-//        {
-//            e.printStackTrace();
-//        }
-
         ServletConfig conf = this.getServletConfig();
-        path        = conf.getInitParameter("WEB_FILE_PATH");
-//        path = "test_creation" + File.separator +"dir" + File.separator;
-        absoluteAppPath = getServletConfig().getServletContext().getRealPath("");
-        instanceFilePath = absoluteAppPath + path;
-//        iHitCounter.doInit(path);                                                   //TODO: To check - comment this!
+        path               = conf.getInitParameter("WEB_FILE_PATH");
+        absoluteAppPath    = getServletConfig().getServletContext().getRealPath("");
+        instanceFilePath   = absoluteAppPath + path;
+
 
         File filePath = new File(instanceFilePath);
         File file     = new File(instanceFilePath + "visits.dat");
@@ -176,22 +161,13 @@ public class HitCounterServlet
         }
         return file.getPath();
 
+
+//        iHitCounter.doInit(path);                             //TODO: To check - comment this!
     }
 
-    public String getWebXmlPath()
-    {
-        return path;
-    }
-    public String getAbsolutePath()
-    {
-        return absoluteAppPath;
-    }
-    private String path;
-    private String instanceFilePath;
-    private String absoluteAppPath;
-
-
-
+    public String getWebXmlPath()  {return path;}               //TODO: DELETE!
+    public String getAbsolutePath(){return absoluteAppPath;}    //TODO: DELETE!
+    private String path, instanceFilePath, absoluteAppPath;     //TODO: DELETE!
 
 
 

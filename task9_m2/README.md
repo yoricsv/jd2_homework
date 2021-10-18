@@ -110,11 +110,11 @@ http://localhost:8080/app/task9m2
 ```xml
     <context-param>
         <param-name>CONTEXT_PATH</param-name>
-        <param-value>${catalina.base}/WEB-INF/classes/data/visit.dat</param-value>
+        <param-value>${catalina.base}/webapps/${artifactId}/data/visit.dat</param-value>
     </context-param>
 ```
 To get the context parameters of the servlet might use to the next method:
-### Get the result as a HashMap:
+### To get the result as a HashMap:
 > ***NOTE***: We can add a ServletContext object here as a parameter.<br/>Everywhere, instead of the getServletConfig() method, use an instance of the ServletContext class
 {
 ```java
@@ -144,7 +144,7 @@ private Map <String, String> getContextParam()
 }
 ```
 
-### *Get the result as a Property Object:*
+### *To get the result as a Property Object:*
 > ***NOTE***: The parameter can be removed here.<br/>Everywhere, instead of the context, use the getServletConfig() method
 ```java
 private Properties getContextParam(ServletContext context)
@@ -218,15 +218,38 @@ private void showContext(HttpServletResponse resp)
         <env-entry-type>java.lang.String</env-entry-type>
     </env-entry>
 ```
+### To get the result as a String:
+> ***NOTE***: May throw a naming exception, use try/catch to catch this 
+```java
+try
+{
+    initialContext = new InitialContext();
+    return  (String)initialContext.lookup("java:comp/env/ENV_FILE_PATH");
+}
+catch (NamingException e)
+{
+    logger.debug(e.toString(), e);
+}
+```
+
 ## Examples How we can specified of the path:
 ```xml
 <param-name>_PATH</param-name>
 
-<param-value>/WEB-INF/classes/data/visits.dat</param-value>
-<param-value>/resources/data/visits.dat</param-value>
+<!-- RELATIVE PATH (for nix systems and servers)-->
+<param-value>WEB-INF/classes/data/visits.dat</param-value>
+
+<!-- RELATIVE AND VARIABLES (all OS)-->
+<param-value>resources${file.separator}data${file.separator}visits.dat</param-value>
+
+<!-- URL ABSOLUTE (for server)-->
 <param-value>http://localhost:8080/app/resources/data/visits.dat</param-value>
-<param-value>${catalina.base}${file.separator}webapps${file.separator}app${file.separator}visits.dat</param-value>
-<param-value>C:\\JavaProjects\\jd2_homework\\task9_m2\\src\\main\\resources\\data\\visits.dat</param-value>
+
+<!-- SYSTEM VARIABLES (all OS)-->
+<param-value>${catalina.base}${file.separator}webapps${file.separator}${artefactId}${file.separator}visits.dat</param-value>
+
+<!-- HARDCODE (for Windows)-->
+<param-value>C:\\JavaProjects\\Tomcat_v.10\\webapps\\app\\resources\\data\\visits.dat</param-value>
 ```
 
 <!--

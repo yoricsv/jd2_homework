@@ -9,29 +9,18 @@
          version = "4.0"
 >
 
-    <context-param>
-        <param-name>CONTEXT_PATH</param-name>
-        <param-value>${catalina.base}/WEB-INF/classes/data/visit.dat</param-value>
-    </context-param>
-
     <servlet>
         <servlet-name>HitCounterServlet</servlet-name>
         <servlet-class>pro.yoric.HitCounter.HitCounterServlet</servlet-class>
+
         <init-param>
            <param-name>WEB_FILE_PATH</param-name>
-               <param-value>resources${file.separator}data${file.separator}</param-value>
-<!--           <param-value>resources${file.separator}data</param-value>-->
+           <param-value>resources${file.separator}data${file.separator}</param-value>
         </init-param>
     </servlet>
+
     <servlet-mapping>
         <servlet-name>HitCounterServlet</servlet-name>
         <url-pattern>/task9m2</url-pattern>
     </servlet-mapping>
-
-    <env-entry>
-        <env-entry-name>ENV_FILE_PATH</env-entry-name>
-        <env-entry-value>resources${file.separator}data${file.separator}visits.dat</env-entry-value>
-        <env-entry-type>java.lang.String</env-entry-type>
-    </env-entry>
-
 </web-app>
