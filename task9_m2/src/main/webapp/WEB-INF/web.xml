@@ -19,7 +19,8 @@
         <servlet-class>pro.yoric.HitCounter.HitCounterServlet</servlet-class>
         <init-param>
            <param-name>WEB_FILE_PATH</param-name>
-           <param-value>resources${file.separator}data</param-value>
+               <param-value>resources${file.separator}data${file.separator}</param-value>
+<!--           <param-value>resources${file.separator}data</param-value>-->
         </init-param>
     </servlet>
     <servlet-mapping>

@@ -10,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -25,7 +24,7 @@ public class HitCounterServlet
     @Override
     public void init()
     {
-        setInitParam();
+       checkPath.doInit(setInitParam());
     }
 
     @Override
@@ -74,8 +73,12 @@ public class HitCounterServlet
             );
 
             out.println(
-                "Initialization path after init: " + checkPath.getPath() + "<br/>"+                 //TODO: DELETE!
-                "Initialization path is: " + setInitParam()                        //TODO: DELETE!
+                "The Path from WEB.XML: " + getWebXmlPath()  + "<br/>"+
+                "The servlet absolute path: " + getAbsolutePath()  + "<br/>"+
+                "Prepared path to init: " + setInitParam()  + "<br/>"+
+//                "The Path before Instance (instanceFilePath): " + checkPath.getInstancePath() + "<br/>"+
+                "The Path after Instance (realFilePath): " + checkPath.getPath() + "<br/>"
+
 //                "The number of visits is: " + amount                              //TODO: After debugging - UNCOMMENT!
             );
 
@@ -138,7 +141,7 @@ public class HitCounterServlet
     private String setInitParam()                                                   //TODO: DELETE!
 //    private void setInitParam()                                                     //TODO: To check - comment this!
     {
-        String absoluteAppPath = getServletConfig().getServletContext().getRealPath("");
+
 
 
 //        try
@@ -154,17 +157,43 @@ public class HitCounterServlet
 //        }
 
         ServletConfig conf = this.getServletConfig();
-        String path        = conf.getInitParameter("WEB_FILE_PATH");
-
-        String instanceFilePath = absoluteAppPath + path + File.separator;
+        path        = conf.getInitParameter("WEB_FILE_PATH");
+//        path = "test_creation" + File.separator +"dir" + File.separator;
+        absoluteAppPath = getServletConfig().getServletContext().getRealPath("");
+        instanceFilePath = absoluteAppPath + path;
 //        iHitCounter.doInit(path);                                                   //TODO: To check - comment this!
-//        return path;                                                               //TODO: DELETE!
-        File filePath = new File(absoluteAppPath + path);
-        String canonical = filePath.getAbsolutePath();
-//        return canonical;
-        return instanceFilePath;
-//        return absoluteAppPath;
+
+        File filePath = new File(instanceFilePath);
+        File file     = new File(instanceFilePath + "visits.dat");
+        try {
+            filePath.mkdirs();
+            filePath.createNewFile();
+
+            file.createNewFile();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return file.getPath();
+
     }
+
+    public String getWebXmlPath()
+    {
+        return path;
+    }
+    public String getAbsolutePath()
+    {
+        return absoluteAppPath;
+    }
+    private String path;
+    private String instanceFilePath;
+    private String absoluteAppPath;
+
+
+
+
+
 
 
     private static final long   serialVersionUID = 1L;

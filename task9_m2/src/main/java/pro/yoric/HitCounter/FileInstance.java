@@ -8,17 +8,18 @@ import java.io.IOException;
 public class FileInstance
     implements IFileInstance
 {
+
     @Override
     public void doInit(String path)
     {
-        instancePath = path + FILE_NAME;
+        this.instancePath = path + FILE_NAME;
     }
 
     private FileInstance()                                      // PRIVATE CONSTRUCTOR
     {
         try
         {
-            File f = new File(instancePath, FILE_NAME);
+            File f = new File(this.instancePath);
 
             if (!f.createNewFile())
                 if (!checkAccessToFile(f))
@@ -72,12 +73,17 @@ public class FileInstance
         instance = null;
     }
 
+    public String getInstancePath()
+    {
+        return this.instancePath;
+    }
+
     @Override
     public String getPath()
     {
         if (instance == null)
             getInstance();
-
+//        return this.instancePath;
         return this.realFilePath;
     }
 
