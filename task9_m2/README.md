@@ -296,12 +296,15 @@ private String path, instanceFilePath, absoluteAppPath;
 
 
     out.println(
-        "The Path from WEB.XML: "                       + getWebXmlPath()               + "<br/>"+
-        "The servlet absolute path: "                   + getAbsolutePath()             + "<br/><br/>"+
+        "The Path from WEB.XML BEFORE: "                + getWebXmlPath()               + "<br/>"+
+        "The servlet absolute path BEFORE: "            + getAbsolutePath()             + "<br/><br/>"+
 
-        "Prepared path to init: "                       + setInitParam()                + "<br/>"+
-        "Check BEFORE return throw try/catch: "         + stateBefore                   + "<br/>"+
+        "Prepared path to init: "                       + setInitParam()                + "<br/><br/>"+
+        "Check BEFORE return throw try/catch: "         + stateBefore                   + "<br/><br/>"+
         "Check AFTER return throw try/catch: "          + state                         + "<br/><br/>"+
+
+        "The Path from WEB.XML AFTER: "                 + getWebXmlPath()               + "<br/>"+
+        "The servlet absolute path AFTER: "             + getAbsolutePath()             + "<br/><br/>"+
 
         "The Path before Instance (instanceFilePath): " + checkPath.getInstancePath()   + "<br/>"+
         "The Path after Instance (realFilePath): "      + checkPath.getPath()           + "<br/>"
@@ -322,8 +325,8 @@ private String path, instanceFilePath, absoluteAppPath;
 //            && file.createNewFile();
         if (file.canRead()
         && file.canWrite())
-            state = "After creation Can The file read? - " + file.canRead() +
-                    "After creation Can The file write? - " + file.canWrite();
+            state = "<br/>>>>>>  After creation: Can The file read? - "  + file.canRead() +
+                    "<br/>>>>>>  After creation: Can The file write? - " + file.canWrite();
 
         return instanceFilePath;//file.getPath();
 
@@ -357,9 +360,10 @@ private String path, instanceFilePath, absoluteAppPath;
     {
         if (   file.canRead()
             && file.canWrite())
-            return stateBefore = "\nBefore creation Can The file read? - " + file.canRead() +
-                                 "\nBefore creation Can The file write? - " + file.canWrite();
-        return stateBefore = "\nFile not exist! IT'S RIGHT!!!!";
+            return stateBefore =
+                "<br/>>>>>> Before creation: Can The file read? - "  + file.canRead() +
+                "<br/>>>>>> Before creation: Can The file write? - " + file.canWrite();
+        return stateBefore = ">>> The File doesn't exist! IT'S RIGHT!!!!";
     }
 
     public boolean checkReturn(File file)

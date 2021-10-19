@@ -74,14 +74,18 @@ public class HitCounterServlet
             );
 
             out.println(
-                "The Path from WEB.XML: " + getWebXmlPath()  + "<br/>"+
-                "The servlet absolute path: " + getAbsolutePath()  + "<br/><br/>"+
-                "Prepared path to init: " + setInitParam()  + "<br/>"+
-                        "Check BEFORE return throw try/catch: " + stateBefore  + "<br/>"+
-                        "Check AFTER return throw try/catch: " + state  + "<br/><br/>"+
-//                "" + state  + "<br/>"+
-                "The Path before Instance (instanceFilePath): " + checkPath.getInstancePath() + "<br/>"+
-                "The Path after Instance (realFilePath): " + checkPath.getPath() + "<br/>"
+                "The Path from WEB.XML BEFORE: "                + getWebXmlPath()               + "<br/>"+
+                "The servlet absolute path BEFORE: "            + getAbsolutePath()             + "<br/><br/>"+
+
+                "Prepared path to init: "                       + setInitParam()                + "<br/><br/>"+
+                "Check BEFORE return throw try/catch: "         + stateBefore                   + "<br/><br/>"+
+                "Check AFTER return throw try/catch: "          + state                         + "<br/><br/>"+
+
+                "The Path from WEB.XML AFTER: "                 + getWebXmlPath()               + "<br/>"+
+                "The servlet absolute path AFTER: "             + getAbsolutePath()             + "<br/><br/>"+
+
+                "The Path before Instance (instanceFilePath): " + checkPath.getInstancePath()   + "<br/>"+
+                "The Path after Instance (realFilePath): "      + checkPath.getPath()           + "<br/>"
 
 //                "The number of visits is: " + amount          //TODO: After debugging - UNCOMMENT!
             );
@@ -157,8 +161,8 @@ public class HitCounterServlet
 //            && file.createNewFile();
         if (file.canRead()
         && file.canWrite())
-            state = "After creation Can The file read? - " + file.canRead() +
-                    "After creation Can The file write? - " + file.canWrite();
+            state = "<br/>>>>>>  After creation: Can The file read? - " + file.canRead() +
+                    "<br/>>>>>>  After creation: Can The file write? - " + file.canWrite();
 
         return instanceFilePath;//file.getPath();
 
@@ -192,10 +196,11 @@ public class HitCounterServlet
     public String checkBefore(File file)
     {
         if (   file.canRead()
-                && file.canWrite())
-            return stateBefore = "Before creation Can The file read? - " + file.canRead() +
-                    "Before creation Can The file write? - " + file.canWrite();
-        return stateBefore = "File not exist! IT'S RIGHT!!!!";
+            && file.canWrite())
+            return stateBefore =
+                "<br/>>>>>> Before creation: Can The file read? - " + file.canRead() +
+                "<br/>>>>>> Before creation: Can The file write? - " + file.canWrite();
+        return stateBefore = ">>> The File doesn't exist! IT'S RIGHT!!!!";
     }
 
     public boolean checkReturn(File file)
@@ -203,7 +208,7 @@ public class HitCounterServlet
         checkBefore(file);
         try
         {
-            return file.getParentFile().mkdirs()
+            return     file.getParentFile().mkdirs()
                     && file.createNewFile();
         }
         catch (IOException e)
@@ -214,8 +219,8 @@ public class HitCounterServlet
     }
 
 
-    public String getWebXmlPath()  {return path;}               //TODO: DELETE!
-    public String getAbsolutePath(){return absoluteAppPath;}    //TODO: DELETE!
+    public  String getWebXmlPath()  {return path;}               //TODO: DELETE!
+    public  String getAbsolutePath(){return absoluteAppPath;}    //TODO: DELETE!
     private String path, instanceFilePath, absoluteAppPath, stateBefore, state;     //TODO: DELETE!
 
 
