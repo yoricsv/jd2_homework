@@ -21,10 +21,6 @@ public class FileInstance
         {
             File f = new File(this.instancePath);
 
-            if (!f.createNewFile())
-                if (!checkAccessToFile(f))
-                    instanceFault();
-
             if(checkAccessToFile(f))
             {
                 BufferedWriter fbw =
@@ -51,9 +47,21 @@ public class FileInstance
         if(fileObj.exists())
             return     fileObj.canRead()
                     && fileObj.canWrite();
-        else
-            return     fileObj.getParentFile().mkdir()
-                    && fileObj.exists();
+//        else
+//        {
+//            try
+//            {
+//                return     fileObj.getParentFile().mkdirs()
+//                        && fileObj.createNewFile()
+//                        && fileObj.canRead()
+//                        && fileObj.canWrite();
+//            }
+//            catch (IOException e)
+//            {
+//                e.printStackTrace();
+//            }
+//        }
+        return false;
     }
 
     public static FileInstance getInstance()

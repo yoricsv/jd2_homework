@@ -13,6 +13,7 @@ import javax.naming.InitialContext;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.*;
 
 @WebServlet(name = "HitCounterServlet", urlPatterns = "/task9m2")
 public class HitCounterServlet
@@ -24,7 +25,7 @@ public class HitCounterServlet
     @Override
     public void init()
     {
-       checkPath.doInit(setInitParam());
+//       checkPath.doInit(setInitParam());
     }
 
     @Override
@@ -74,9 +75,12 @@ public class HitCounterServlet
 
             out.println(
                 "The Path from WEB.XML: " + getWebXmlPath()  + "<br/>"+
-                "The servlet absolute path: " + getAbsolutePath()  + "<br/>"+
+                "The servlet absolute path: " + getAbsolutePath()  + "<br/><br/>"+
                 "Prepared path to init: " + setInitParam()  + "<br/>"+
-//                "The Path before Instance (instanceFilePath): " + checkPath.getInstancePath() + "<br/>"+
+                        "Check BEFORE return throw try/catch: " + stateBefore  + "<br/>"+
+                        "Check AFTER return throw try/catch: " + state  + "<br/><br/>"+
+//                "" + state  + "<br/>"+
+                "The Path before Instance (instanceFilePath): " + checkPath.getInstancePath() + "<br/>"+
                 "The Path after Instance (realFilePath): " + checkPath.getPath() + "<br/>"
 
 //                "The number of visits is: " + amount          //TODO: After debugging - UNCOMMENT!
@@ -141,33 +145,78 @@ public class HitCounterServlet
     private String setInitParam()                               //TODO: DELETE!
 //    private void setInitParam()                               //TODO: To check - comment this!
     {
-
-        ServletConfig conf = this.getServletConfig();
-        path               = conf.getInitParameter("WEB_FILE_PATH");
-        absoluteAppPath    = getServletConfig().getServletContext().getRealPath("");
+        absoluteAppPath    = this.getServletConfig().getServletContext().getRealPath("");
+        path               = this.getServletConfig().getInitParameter("WEB_FILE_PATH");
         instanceFilePath   = absoluteAppPath + path;
 
+        File file = new File(instanceFilePath + "visits.dat");
 
-        File filePath = new File(instanceFilePath);
-        File file     = new File(instanceFilePath + "visits.dat");
-        try {
-            filePath.mkdirs();
-            filePath.createNewFile();
+        checkReturn(file);
 
-            file.createNewFile();
+//            return file.getParentFile().mkdirs()
+//            && file.createNewFile();
+        if (file.canRead()
+        && file.canWrite())
+            state = "After creation Can The file read? - " + file.canRead() +
+                    "After creation Can The file write? - " + file.canWrite();
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return file.getPath();
+        return instanceFilePath;//file.getPath();
 
+        /* NIO */
+//        Path path = Paths.get(instanceFilePath + "visits.dat"); //"data/logging.properties"
+//        Path path = Paths.get(instanceFilePath);//"data/subdir"
+//
+//        boolean pathExists =
+//            Files.exists(
+//                path,
+//                LinkOption.NOFOLLOW_LINKS
+//            );
+//
+//        try
+//        {
+//            Path newDir = Files.createDirectory(path);
+//        }
+//        catch(FileAlreadyExistsException e)
+//        {
+//            logger.warn(e.toString(), e);
+//        }
+//        catch (IOException e)
+//        {
+//            logger.trace(e.toString(), e);
+//        }
+//        return instanceFilePath ;
 
 //        iHitCounter.doInit(path);                             //TODO: To check - comment this!
     }
 
+    public String checkBefore(File file)
+    {
+        if (   file.canRead()
+                && file.canWrite())
+            return stateBefore = "Before creation Can The file read? - " + file.canRead() +
+                    "Before creation Can The file write? - " + file.canWrite();
+        return stateBefore = "File not exist! IT'S RIGHT!!!!";
+    }
+
+    public boolean checkReturn(File file)
+    {
+        checkBefore(file);
+        try
+        {
+            return file.getParentFile().mkdirs()
+                    && file.createNewFile();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
     public String getWebXmlPath()  {return path;}               //TODO: DELETE!
     public String getAbsolutePath(){return absoluteAppPath;}    //TODO: DELETE!
-    private String path, instanceFilePath, absoluteAppPath;     //TODO: DELETE!
+    private String path, instanceFilePath, absoluteAppPath, stateBefore, state;     //TODO: DELETE!
 
 
 

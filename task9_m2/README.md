@@ -193,6 +193,8 @@ private void showContext(HttpServletResponse resp)
 }
 ``` 
 ---
+<br/>
+
 ### Set Path via servlet init-param (for spacified servlet):
 ```xml
    <servlet>
@@ -210,6 +212,13 @@ private void showContext(HttpServletResponse resp)
         <url-pattern>/task9m2</url-pattern>
     </servlet-mapping>
 ```
+### To get the result as a String:
+```java
+String webFilePath = this.getServletConfig().getInitParameter("WEB_FILE_PATH");
+```
+---
+<br/>
+
 ### Set Path via environment entry:
 ```xml
     <env-entry>
@@ -251,6 +260,142 @@ catch (NamingException e)
 <!-- HARDCODE (for Windows)-->
 <param-value>C:\\JavaProjects\\Tomcat_v.10\\webapps\\app\\resources\\data\\visits.dat</param-value>
 ```
+
+## Create folders and file via I/O
+```java
+private String setInitParam()
+{
+    absoluteAppPath    = this.getServletConfig().getServletContext().getRealPath("");
+    path               = this.getServletConfig().getInitParameter("WEB_FILE_PATH");
+    instanceFilePath   = absoluteAppPath + path;
+
+    File filePath = new File(instanceFilePath);
+    File file     = new File(instanceFilePath + "visits.dat");
+    try
+    {
+        filePath.mkdirs();
+        file.createNewFile();
+    }
+    catch (IOException e)
+    {
+        e.printStackTrace();
+    }
+    return file.getPath();
+}
+
+public  String getWebXmlPath()  {return path;}
+public  String getAbsolutePath(){return absoluteAppPath;}
+private String path, instanceFilePath, absoluteAppPath;
+```
+### The code I have to use in the unit tests:
+```java
+
+
+    IHitCounter iHitCounter = new HitCounter();
+    FileInstance checkPath  = FileInstance.getInstance();
+
+
+    out.println(
+        "The Path from WEB.XML: "                       + getWebXmlPath()               + "<br/>"+
+        "The servlet absolute path: "                   + getAbsolutePath()             + "<br/><br/>"+
+
+        "Prepared path to init: "                       + setInitParam()                + "<br/>"+
+        "Check BEFORE return throw try/catch: "         + stateBefore                   + "<br/>"+
+        "Check AFTER return throw try/catch: "          + state                         + "<br/><br/>"+
+
+        "The Path before Instance (instanceFilePath): " + checkPath.getInstancePath()   + "<br/>"+
+        "The Path after Instance (realFilePath): "      + checkPath.getPath()           + "<br/>"
+    );
+
+
+    private String setInitParam()
+    {
+        absoluteAppPath    = this.getServletConfig().getServletContext().getRealPath("");
+        path               = this.getServletConfig().getInitParameter("WEB_FILE_PATH");
+        instanceFilePath   = absoluteAppPath + path;
+
+        File file = new File(instanceFilePath + "visits.dat");
+
+        checkReturn(file);
+
+//            return file.getParentFile().mkdirs()
+//            && file.createNewFile();
+        if (file.canRead()
+        && file.canWrite())
+            state = "After creation Can The file read? - " + file.canRead() +
+                    "After creation Can The file write? - " + file.canWrite();
+
+        return instanceFilePath;//file.getPath();
+
+        /* NIO */
+//        Path path = Paths.get(instanceFilePath + "visits.dat"); //"data/logging.properties"
+//        Path path = Paths.get(instanceFilePath);//"data/subdir"
+//
+//        boolean pathExists =
+//            Files.exists(
+//                path,
+//                LinkOption.NOFOLLOW_LINKS
+//            );
+//
+//        try
+//        {
+//            Path newDir = Files.createDirectory(path);
+//        }
+//        catch(FileAlreadyExistsException e)
+//        {
+//            logger.warn(e.toString(), e);
+//        }
+//        catch (IOException e)
+//        {
+//            logger.trace(e.toString(), e);
+//        }
+//        return instanceFilePath ;
+
+    }
+
+    public String checkBefore(File file)
+    {
+        if (   file.canRead()
+            && file.canWrite())
+            return stateBefore = "\nBefore creation Can The file read? - " + file.canRead() +
+                                 "\nBefore creation Can The file write? - " + file.canWrite();
+        return stateBefore = "\nFile not exist! IT'S RIGHT!!!!";
+    }
+
+    public boolean checkReturn(File file)
+    {
+        checkBefore(file);
+        try
+        {
+            return     file.getParentFile().mkdirs()
+                    && file.createNewFile();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
+    public String getWebXmlPath()  {return path;}
+    public String getAbsolutePath(){return absoluteAppPath;}
+    private String path, instanceFilePath, absoluteAppPath, stateBefore, state;
+
+
+
+
+
+    private static final Logger logger =
+        LoggerFactory
+        .getLogger(
+            HitCounterServlet.class
+    );
+    private      InitialContext initialContext   = null;
+}
+
+```
+
 
 <!--
 * [Maven configuration][1]
