@@ -51,7 +51,7 @@ public class FileInstance
             }
             catch (IOException e)
             {
-                e.printStackTrace();
+                logger.trace(e.toString(), e);
             }
         }
         return false;
@@ -78,12 +78,6 @@ public class FileInstance
         );
         instance = null;
     }
-// TODO: DELETE TEMPLATE BLOCK BEGIN -----------------------------------------------------------------------------------
-    public String getInstancePath()
-    {
-        return this.realFilePath;
-    }
-// TODO: DELETE TEMPLATE BLOCK END -------------------------------------------------------------------------------------
 
     @Override
     public File getFile()

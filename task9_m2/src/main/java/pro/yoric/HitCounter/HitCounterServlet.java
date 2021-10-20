@@ -8,7 +8,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -21,27 +20,16 @@ public class HitCounterServlet
     @Override
     public void init()
     {
-        absoluteAppPath =
+        String absoluteAppPath =
             this.getServletConfig()
                 .getServletContext()
                 .getRealPath("");
-        path =
+        String path =
             this.getServletConfig()
                 .getInitParameter(
                     "WEB_FILE_PATH"
                 );
-
-        singletonPointer = FileInstance.getInstance(absoluteAppPath + path);
-// TODO: DELETE TEMPLATE BLOCK BEGIN -----------------------------------------------------------------------------------
-        File file = new File(absoluteAppPath + path + "visits.dat");
-
-        checkReturn(file);
-
-        if (file.canRead()
-                && file.canWrite())
-            state = "<br/>>>>>>  After creation: Can The file read? - " + file.canRead() +
-                    "<br/>>>>>>  After creation: Can The file write? - " + file.canWrite();
-// TODO: DELETE TEMPLATE BLOCK END -------------------------------------------------------------------------------------
+        FileInstance.getInstance(absoluteAppPath + path);
     }
 
     @Override
@@ -90,20 +78,6 @@ public class HitCounterServlet
             );
 
             out.println(
-// TODO: DELETE TEMPLATE BLOCK BEGIN -----------------------------------------------------------------------------------
-                "The Path from WEB.XML BEFORE: "                + getWebXmlPath()               + "<br/>"+
-                "The servlet absolute path BEFORE: "            + getAbsolutePath()             + "<br/><br/>"+
-
-                "Prepared path to init: "                       + absoluteAppPath + path        + "<br/><br/>"+
-                "Check BEFORE return throw try/catch: "         + stateBefore                   + "<br/><br/>"+
-                "Check AFTER return throw try/catch: "          + state                         + "<br/><br/>"+
-
-                "The Path from WEB.XML AFTER: "                 + getWebXmlPath()               + "<br/>"+
-                "Real File Path AFTER instancs: "             + singletonPointer.getInstancePath()             + "<br/><br/>"//+
-
-//                "The Path before Instance (initFilePath): " + checkPath.getInstancePath()   + "<br/>"+
-//                "The Path after Instance (realFilePath): "      + checkPath.getPath()           + "<br/>"
-// TODO: DELETE TEMPLATE BLOCK END -------------------------------------------------------------------------------------
 //                "The number of visits is: " + amount                              //TODO: After debugging - UNCOMMENT!
             );
 
@@ -161,38 +135,6 @@ public class HitCounterServlet
     {
         doGet(req, resp);
     }
-
-// TODO: DELETE TEMPLATE BLOCK BEGIN -----------------------------------------------------------------------------------
-    public String checkBefore(File file)
-    {
-        if (   file.canRead()
-            && file.canWrite())
-            return stateBefore =
-                "<br/>>>>>> Before creation: Can The file read? - " + file.canRead() +
-                "<br/>>>>>> Before creation: Can The file write? - " + file.canWrite();
-        return stateBefore = ">>> The File doesn't exist! IT'S RIGHT!!!!";
-    }
-
-    public boolean checkReturn(File file)
-    {
-        checkBefore(file);
-        try
-        {
-            return     file.getParentFile().mkdirs()
-                    && file.createNewFile();
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    public  String getWebXmlPath()  {return path;}
-    public  String getAbsolutePath(){return absoluteAppPath;}
-    private String path, absoluteAppPath, stateBefore, state;
-    FileInstance singletonPointer = null;
-// TODO: DELETE TEMPLATE BLOCK END -------------------------------------------------------------------------------------
 
     private static final long   serialVersionUID = 1L;
     private static final Logger logger =
