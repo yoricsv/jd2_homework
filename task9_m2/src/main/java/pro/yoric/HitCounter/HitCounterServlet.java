@@ -1,6 +1,5 @@
 package pro.yoric.HitCounter;
 
-import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -9,23 +8,41 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.naming.InitialContext;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.file.*;
 
 @WebServlet(name = "HitCounterServlet", urlPatterns = "/task9m2")
 public class HitCounterServlet
      extends HttpServlet
 {
     IHitCounter iHitCounter = new HitCounter();
-    FileInstance checkPath  = FileInstance.getInstance();       //TODO: DELETE!
 
     @Override
     public void init()
     {
-//       checkPath.doInit(setInitParam());
+        absoluteAppPath =
+            this.getServletConfig()
+                .getServletContext()
+                .getRealPath("");
+        path =
+            this.getServletConfig()
+                .getInitParameter(
+                    "WEB_FILE_PATH"
+                );
+        initFilePath = absoluteAppPath + path;
+
+        IFileInstance initFile = FileInstance.getInstance(initFilePath);
+// TODO: DELETE TEMPLATE BLOCK BEGIN -----------------------------------------------------------------------------------
+        File file = new File(initFilePath + "visits.dat");
+
+        checkReturn(file);
+
+        if (file.canRead()
+                && file.canWrite())
+            state = "<br/>>>>>>  After creation: Can The file read? - " + file.canRead() +
+                    "<br/>>>>>>  After creation: Can The file write? - " + file.canWrite();
+// TODO: DELETE TEMPLATE BLOCK END -------------------------------------------------------------------------------------
     }
 
     @Override
@@ -39,7 +56,7 @@ public class HitCounterServlet
         try
         {
             PrintWriter out    = resp.getWriter();
-//                    int amount = iHitCounter.getCalls();      //TODO: After debugging - UNCOMMENT!
+//                    int amount = iHitCounter.getCalls();                            //TODO: After debugging - UNCOMMENT!
 
             out.println(
                 "<!DOCTYPE html>\n" +
@@ -74,20 +91,21 @@ public class HitCounterServlet
             );
 
             out.println(
+// TODO: DELETE TEMPLATE BLOCK BEGIN -----------------------------------------------------------------------------------
                 "The Path from WEB.XML BEFORE: "                + getWebXmlPath()               + "<br/>"+
                 "The servlet absolute path BEFORE: "            + getAbsolutePath()             + "<br/><br/>"+
 
-                "Prepared path to init: "                       + setInitParam()                + "<br/><br/>"+
+                "Prepared path to init: "                       + initFilePath                  + "<br/><br/>"+
                 "Check BEFORE return throw try/catch: "         + stateBefore                   + "<br/><br/>"+
                 "Check AFTER return throw try/catch: "          + state                         + "<br/><br/>"+
 
                 "The Path from WEB.XML AFTER: "                 + getWebXmlPath()               + "<br/>"+
-                "The servlet absolute path AFTER: "             + getAbsolutePath()             + "<br/><br/>"+
+                "The servlet absolute path AFTER: "             + getAbsolutePath()             + "<br/><br/>"//+
 
-                "The Path before Instance (instanceFilePath): " + checkPath.getInstancePath()   + "<br/>"+
-                "The Path after Instance (realFilePath): "      + checkPath.getPath()           + "<br/>"
-
-//                "The number of visits is: " + amount          //TODO: After debugging - UNCOMMENT!
+//                "The Path before Instance (initFilePath): " + checkPath.getInstancePath()   + "<br/>"+
+//                "The Path after Instance (realFilePath): "      + checkPath.getPath()           + "<br/>"
+// TODO: DELETE TEMPLATE BLOCK END -------------------------------------------------------------------------------------
+//                "The number of visits is: " + amount                              //TODO: After debugging - UNCOMMENT!
             );
 
             out.println(
@@ -126,7 +144,7 @@ public class HitCounterServlet
                 "</html>"
             );
 
-//            iHitCounter.setCall();                            //TODO: After debugging - UNCOMMENT!
+//            iHitCounter.setCall();                                                //TODO: After debugging - UNCOMMENT!
         }
         catch(Exception e)
         {
@@ -145,54 +163,7 @@ public class HitCounterServlet
         doGet(req, resp);
     }
 
-
-    private String setInitParam()                               //TODO: DELETE!
-//    private void setInitParam()                               //TODO: To check - comment this!
-    {
-        absoluteAppPath    = this.getServletConfig().getServletContext().getRealPath("");
-        path               = this.getServletConfig().getInitParameter("WEB_FILE_PATH");
-        instanceFilePath   = absoluteAppPath + path;
-
-        File file = new File(instanceFilePath + "visits.dat");
-
-        checkReturn(file);
-
-//            return file.getParentFile().mkdirs()
-//            && file.createNewFile();
-        if (file.canRead()
-        && file.canWrite())
-            state = "<br/>>>>>>  After creation: Can The file read? - " + file.canRead() +
-                    "<br/>>>>>>  After creation: Can The file write? - " + file.canWrite();
-
-        return instanceFilePath;//file.getPath();
-
-        /* NIO */
-//        Path path = Paths.get(instanceFilePath + "visits.dat"); //"data/logging.properties"
-//        Path path = Paths.get(instanceFilePath);//"data/subdir"
-//
-//        boolean pathExists =
-//            Files.exists(
-//                path,
-//                LinkOption.NOFOLLOW_LINKS
-//            );
-//
-//        try
-//        {
-//            Path newDir = Files.createDirectory(path);
-//        }
-//        catch(FileAlreadyExistsException e)
-//        {
-//            logger.warn(e.toString(), e);
-//        }
-//        catch (IOException e)
-//        {
-//            logger.trace(e.toString(), e);
-//        }
-//        return instanceFilePath ;
-
-//        iHitCounter.doInit(path);                             //TODO: To check - comment this!
-    }
-
+// TODO: DELETE TEMPLATE BLOCK BEGIN -----------------------------------------------------------------------------------
     public String checkBefore(File file)
     {
         if (   file.canRead()
@@ -218,13 +189,10 @@ public class HitCounterServlet
         return false;
     }
 
-
-    public  String getWebXmlPath()  {return path;}               //TODO: DELETE!
-    public  String getAbsolutePath(){return absoluteAppPath;}    //TODO: DELETE!
-    private String path, instanceFilePath, absoluteAppPath, stateBefore, state;     //TODO: DELETE!
-
-
-
+    public  String getWebXmlPath()  {return path;}
+    public  String getAbsolutePath(){return absoluteAppPath;}
+    private String path, initFilePath, absoluteAppPath, stateBefore, state;
+// TODO: DELETE TEMPLATE BLOCK END -------------------------------------------------------------------------------------
 
     private static final long   serialVersionUID = 1L;
     private static final Logger logger =
@@ -232,5 +200,4 @@ public class HitCounterServlet
         .getLogger(
             HitCounterServlet.class
     );
-    private      InitialContext initialContext   = null;
 }

@@ -1,7 +1,8 @@
 package pro.yoric.HitCounter;
 
+import java.io.File;
+
 public interface IFileInstance
 {
-      void doInit(String pathValue);
-    String getPath();
+    File getFile();
 }

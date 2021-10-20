@@ -6,5 +6,4 @@ public interface IDataController
 {
     int  getInfo()             throws IOException;
     void setInfo(int newValue) throws IOException;
-    void doInit (String initValue);
 }

@@ -8,30 +8,24 @@ import java.io.IOException;
 public class FileInstance
     implements IFileInstance
 {
-
-    @Override
-    public void doInit(String path)
-    {
-        this.instancePath = path + FILE_NAME;
-    }
-
-    private FileInstance()                                      // PRIVATE CONSTRUCTOR
+    private FileInstance(String initPath)                                      // PRIVATE CONSTRUCTOR
     {
         try
         {
-            File f = new File(this.instancePath);
+            inputFile = new File(initPath + FILE_NAME);
 
-            if(checkAccessToFile(f))
+            if(checkAccessToFile(inputFile))
             {
                 BufferedWriter fbw =
                     new BufferedWriter(
-                        new FileWriter(f)
+                        new FileWriter(inputFile)
                     );
                 fbw.write(THE_FIRST_HIT);
                 fbw.flush();
                 fbw.close();
 
-                this.realFilePath = f.getAbsolutePath();
+                this.realFilePath = inputFile.getAbsolutePath();
+                this.inputFile = inputFile;
             }
             else
                 instanceFault();
@@ -63,11 +57,14 @@ public class FileInstance
 //        }
         return false;
     }
-
     public static FileInstance getInstance()
     {
+        return instance;
+    }
+    public static FileInstance getInstance(String initPath)
+    {
         if (instance == null)
-            instance = new FileInstance();
+            instance = new FileInstance(initPath);
 
         return instance;
     }
@@ -80,27 +77,30 @@ public class FileInstance
         );
         instance = null;
     }
-
+// TODO: DELETE TEMPLATE BLOCK BEGIN -----------------------------------------------------------------------------------
     public String getInstancePath()
     {
-        return this.instancePath;
+        return this.initPath;
     }
+// TODO: DELETE TEMPLATE BLOCK END -------------------------------------------------------------------------------------
 
     @Override
-    public String getPath()
+    public File getFile()
     {
         if (instance == null)
             getInstance();
-//        return this.instancePath;
-        return this.realFilePath;
+
+        return this.inputFile;
     }
 
     private static FileInstance instance      = null;           // IMPORTANT!!!
     private static final String FILE_NAME     = "visits.dat";
     private        final    int THE_FIRST_HIT = 1;
-    private              String instancePath  = "";
+    private              String initPath      = "";
+    private                File inputFile     = null;
+// TODO: DELETE TEMPLATE BLOCK BEGIN -----------------------------------------------------------------------------------
     private              String realFilePath  = "";
-
+// TODO: DELETE TEMPLATE BLOCK END -------------------------------------------------------------------------------------
     private static final org.slf4j.Logger logger =
         org
         .slf4j

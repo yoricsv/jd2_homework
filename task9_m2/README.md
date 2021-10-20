@@ -267,10 +267,10 @@ private String setInitParam()
 {
     absoluteAppPath    = this.getServletConfig().getServletContext().getRealPath("");
     path               = this.getServletConfig().getInitParameter("WEB_FILE_PATH");
-    instanceFilePath   = absoluteAppPath + path;
+    initFilePath   = absoluteAppPath + path;
 
-    File filePath = new File(instanceFilePath);
-    File file     = new File(instanceFilePath + "visits.dat");
+    File filePath = new File(initFilePath);
+    File file     = new File(initFilePath + "visits.dat");
     try
     {
         filePath.mkdirs();
@@ -285,7 +285,7 @@ private String setInitParam()
 
 public  String getWebXmlPath()  {return path;}
 public  String getAbsolutePath(){return absoluteAppPath;}
-private String path, instanceFilePath, absoluteAppPath;
+private String path, initFilePath, absoluteAppPath;
 ```
 ### The code I have to use in the unit tests:
 ```java
@@ -306,7 +306,7 @@ private String path, instanceFilePath, absoluteAppPath;
         "The Path from WEB.XML AFTER: "                 + getWebXmlPath()               + "<br/>"+
         "The servlet absolute path AFTER: "             + getAbsolutePath()             + "<br/><br/>"+
 
-        "The Path before Instance (instanceFilePath): " + checkPath.getInstancePath()   + "<br/>"+
+        "The Path before Instance (initFilePath): " + checkPath.getInstancePath()   + "<br/>"+
         "The Path after Instance (realFilePath): "      + checkPath.getPath()           + "<br/>"
     );
 
@@ -315,9 +315,9 @@ private String path, instanceFilePath, absoluteAppPath;
     {
         absoluteAppPath    = this.getServletConfig().getServletContext().getRealPath("");
         path               = this.getServletConfig().getInitParameter("WEB_FILE_PATH");
-        instanceFilePath   = absoluteAppPath + path;
+        initFilePath   = absoluteAppPath + path;
 
-        File file = new File(instanceFilePath + "visits.dat");
+        File file = new File(initFilePath + "visits.dat");
 
         checkReturn(file);
 
@@ -328,11 +328,11 @@ private String path, instanceFilePath, absoluteAppPath;
             state = "<br/>>>>>>  After creation: Can The file read? - "  + file.canRead() +
                     "<br/>>>>>>  After creation: Can The file write? - " + file.canWrite();
 
-        return instanceFilePath;//file.getPath();
+        return initFilePath;//file.getPath();
 
         /* NIO */
-//        Path path = Paths.get(instanceFilePath + "visits.dat"); //"data/logging.properties"
-//        Path path = Paths.get(instanceFilePath);//"data/subdir"
+//        Path path = Paths.get(initFilePath + "visits.dat"); //"data/logging.properties"
+//        Path path = Paths.get(initFilePath);//"data/subdir"
 //
 //        boolean pathExists =
 //            Files.exists(
@@ -352,7 +352,7 @@ private String path, instanceFilePath, absoluteAppPath;
 //        {
 //            logger.trace(e.toString(), e);
 //        }
-//        return instanceFilePath ;
+//        return initFilePath ;
 
     }
 
@@ -384,7 +384,7 @@ private String path, instanceFilePath, absoluteAppPath;
 
     public String getWebXmlPath()  {return path;}
     public String getAbsolutePath(){return absoluteAppPath;}
-    private String path, instanceFilePath, absoluteAppPath, stateBefore, state;
+    private String path, initFilePath, absoluteAppPath, stateBefore, state;
 
 
 

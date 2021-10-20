@@ -8,12 +8,6 @@ public class HitCounter
     IDataController transfer = new DataController();
 
     @Override
-    public void doInit(String initValue)
-    {
-        transfer.doInit(initValue);
-    }
-
-    @Override
     public int getCalls() throws IOException
     {
         return transfer.getInfo();
