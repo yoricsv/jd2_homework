@@ -12,20 +12,19 @@ public class FileInstance
     {
         try
         {
-            inputFile = new File(initPath + FILE_NAME);
+            filePointer = new File(initPath + FILE_NAME);
 
-            if(checkAccessToFile(inputFile))
+            if(checkAccessToFile(filePointer))
             {
                 BufferedWriter fbw =
                     new BufferedWriter(
-                        new FileWriter(inputFile)
+                        new FileWriter(filePointer)
                     );
                 fbw.write(THE_FIRST_HIT);
                 fbw.flush();
                 fbw.close();
 
-                this.realFilePath = inputFile.getAbsolutePath();
-                this.inputFile = inputFile;
+                this.realFilePath = filePointer.getAbsolutePath();
             }
             else
                 instanceFault();
@@ -36,31 +35,33 @@ public class FileInstance
         }
     }
 
-    private boolean checkAccessToFile(File fileObj)
+    private boolean checkAccessToFile(File FilePtr)
     {
-        if(fileObj.exists())
-            return     fileObj.canRead()
-                    && fileObj.canWrite();
-//        else
-//        {
-//            try
-//            {
-//                return     fileObj.getParentFile().mkdirs()
-//                        && fileObj.createNewFile()
-//                        && fileObj.canRead()
-//                        && fileObj.canWrite();
-//            }
-//            catch (IOException e)
-//            {
-//                e.printStackTrace();
-//            }
-//        }
+        if(FilePtr.exists())
+            return     FilePtr.canRead()
+                    && FilePtr.canWrite();
+        else
+        {
+            try
+            {
+                return     FilePtr.getParentFile().mkdirs()
+                        && FilePtr.createNewFile()
+                        && FilePtr.canRead()
+                        && FilePtr.canWrite();
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
         return false;
     }
+
     public static FileInstance getInstance()
     {
         return instance;
     }
+
     public static FileInstance getInstance(String initPath)
     {
         if (instance == null)
@@ -80,27 +81,23 @@ public class FileInstance
 // TODO: DELETE TEMPLATE BLOCK BEGIN -----------------------------------------------------------------------------------
     public String getInstancePath()
     {
-        return this.initPath;
+        return this.realFilePath;
     }
 // TODO: DELETE TEMPLATE BLOCK END -------------------------------------------------------------------------------------
 
     @Override
     public File getFile()
     {
-        if (instance == null)
-            getInstance();
-
-        return this.inputFile;
+        return this.filePointer;
     }
 
-    private static FileInstance instance      = null;           // IMPORTANT!!!
     private static final String FILE_NAME     = "visits.dat";
-    private        final    int THE_FIRST_HIT = 1;
-    private              String initPath      = "";
-    private                File inputFile     = null;
-// TODO: DELETE TEMPLATE BLOCK BEGIN -----------------------------------------------------------------------------------
+    private static final    int THE_FIRST_HIT = 1;
+
+    private static FileInstance instance      = null;           // IMPORTANT!!!
+    private                File filePointer   = null;
     private              String realFilePath  = "";
-// TODO: DELETE TEMPLATE BLOCK END -------------------------------------------------------------------------------------
+
     private static final org.slf4j.Logger logger =
         org
         .slf4j

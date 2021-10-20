@@ -30,11 +30,10 @@ public class HitCounterServlet
                 .getInitParameter(
                     "WEB_FILE_PATH"
                 );
-        initFilePath = absoluteAppPath + path;
 
-        IFileInstance initFile = FileInstance.getInstance(initFilePath);
+        singletonPointer = FileInstance.getInstance(absoluteAppPath + path);
 // TODO: DELETE TEMPLATE BLOCK BEGIN -----------------------------------------------------------------------------------
-        File file = new File(initFilePath + "visits.dat");
+        File file = new File(absoluteAppPath + path + "visits.dat");
 
         checkReturn(file);
 
@@ -95,12 +94,12 @@ public class HitCounterServlet
                 "The Path from WEB.XML BEFORE: "                + getWebXmlPath()               + "<br/>"+
                 "The servlet absolute path BEFORE: "            + getAbsolutePath()             + "<br/><br/>"+
 
-                "Prepared path to init: "                       + initFilePath                  + "<br/><br/>"+
+                "Prepared path to init: "                       + absoluteAppPath + path        + "<br/><br/>"+
                 "Check BEFORE return throw try/catch: "         + stateBefore                   + "<br/><br/>"+
                 "Check AFTER return throw try/catch: "          + state                         + "<br/><br/>"+
 
                 "The Path from WEB.XML AFTER: "                 + getWebXmlPath()               + "<br/>"+
-                "The servlet absolute path AFTER: "             + getAbsolutePath()             + "<br/><br/>"//+
+                "Real File Path AFTER instancs: "             + singletonPointer.getInstancePath()             + "<br/><br/>"//+
 
 //                "The Path before Instance (initFilePath): " + checkPath.getInstancePath()   + "<br/>"+
 //                "The Path after Instance (realFilePath): "      + checkPath.getPath()           + "<br/>"
@@ -191,7 +190,8 @@ public class HitCounterServlet
 
     public  String getWebXmlPath()  {return path;}
     public  String getAbsolutePath(){return absoluteAppPath;}
-    private String path, initFilePath, absoluteAppPath, stateBefore, state;
+    private String path, absoluteAppPath, stateBefore, state;
+    FileInstance singletonPointer = null;
 // TODO: DELETE TEMPLATE BLOCK END -------------------------------------------------------------------------------------
 
     private static final long   serialVersionUID = 1L;
