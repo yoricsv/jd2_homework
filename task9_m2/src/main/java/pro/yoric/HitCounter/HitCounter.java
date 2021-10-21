@@ -1,5 +1,6 @@
 package pro.yoric.HitCounter;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class HitCounter
@@ -8,7 +9,7 @@ public class HitCounter
     IDataController transfer = new DataController();
 
     @Override
-    public int getCalls() throws IOException
+    public String getCalls() throws IOException
     {
         return transfer.getInfo();
     }
@@ -16,7 +17,7 @@ public class HitCounter
     @Override
     public void setCall() throws IOException
     {
-        int visitsCounter = transfer.getInfo();
-        transfer.setInfo(++visitsCounter);
+        String amountHits = transfer.getInfo() + 1;
+        transfer.setInfo(Integer.parseInt(amountHits));
     }
 }

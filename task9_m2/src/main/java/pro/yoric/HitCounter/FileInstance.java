@@ -20,11 +20,9 @@ public class FileInstance
                     new BufferedWriter(
                         new FileWriter(filePointer)
                     );
-                fbw.write(THE_FIRST_HIT);
+                fbw.write(String.valueOf(THE_FIRST_HIT));
                 fbw.flush();
                 fbw.close();
-
-                this.realFilePath = filePointer.getAbsolutePath();
             }
             else
                 instanceFault();
@@ -90,7 +88,6 @@ public class FileInstance
 
     private static FileInstance instance      = null;           // IMPORTANT!!!
     private                File filePointer   = null;
-    private              String realFilePath  = "";
 
     private static final org.slf4j.Logger logger =
         org

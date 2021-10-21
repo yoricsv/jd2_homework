@@ -4,6 +4,6 @@ import java.io.IOException;
 
 public interface IHitCounter
 {
-    int  getCalls() throws IOException;
+    String  getCalls() throws IOException;
     void setCall()  throws IOException;
 }

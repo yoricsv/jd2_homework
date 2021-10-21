@@ -4,6 +4,8 @@ import java.io.IOException;
 
 public interface IDataController
 {
-    int  getInfo()             throws IOException;
+    String  getInfo()             throws IOException;
     void setInfo(int newValue) throws IOException;
+
+    String checkPath(); // TODO: DELETE
 }
