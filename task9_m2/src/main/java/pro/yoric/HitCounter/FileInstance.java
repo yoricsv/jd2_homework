@@ -8,7 +8,7 @@ import java.io.IOException;
 public class FileInstance
     implements IFileInstance
 {
-    private FileInstance(String initPath)                                      // PRIVATE CONSTRUCTOR
+    FileInstance(String initPath)                                      // PRIVATE CONSTRUCTOR
     {
         try
         {
@@ -88,6 +88,8 @@ public class FileInstance
 
     private static FileInstance instance      = null;           // IMPORTANT!!!
     private                File filePointer   = null;
+
+    private             boolean useTestInstance;
 
     private static final org.slf4j.Logger logger =
         org

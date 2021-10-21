@@ -8,12 +8,12 @@ public class DataController
 {
     IFileInstance file = FileInstance.getInstance();
 
-    public DataController() {this(null);}
+//    public DataController() throws ClassNotFoundException {this(false);}
 
-    public DataController(IFileInstance file) {
-        this.file = file;
-    }
-
+//    public DataController(IFileInstance file) {
+//        this.file = file;
+//    }
+//
     public String checkPath()
     {
         return file.getFile().getPath();
