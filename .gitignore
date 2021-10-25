@@ -21,6 +21,10 @@ logs/
 *.iml
 *.ipr
 
+# Sensei plugin for idea
+.sensei/
+*.yaml
+
 # Spring boot
 .mvn/
 mvnw.*
