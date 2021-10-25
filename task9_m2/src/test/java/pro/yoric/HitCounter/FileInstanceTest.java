@@ -1,6 +1,5 @@
 package pro.yoric.HitCounter;
 
-import org.junit.Before;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -42,15 +41,6 @@ public class FileInstanceTest
 
         Assertions.assertNull(_fileTest.getFile());
     }
-
-
-    @Test
-    public void setUp()
-        throws Exception
-    {
-        iFileInstance = new FileInstance("test.txt");
-    }
-
 
     @Test
     public void testInstance() {

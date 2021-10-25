@@ -5,7 +5,7 @@
 
 body {
     background-color        : var(--bg_color_whitesmoke, whitesmoke);
-    height                  : 100%;
+    height                  : 60%;
 }
 
 body #wrapper {
@@ -27,9 +27,17 @@ body #wrapper header h1 {
     padding                 : 20px 0;
 }
 
+body #wrapper .content p{
+    display                 : block;
+    font-weight             : 700;
+    font-size               : 50px;
+    padding                 : 30%;
+    text-align              : center;
+}
+
 body .content {
     background-color        : var(--bg_color-white, white);
-	padding-bottom          : 79%;
+	x-padding-bottom          : 30%;
 }
 
 body footer {

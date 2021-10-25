@@ -7,19 +7,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.PrintWriter;
 
 @WebServlet(name = "HitCounterServlet", urlPatterns = "/task9m2")
 public class HitCounterServlet
      extends HttpServlet
 {
-    private IDataController iController = null;
-    private IHitCounter     iCounter    = null;
-    private FileInstance    file        = null;
-
-
     @Override
     public void init()
     {
@@ -32,9 +25,9 @@ public class HitCounterServlet
                 .getInitParameter(
                     "WEB_FILE_PATH"
                 );
+
         file        = FileInstance.getInstance(absoluteAppPath + path);
         iCounter    = new HitCounter();
-        iController = new DataController();    //TODO: DELETE
     }
 
     @Override
@@ -46,7 +39,7 @@ public class HitCounterServlet
         try
         {
             PrintWriter out = resp.getWriter();
- //           int amount      = iCounter.getCalls();                            //TODO: After debugging - UNCOMMENT!
+            String   amount = iCounter.getCalls();
 
             out.println(
                 "<!DOCTYPE html>\n" +
@@ -81,7 +74,7 @@ public class HitCounterServlet
             );
 
             out.println(
-                "The number of visits is: " + iController.checkPath()//   file.getFile().getPath() //Integer.toString(amount) //        //TODO: After debugging - UNCOMMENT!
+                "The number of visits is: " + amount + "<br/>"
             );
 
             out.println(
@@ -120,7 +113,7 @@ public class HitCounterServlet
                 "</html>"
             );
 
-//            iCounter.setCall();                                                //TODO: After debugging - UNCOMMENT!
+            iCounter.setCall();
         }
         catch(Exception e)
         {
@@ -137,6 +130,8 @@ public class HitCounterServlet
         doGet(req, resp);
     }
 
+    private IHitCounter     iCounter    = null;
+    private FileInstance    file        = null;
 
     private static final long   serialVersionUID = 1L;
     private static final Logger logger =

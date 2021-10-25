@@ -1,42 +1,51 @@
 package pro.yoric.HitCounter;
 
 import org.junit.jupiter.api.Test;
-
+import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DataControllerTest
 {
+    private final IDataController iController = setUp();
+    @Test
 
-    DataController iController;
+    public DataController setUp()
+    {
 
-    @org.junit.Before
-    public void setUp() throws Exception {
-        iController = new DataController();
-    }
-
-    @org.junit.After
-    public void tearDown() throws Exception {
+        return new DataController();
     }
 
     @Test
-    public void testInstance() {
+    public void testInstance()
+    {
         assertNotNull(iController);
     }
 
+    @Test
+    public void testSetInfo ()
+        throws IOException
+    {
+        iController.setInfo (5);
+        iController.setInfo (3);
+        iController.setInfo (12);
+        iController.setInfo (9);
+    }
 
     @Test
-    void testGetInfo()
+    public void testGetInfo()
+        throws IOException
     {
-        //Given
-        IFileInstance _file = FileInstance.getInstance();
-        _file.getFile();
-//        newFile.setInfo("1234test");
-        //When
-//        ticketDao.saveNewTicket(newTicket);
-        //Then
-//        Ticket ticket = ticketDao.readAllTickets().get(0);
-//        assertNotNull(ticket);
-//        assertEquals("1234test", ticket.getLicensePlateNumber());
-//        ticketDao.deleteAll();
+        iController.getInfo();
+
+        assertEquals ("9", iController.getInfo());
+    }
+
+    @Test
+    public void testReset()
+        throws IOException
+    {
+        IDataController.reset();
+
+        assertEquals ("0", iController.getInfo());
     }
 }

@@ -8,7 +8,7 @@ import java.io.IOException;
 public class FileInstance
     implements IFileInstance
 {
-    FileInstance(String initPath)                                      // PRIVATE CONSTRUCTOR
+    private FileInstance(String initPath)                                      // PRIVATE CONSTRUCTOR
     {
         try
         {
@@ -20,7 +20,9 @@ public class FileInstance
                     new BufferedWriter(
                         new FileWriter(filePointer)
                     );
+
                 fbw.write(String.valueOf(THE_FIRST_HIT));
+
                 fbw.flush();
                 fbw.close();
             }
@@ -33,19 +35,19 @@ public class FileInstance
         }
     }
 
-    private boolean checkAccessToFile(File FilePtr)
+    private boolean checkAccessToFile(File filePtr)
     {
-        if(FilePtr.exists())
-            return     FilePtr.canRead()
-                    && FilePtr.canWrite();
+        if(filePtr.exists())
+            return     filePtr.canRead()
+                    && filePtr.canWrite();
         else
         {
             try
             {
-                return     FilePtr.getParentFile().mkdirs()
-                        && FilePtr.createNewFile()
-                        && FilePtr.canRead()
-                        && FilePtr.canWrite();
+                return     filePtr.getParentFile().mkdirs()
+                        && filePtr.createNewFile()
+                        && filePtr.canRead()
+                        && filePtr.canWrite();
             }
             catch (IOException e)
             {
@@ -86,10 +88,8 @@ public class FileInstance
     private static final String FILE_NAME     = "visits.dat";
     private static final    int THE_FIRST_HIT = 1;
 
-    private static FileInstance instance      = null;           // IMPORTANT!!!
+    private static FileInstance instance      = null;
     private                File filePointer   = null;
-
-    private             boolean useTestInstance;
 
     private static final org.slf4j.Logger logger =
         org

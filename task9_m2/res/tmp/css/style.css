@@ -18,9 +18,9 @@
 }
 
 
-body {
+html body {
     background-color        : var(--bg_color_whitesmoke, whitesmoke);
-    height                  : 100%;
+    max-height              : 80%;
 }
 
 body #wrapper {
@@ -42,9 +42,17 @@ body #wrapper header h1 {
     padding                 : 20px 0;
 }
 
+body #wrapper .content p{
+    display                 : block;
+    font-weight             : 700;
+    font-size               : 50px;
+    padding-top             : 30%;
+    text-align              : center;
+}
+
 body .content {
     background-color        : var(--bg_color-white, white);
-	padding-bottom          : 79%;
+	padding-bottom          : 30%;
 }
 
 body footer {
