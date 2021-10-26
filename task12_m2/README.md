@@ -1,13 +1,10 @@
 # jd2_homework *(Enterprise homeworks)*
 
-## Module 2, Task 9:
-Make a simple servlet that counts the number of visits.
-Each time the servlet is called, the counter should increase,
-information about the number of visits should be displayed on
-the page and stored in a file.
+## Module 2, Task 12:
+Modify the HitCounter from task 9 so that the quantity is not displayed as numbers, but displayed as an image.
 
 ---
-
+<!--
 ## CONTENTS:
 * [web.xml template][5] structure
 * [Variables in web.xml][6]
@@ -16,7 +13,7 @@ the page and stored in a file.
 * [Operation with the files][9]
 
 ---
-
+-->
 ### Requirements:
 **Development Kits** | **Version**
 --: | :--
@@ -42,7 +39,7 @@ slf4j-api | v.2.0.0-alpha1
 3. Copy the link below:
 
 ``` url
-http://localhost:8080/app/task9m2
+http://localhost:8080/app/task12m2
 ``` 
 4. Paste it into the address bar
 5. Click the "Go" button or press `[Enter]`

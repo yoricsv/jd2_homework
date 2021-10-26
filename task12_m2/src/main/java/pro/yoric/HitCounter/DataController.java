@@ -5,7 +5,7 @@ import java.io.*;
 public class DataController
     implements IDataController
 {
-    IFileInstance file = FileInstance.getInstance();
+    IFileInstance file = FileInstance.getInstance(false);
 
     @Override
     public String getInfo ()
@@ -13,7 +13,7 @@ public class DataController
     {
         BufferedReader reader =
             new BufferedReader(
-                new FileReader(file.getFile())
+                new FileReader(file.getFile(false))
             );
 
         quantity = reader.readLine();
@@ -28,7 +28,7 @@ public class DataController
     {
         BufferedWriter fbw =
             new BufferedWriter(
-                 new FileWriter (file.getFile(), false)
+                 new FileWriter (file.getFile(false), false)
         );
 
         fbw.write(String.valueOf(newValue));
@@ -41,7 +41,7 @@ public class DataController
         throws IOException
     {
         FileWriter fbw =
-            new FileWriter (file.getFile(), false);
+            new FileWriter (file.getFile(false), false);
 
         fbw.write(String.valueOf(0));
 

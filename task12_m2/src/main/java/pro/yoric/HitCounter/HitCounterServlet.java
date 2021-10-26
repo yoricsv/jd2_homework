@@ -25,9 +25,16 @@ public class HitCounterServlet
                 .getInitParameter(
                     "WEB_FILE_PATH"
                 );
+        String imagePath =
+            this.getServletConfig()
+                .getInitParameter(
+                    "WEB_IMAGE_PATH"
+                );
 
-        file        = FileInstance.getInstance(absoluteAppPath + path);
-        iCounter    = new HitCounter();
+        file     = FileInstance.getInstance(absoluteAppPath + path,      false);
+        image    = FileInstance.getInstance(absoluteAppPath + imagePath, true);
+        iCounter = new HitCounter();
+
     }
 
     @Override
@@ -39,9 +46,8 @@ public class HitCounterServlet
         try
         {
             PrintWriter out = resp.getWriter();
-            resp.setContentType("text/html");
 
-            String   amount = iCounter.getCalls();
+            String amount = iCounter.getCalls();
 
             out.println(
                 "<!DOCTYPE html>\n" +
@@ -76,7 +82,9 @@ public class HitCounterServlet
             );
 
             out.println(
-                "The number of visits is: " + amount + "<br/>"
+                "The number of visits is: <br/>" +
+                "<img alt=\"\" src=\"" + image.getFile(true).getPath() +
+                "\" />\n<br/>"
             );
 
             out.println(
@@ -132,8 +140,9 @@ public class HitCounterServlet
         doGet(req, resp);
     }
 
-    private IHitCounter     iCounter    = null;
-    private FileInstance    file        = null;
+    private IHitCounter  iCounter = null;
+    private FileInstance file     = null;
+    private FileInstance image    = null;
 
     private static final long   serialVersionUID = 1L;
     private static final Logger logger =

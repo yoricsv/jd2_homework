@@ -9,7 +9,7 @@ import java.lang.reflect.Method;
 
 public class FileInstanceTest
 {
-    FileInstance iFileInstance;
+    FileInstance iFileInstanceFile;
 
     @org.junit.Before
     public void resetFileInstanceTest()
@@ -26,7 +26,7 @@ public class FileInstanceTest
         instance.setAccessible(true);
         instance.set(null, null);
 
-        Assertions.assertNull(FileInstance.getInstance());
+        Assertions.assertNull(FileInstance.getInstance(false));
     }
 
     public FileInstanceTest()
@@ -36,15 +36,15 @@ public class FileInstanceTest
                 NoSuchMethodException
     {
         Class <?>    className  = Class.forName("pro.yoric.HitCounter.IFileInstance");
-        Method       getMethod  = className.getDeclaredMethod("getFile");
+        Method       getMethod  = className.getDeclaredMethod("getFile", boolean.class);
         IFileInstance _fileTest = (FileInstance) getMethod.invoke(null);
 
-        Assertions.assertNull(_fileTest.getFile());
+        Assertions.assertNull(_fileTest.getFile(false));
     }
 
     @Test
     public void testInstance() {
-        Assertions.assertNotNull(iFileInstance);
+        Assertions.assertNotNull(FileInstance.getInstance(false));
     }
 
     @org.junit.After

@@ -9,6 +9,8 @@
          version = "4.0"
 >
 
+    <display-name>Visits counter</display-name>
+
     <servlet>
         <servlet-name>HitCounterServlet</servlet-name>
         <servlet-class>pro.yoric.HitCounter.HitCounterServlet</servlet-class>
@@ -16,6 +18,10 @@
         <init-param>
            <param-name>WEB_FILE_PATH</param-name>
            <param-value>resources${file.separator}data${file.separator}</param-value>
+        </init-param>
+        <init-param>
+            <param-name>WEB_IMAGE_PATH</param-name>
+            <param-value>resources${file.separator}img${file.separator}</param-value>
         </init-param>
     </servlet>
 
