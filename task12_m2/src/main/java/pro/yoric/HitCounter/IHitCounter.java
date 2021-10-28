@@ -1,7 +1,6 @@
 package pro.yoric.HitCounter;
 
 import java.io.IOException;
-import java.net.URI;
 
 public interface IHitCounter
 {

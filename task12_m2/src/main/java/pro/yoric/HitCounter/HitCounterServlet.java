@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.PrintWriter;
-import java.net.URI;
 
 @WebServlet(name = "HitCounterServlet", urlPatterns = "/task12m2")
 public class HitCounterServlet
@@ -33,10 +32,8 @@ public class HitCounterServlet
                 );
 
         file     = FileInstance.getInstance(absoluteAppPath + path);
-//        file     = FileInstance.getInstance(absoluteAppPath + path,      false);
         image    = ImageBlankInstance.getInstance(absoluteAppPath + imagePath);
         iCounter = new HitCounter();
-
     }
 
     @Override
@@ -87,6 +84,7 @@ public class HitCounterServlet
                 "The number of visits is: <br/>" +
                 "<img alt=\"\" src=\"" + amount +
                 "\" />\n<br/>"
+
             );
 
             out.println(
@@ -142,13 +140,13 @@ public class HitCounterServlet
         doGet(req, resp);
     }
 
-    private IHitCounter        iCounter = null;
-    private FileInstance       file     = null;
-    private ImageBlankInstance image    = null;
-
     private String path;
     private String imagePath;
     private String absoluteAppPath;
+
+    private IHitCounter        iCounter = null;
+    private FileInstance       file     = null;
+    private ImageBlankInstance image    = null;
 
     private static final long   serialVersionUID = 1L;
     private static final Logger logger =

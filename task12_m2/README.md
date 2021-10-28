@@ -44,6 +44,12 @@ http://localhost:8080/app/task12m2
 4. Paste it into the address bar
 5. Click the "Go" button or press `[Enter]`
 
+
+---
+
+## Issue:
+> Can't fix the performance issue. The generating image **can't be updated at the same time** as the file.
+
 ---
 
 ### The result:
@@ -68,7 +74,7 @@ http://localhost:8080/app/task12m2
 
 [1]: https://github.com/yoricsv/001_JMaven_/blob/master/res/read/Maven_Configuration.md
 [2]: https://github.com/yoricsv/002_JMvnWebapp_/blob/master/README.md
-[3]: res/img/task9_mod2.png
+[3]: res/img/task12_mod2.png
 [4]: res/img/UMLHitCounterServlet.png
 [5]: res/read/web.xml_template_structure.md
 [6]: res/read/web.xml_variables.md 

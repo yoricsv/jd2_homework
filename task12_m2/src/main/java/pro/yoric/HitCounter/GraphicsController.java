@@ -19,12 +19,20 @@ public class GraphicsController
             new BufferedImage(
                 70,
                 65,
-                BufferedImage.TYPE_INT_RGB
+                BufferedImage.TYPE_INT_ARGB
             );
 
         Graphics2D g = bufferedImage.createGraphics();
+        g.setRenderingHint(
+            RenderingHints.KEY_ANTIALIASING,
+            RenderingHints.VALUE_ANTIALIAS_ON
+        );
+        g.setRenderingHint(
+            RenderingHints.KEY_TEXT_ANTIALIASING,
+            RenderingHints.VALUE_TEXT_ANTIALIAS_ON
+        );
 
-        g.setFont(new Font("Arial", Font.ITALIC, 50));
+        g.setFont(new Font("Purisa", Font.ITALIC, 50));
         g.setBackground(new Color(245, 245, 245, 0));
         g.setColor(Color.magenta);
         g.drawString(newImageText, 5,50);
@@ -34,52 +42,4 @@ public class GraphicsController
         ImageIO.write(bufferedImage, "png", image.getImage());
         return image.getImage();
     }
-
-
-//    public void paint(
-//            Graphics2D g,
-//            String     processedText
-//        )
-//    {
-//        Image img = createImageWithText(processedText);
-//        g.drawImage(img, 20,20, (ImageObserver) this);
-//    }
-
-
-
-
-//    private void doRenderingString(Graphics g)
-//    {
-//        Graphics2D g2d = (Graphics2D) g;
-//
-//        RenderingHints rh =
-//                new RenderingHints(
-//                        RenderingHints.KEY_ANTIALIASING,
-//                        RenderingHints.VALUE_ANTIALIAS_ON
-//                );
-//
-//        rh.put(
-//                RenderingHints.KEY_RENDERING,
-//                RenderingHints.VALUE_RENDER_QUALITY
-//        );
-//
-//        g2d.setRenderingHints(rh);
-//
-//        g2d.setFont(
-//            new Font(
-//                "Purisa",
-//                Font.PLAIN,
-//                50
-//            )
-//        );
-//
-//        g2d.drawString("Most relationships seem so transitory",20, 30);
-//
-//    }
-//    @Override
-//    public void paintComponent(Graphics g)
-//    {
-//        doRenderingString(g);
-//    }
-
 }
