@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.PrintWriter;
+import java.net.URI;
 
 @WebServlet(name = "HitCounterServlet", urlPatterns = "/task12m2")
 public class HitCounterServlet
@@ -16,23 +17,24 @@ public class HitCounterServlet
     @Override
     public void init()
     {
-        String absoluteAppPath =
+        absoluteAppPath =
             this.getServletConfig()
                 .getServletContext()
                 .getRealPath("");
-        String path =
+        path =
             this.getServletConfig()
                 .getInitParameter(
                     "WEB_FILE_PATH"
                 );
-        String imagePath =
+        imagePath =
             this.getServletConfig()
                 .getInitParameter(
                     "WEB_IMAGE_PATH"
                 );
 
-        file     = FileInstance.getInstance(absoluteAppPath + path,      false);
-        image    = FileInstance.getInstance(absoluteAppPath + imagePath, true);
+        file     = FileInstance.getInstance(absoluteAppPath + path);
+//        file     = FileInstance.getInstance(absoluteAppPath + path,      false);
+        image    = ImageBlankInstance.getInstance(absoluteAppPath + imagePath);
         iCounter = new HitCounter();
 
     }
@@ -47,7 +49,7 @@ public class HitCounterServlet
         {
             PrintWriter out = resp.getWriter();
 
-            String amount = iCounter.getCalls();
+            String amount = imagePath + iCounter.getCallsImagePath();
 
             out.println(
                 "<!DOCTYPE html>\n" +
@@ -83,7 +85,7 @@ public class HitCounterServlet
 
             out.println(
                 "The number of visits is: <br/>" +
-                "<img alt=\"\" src=\"" + image.getFile(true).getPath() +
+                "<img alt=\"\" src=\"" + amount +
                 "\" />\n<br/>"
             );
 
@@ -140,9 +142,13 @@ public class HitCounterServlet
         doGet(req, resp);
     }
 
-    private IHitCounter  iCounter = null;
-    private FileInstance file     = null;
-    private FileInstance image    = null;
+    private IHitCounter        iCounter = null;
+    private FileInstance       file     = null;
+    private ImageBlankInstance image    = null;
+
+    private String path;
+    private String imagePath;
+    private String absoluteAppPath;
 
     private static final long   serialVersionUID = 1L;
     private static final Logger logger =

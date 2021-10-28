@@ -4,5 +4,6 @@ import java.io.File;
 
 public interface IFileInstance
 {
-    File getFile(boolean image);
+    File getFile();
+//    File getFile(boolean image);
 }

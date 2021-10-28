@@ -50,6 +50,10 @@ body #wrapper .content p{
     text-align              : center;
 }
 
+body #wrapper .content p img{
+    background-color        : var(--bg_color_whitesmoke, whitesmoke);
+}
+
 body .content {
     background-color        : var(--bg_color-white, white);
 	padding-bottom          : 30%;

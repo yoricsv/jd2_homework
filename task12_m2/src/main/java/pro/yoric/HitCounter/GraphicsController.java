@@ -17,16 +17,17 @@ public class GraphicsController
     {
         BufferedImage bufferedImage =
             new BufferedImage(
-                200,
                 70,
+                65,
                 BufferedImage.TYPE_INT_RGB
             );
 
         Graphics2D g = bufferedImage.createGraphics();
 
         g.setFont(new Font("Arial", Font.ITALIC, 50));
+        g.setBackground(new Color(245, 245, 245, 0));
         g.setColor(Color.magenta);
-        g.drawString(newImageText, 20,10);
+        g.drawString(newImageText, 5,50);
 
         g.dispose();
 

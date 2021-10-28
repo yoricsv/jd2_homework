@@ -37,8 +37,12 @@ body #wrapper .content p{
 
 body .content {
     background-color        : var(--bg_color-white, white);
-	x-padding-bottom          : 30%;
 }
+
+body .content {
+    background-color        : var(--bg_color-white, white);
+}
+
 
 body footer {
     background-color        : var(--bg_color-steelblue, steelblue);
