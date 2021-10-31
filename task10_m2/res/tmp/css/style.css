@@ -1,0 +1,187 @@
+@charset "utf-8";
+
+@import url('reset.css');
+@import url('color_scheme.css');
+@import url('signin.css');
+
+:root {
+    /* --------------------- COLOR SCHEME ---------------------- */
+
+    /* BACKGROUND */
+    --bg_color-white                  : rgb(255, 255, 255);
+    --bg_color-whitesmoke             : rgb(245, 245, 245);
+    --bg_color-lavender               : rgb(230, 230, 250);
+    --bg_color-darkslategray          : rgb(47,  79,  79);
+    --bg_color-steelblue              : rgb(70,  130, 180);
+    --bg_color-skyblue                : rgb(135, 206, 235);
+    --bg_color-mediumseagreen         : rgb(60,  179, 113);
+    --bg_color-forestgreen            : rgb(34,  139, 34);
+
+    /* TEXT */
+    --text_color-white                : rgb(255, 255, 255);
+    --text_color-dimgrey              : rgb(105, 105, 105);
+    --text_color-red                  : rgb(255, 0,   0);
+    --text_color-steelblue            : rgb(70,  130, 180);
+
+    /* SHADOW */
+    --shadow_color-steelblue          : rgba(70,  130, 180, 0.15);
+    --shadow_color-slateblue          : rgba(106, 90,  205, 0.3);
+}
+
+
+html body {
+    background-color        : var(--bg_color-whitesmoke, whitesmoke);
+    max-height              : 80%;
+}
+
+/* BEGIN > WRAPPER STYLES (BASIC) */
+body #wrapper {
+    position                : relative;
+}
+/* END > WRAPPER STYLES (BASIC) */
+
+
+
+/* BEGIN > HEADER STYLES */
+body #wrapper header {
+    background-color        : var(--bg_color-darkslategray, darkslategray);
+    display                 : block;
+    font-weight             : 700;
+    opacity                 : .5;
+    padding                 : .01em 16px;
+    text-align              : center;
+}
+body #wrapper header h1 {
+    color                   : var(--text_color-white, white);
+    font-family             : sans-serif;
+    font-size               : 4vmax;
+    font-style              : oblique;
+    padding                 : 20px 0;
+}
+/* END > HEADER STYLES */
+
+
+
+/* BEGIN > CONTENT STYLES */
+body #wrapper .content {
+    background-color        : var(--bg_color-white, white);
+    padding                 : .01em 16px;
+    margin-top              : 1%;
+	padding-bottom          : 1%;
+}
+/* Text paragraphs */
+body #wrapper .content p {
+    display                 : block;
+    font-weight             : 700;
+    font-size               : 50px;
+    padding-top             : 30%;
+    text-align              : center;
+}
+/* Form */
+body #wrapper .content form fieldset {
+    box-shadow              : 0 4px 10px 0 rgba(0, 0, 0, 0.2),
+                              0 4px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color        : var(--bg_color-lavender, lavender);
+    font-family             : Geneva, Tahoma, sans-serif;
+    overflow                : hidden;
+    padding                 : 3% 0;
+    width                   : 100%;
+}
+/* Legend */
+body #wrapper .content form fieldset legend {
+    background-color        : var(--bg_color-mediumseagreen, mediumseagreen);
+    border                  : none;
+    color                   : var(--text_color-white, white);
+    display                 : block;
+    font-size               : 1.4vmax;
+    width                   : 100%;
+}
+body #wrapper .content form fieldset legend p {
+    font-family             : Geneva, Tahoma, sans-serif;
+    font-size               : 3vmax;
+    overflow                : hidden;
+    padding                 : .8em;
+    text-align              : left;
+    white-space             : normal;
+}
+/* Labels */
+body #wrapper .content form fieldset label {
+    color                   : var(--text_color-steelblue, steelblue);
+    font-size               : 1.5vmax;
+    font-weight             : bold;
+    margin                  : 4.5em;
+    text-align              : left;
+}
+body #wrapper .content form fieldset .required:after {
+    color                   : var(--text_color-red, red);
+    content                 : "*";
+    opacity                 : .5;
+}
+/* Text inputs */
+body #wrapper .content form fieldset input {
+    border                  : 3px
+                              var(--bg_color-steelblue, steelblue)
+                              solid;
+    border-radius           : 7px;
+    -webkit-border-radius   : 7px;
+    -moz-border-radius      : 7px;
+    -ms-border-radius       : 7px;
+    -o-border-radius        : 7px;
+    display                 : block;
+    font-size               : 30px;
+    margin                  : .8rem auto    !important;
+    margin                  : 0 auto        !important;
+    opacity                 : .6;
+    overflow                : hidden;
+    padding                 : .2em;
+    width                   : 83%;
+}
+/* Buttons */
+body #wrapper .content form fieldset button {
+    background-color     : var(--bg_color-mediumseagreen, mediumseagreen);
+    border               : none;
+    border-radius        : 7px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius   : 7px;
+    -ms-border-radius    : 7px;
+    -o-border-radius     : 7px;
+    color                : var(--text_color-white, white);
+    cursor               : pointer;
+    font-size            : 1.4vmax;
+    margin-left          : 5.2em;
+    min-width            : 35%;
+    overflow             : hidden;
+    padding              : .8em;
+    white-space          : normal;
+}
+body #wrapper .content form fieldset button:hover {
+    background-color        : var(--bg_color-forestgreen, forestgreen)   !important;
+    box-shadow              : 0 7px 5px 0 var(--shadow_color-steelblue),
+                              0 3px 4px 0 var(--shadow_color-steelblue);
+}
+/* END > CONTENT STYLES */
+
+
+
+/* BEGIN > FOOTER STYLES */
+body footer {
+    background-color        : var(--bg_color-skyblue, skyblue);
+    padding                 : 1%;
+}
+/* Text paragraphs */
+body footer p {
+    font-family             : Geneva, Tahoma, sans-serif;
+    font-size               : 1.3vmax;
+    text-align              : center;
+}
+body footer p b {
+    color                   : var(--text_color-dimgray, dimgrey);
+    font-weight             : 600;
+}
+/* Links */
+body footer p a {
+    color                   : var(--text_color-steelblue, steelblue);
+    font-weight             : 500;
+    text-decoration         : none;
+}
+/* END > FOOTER STYLES */

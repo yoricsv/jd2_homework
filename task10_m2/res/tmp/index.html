@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang = "en">
+
+<head>
+    <meta   charset     = "utf-8"/>
+    <meta   content     = "ie=edge"
+            http-equiv  = "x-ua-compatible"/>
+
+    <link   href        = "css/style.css"
+            media       = "all"
+            rel         = "stylesheet"
+            type        = "text/css"/>
+
+    <title>
+        Registration
+    </title> 
+</head>
+
+<body>
+    <div id = "wrapper">
+
+        <header>
+            <h1>
+                Welcome!<br/>
+                Please, sign up before using.
+            </h1>
+        </header>
+
+        <div class = "content">
+
+            <form method = "get">
+                <fieldset>
+                    <legend>
+                        <p>
+                            Sign Up
+                        </p>
+                    </legend>
+
+                    <label class = "required"
+                           for   = "name">
+                            Name:
+                    </label>
+                    <br/>
+                    <input minlength   = "3"
+                           name        = "name" required
+                           placeholder = "(min 3 characters)"
+                           type        = "text"  
+                    >
+                    <br/>
+
+                    <label for = "surname">
+                        Surname:
+                    </label>
+                    <br/>
+                    <input name        = "surname"
+                           type        = "text"  
+                    >
+                    <br/>
+
+                    <label for = "phone">
+                        Phone:
+                    </label>
+                    <br/>
+                    <input name        = "phone"
+                           placeholder = "+_ (___) ___-__-__"
+                           type        = "tel"  
+                    >
+                    <br/>
+
+                    <label  class = "required"
+                            for   = "email">
+                        E-mail:
+                    </label>
+                    <br/>
+                    <input name        = "email" required
+                           placeholder = "email@adress.net"
+                           type        = "email"  
+                    >
+                    <br/>
+
+                    <button onclick = "location.href = '/signup'">
+                        Sign Up
+                    </button>
+                </fieldset>
+            </form>
+           
+        </div>
+
+        <footer>
+            <p>
+                <b>
+                    Developed by: 
+                </b>
+                Sergei Selivonchyk
+            </p>
+
+            <p>
+                <b>
+                    Contact information:
+                </b>
+                
+                <br/>
+                <b>
+                    Follow Me:
+                </b>
+                <a href="https://www.linkedin.com/in/yoric/">
+                     LinkedIn
+                </a>
+                <br/>
+
+                <b>
+                    E-mail:
+                </b>
+                
+                <a href = "my e-mail:" onclick = "this.href = 'mailto:yoricsv@yandex.ru'">
+                    yoricsv@yandex.ru
+                </a>
+                .
+            </p>
+        </footer>
+    </div>
+
+</body>
+</html>
