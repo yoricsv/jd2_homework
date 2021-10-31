@@ -35,7 +35,7 @@ slf4j-api | v.2.0.0-alpha1
 3. Copy the link below:
 
 ``` url
-http://localhost:8080/app/task10m2
+http://localhost:8080/app
 ``` 
 4. Paste it into the address bar
 5. Click the "Go" button or press `[Enter]`
@@ -43,7 +43,14 @@ http://localhost:8080/app/task10m2
 ---
 
 ### The result:
-<!-- ![Result][3] -->
+![Result][3]
+<br/>
+![Result][4]
+<br/>
+![Result][5]
+<br/>
+![Result][6]
+<br/>
 
 ## Project UML Class Diagram
 <!-- ![UML Class Diagram][4] -->
@@ -60,6 +67,9 @@ http://localhost:8080/app/task10m2
 
 [1]: https://github.com/yoricsv/001_JMaven_/blob/master/res/read/Maven_Configuration.md
 [2]: https://github.com/yoricsv/002_JMvnWebapp_/blob/master/README.md
-[3]: res/img/task9_mod2.png
-[4]: res/img/UMLHitCounterServlet.png
-[5]: res/read/web.xml_template_structure.md
+[3]: res/img/task10_mod2_01.png
+[4]: res/img/task10_mod2_02.png
+[5]: res/img/task10_mod2_03.png
+[6]: res/img/task10_mod2_04.png
+[7]: res/img/UMLHitCounterServlet.png
+[8]: res/read/web.xml_template_structure.md

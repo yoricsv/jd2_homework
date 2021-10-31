@@ -21,41 +21,44 @@
 
         <header>
             <h1>
-                Welcome!<br/>
+                ERROR!                      <!--ERROR!-->
             </h1>
         </header>
 
         <div class = "content">
 
-            <div class = "sign_in">
+            <div class = "sign_in err">      <!-- err-->
                 <div>
                     <p>
-                        Information added successfully!
+                        Inability to add information. Required fields are empty!
+                        <!--Inability to add information. Required fields are empty!-->
                     </p>
                 </div>
 
                 <p>
-                    Hello, 'name'!
+                    You must enter your name with e-mail address or phone number.
+                    <!-- You must enter your name with e-mail address or phone number. -->
                     <br/>
-                    Below, is the information you entered:
+                    Please, go back and fill in all required fields.
+                    <!-- Please, go back and fill in all required fields. -->
                 </p>
 
                 <ul>
                     <li>
-                        Name is: 'name';
+                        Name is: <span></span>      <!--<span></span>-->
                     </li>
                     <li>
-                        Surname is: 'surname';
+                        Surname is: 'surname'
                     </li>
                     <li>
-                        Phone is: 'phone'
+                        Phone is: <span></span>     <!--<span></span>-->
                     </li>
                     <li>
-                        E-mail is: 'email'
+                        E-mail is: <span></span>    <!--<span></span>-->
                     </li>
                 </ul>
 
-                <nav>
+                <nav class = "err">                 <!--class = "err"-->
                     <button onclick = "location.href = '/'">
                         Back to main
                     </button>

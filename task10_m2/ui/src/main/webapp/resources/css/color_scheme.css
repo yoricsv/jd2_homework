@@ -50,6 +50,7 @@
     --bg_color-skyblue                : rgb(135, 206, 235);
     --bg_color-mediumseagreen         : rgb(60,  179, 113);
     --bg_color-forestgreen            : rgb(34,  139, 34);
+    --bg_color-red                    : rgb(255, 0,   0);
 
     /* TEXT */
     --text_color-white                : rgb(255, 255, 255);
