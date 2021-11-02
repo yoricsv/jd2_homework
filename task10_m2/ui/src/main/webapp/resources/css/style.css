@@ -110,7 +110,16 @@ body #wrapper .content form fieldset input {
     width                   : 83%;
 }
 /* Buttons */
-body #wrapper .content form fieldset button {
+body #wrapper .content form fieldset nav {
+    background-color        : inherit;
+    display                 : block;
+    font-size               : 1.4vmax;
+    margin                  : 1rem 3%;
+    overflow                : hidden;
+    text-align              : center;
+    white-space             : normal;
+}
+body #wrapper .content form fieldset nav button {
     background-color        : var(--bg_color-mediumseagreen, mediumseagreen);
     border                  : none;
     border-radius           : 7px;
@@ -121,13 +130,12 @@ body #wrapper .content form fieldset button {
     color                   : var(--text_color-white, white);
     cursor                  : pointer;
     font-size               : 1.4vmax;
-    margin-left             : 5.2em;
+    margin                  : 0 5%;
     min-width               : 35%;
     overflow                : hidden;
     padding                 : .8em;
-    white-space             : normal;
 }
-body #wrapper .content form fieldset button:hover {
+body #wrapper .content form fieldset nav button:hover {
     background-color        : var(--bg_color-forestgreen, forestgreen)   !important;
     box-shadow              : 0 7px 5px 0 var(--shadow_color-steelblue),
                               0 3px 4px 0 var(--shadow_color-steelblue);

@@ -1,4 +1,12 @@
-package pro.yoric.registration.ui;
+package pro.yoric.registration.controller;
+
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+import java.io.IOException;
 
 public class RegistrationServlet
     extends HttpServlet
@@ -9,7 +17,7 @@ public class RegistrationServlet
         HttpServletResponse resp
         )
         throws ServletException,
-               IOException
+            IOException
     {
         RequestDispatcher requestDispatcher =
             req.getRequestDispatcher("views/signup.jsp");
