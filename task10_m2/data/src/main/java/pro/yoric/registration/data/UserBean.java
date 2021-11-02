@@ -59,37 +59,12 @@ public class UserBean
     @Override
     public String toString()
     {
-        return  "User {"            +
-                    "Name = '"      + userName      + "'\', "   +
-                    "Surname = '"   + userSurname   + "'\''"    +
-                    "Phone = '"     + userPhone     + "'\', "   +
-                    "E-mail = '"    + userEmail     + "'\''"    +
-                "}";
+        return
+            "User {"           +
+                "Name = \""    + userName    + "\", " +
+                "Surname = \"" + userSurname + "\", " +
+                "Phone = \""   + userPhone   + "\", " +
+                "E-mail = \""  + userEmail   + "\""   +
+            "}";
     }
-
-//    @Override
-//    public boolean equals (Object beanObj)
-//    {
-//        if (this == beanObj)
-//            return true;
-//
-//        if (   beanObj    == null
-//                || getClass() != beanObj.getClass()
-//        )
-//            return false;
-//
-//        UserBean user = (UserBean) beanObj;
-//
-//        if (userName != null ? !userName.equals(user.userName) : user.userName != null) return false;
-//
-//        return password != null ? password.equals(user.password) : user.password == null;
-//
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        int result = userName != null ? userName.hashCode() : 0;
-//        result = 31 * result + (password != null ? password.hashCode() : 0);
-//        return result;
-//    }
 }

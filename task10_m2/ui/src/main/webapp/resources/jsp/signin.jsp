@@ -29,7 +29,7 @@
                     Below, is the information you entered:
                 </p>
 
-                <jsp:useBean id="reqFault" class="pro.yoric.model.UserData" scope="application" />
+                <jsp:useBean id="reqFault" class="pro.yoric.registration.data.UserBean" scope="application" />
 
                 <ul>
                     <li>

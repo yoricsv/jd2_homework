@@ -35,7 +35,7 @@ slf4j-api | v.2.0.0-alpha1
 3. Copy the link below:
 
 ``` url
-http://localhost:8080/app
+http://localhost:8080/
 ``` 
 4. Paste it into the address bar
 5. Click the "Go" button or press `[Enter]`

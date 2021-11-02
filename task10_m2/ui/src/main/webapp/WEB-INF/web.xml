@@ -24,7 +24,7 @@
 
     <servlet>
         <servlet-name>UserList</servlet-name>
-        <servlet-class>pro.yoric.registration.controller.UserListServlet</servlet-class>
+        <servlet-class>pro.yoric.registration.controller.UsersListServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>UserList</servlet-name>
