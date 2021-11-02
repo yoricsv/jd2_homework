@@ -23,10 +23,10 @@
                     </p>
                 </div>
 
-
+<%-- 
                 <jsp:useBean id="list" class="pro.yoric.controller.UsersListServlet" scope="application" />
                 <jsp:getProperty name="list" property="name" /> 
-                
+--%>
                 <ul class = "users">
                     <li>
                         Anton
@@ -44,11 +44,11 @@
                 </ul>
 
                 <nav class = "err">
-                    <button onclick = "location.href = '/'">
+                    <button onclick = "location.href = '/ui'">
                         Back to main
                     </button>
 
-                    <button onclick = "location.href = '/users'">
+                    <button onclick = "location.href = '/ui/users'">
                         Reload list
                     </button>
                 </nav>

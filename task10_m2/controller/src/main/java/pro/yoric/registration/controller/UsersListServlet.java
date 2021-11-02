@@ -7,7 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import pro.yoric.registration.data.UserBean;
 
-@WebServlet(name = "UserListServlet", urlPatterns = "/users")
+@WebServlet(name = "UsersListServlet", urlPatterns = "/users")
 public class UsersListServlet
     extends HttpServlet
 {
@@ -16,6 +16,7 @@ public class UsersListServlet
         throws ServletException
     {
         super.init(config);
+
     }
 
     @Override
@@ -26,15 +27,15 @@ public class UsersListServlet
     {
         try
         {
-            bean.getName();
-            bean.getSurname();
-            bean.getPhone();
-            bean.getEmail();
+//            bean.getName();
+//            bean.getSurname();
+//            bean.getPhone();
+//            bean.getEmail();
 
             RequestDispatcher requestDispatcher =
-                req.getRequestDispatcher(
-                    "resources/jsp/users.jsp"
-                );
+                    req.getRequestDispatcher(
+                        "resources/jsp/users.jsp"
+                    );
             requestDispatcher.forward(req, resp);
         }
         catch (Exception e)

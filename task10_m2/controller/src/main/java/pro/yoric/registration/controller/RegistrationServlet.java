@@ -7,6 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import pro.yoric.registration.data.UserBean;
 
+import java.io.PrintWriter;
 import java.util.Date;
 
 @WebServlet(name = "RegistrationServlet", urlPatterns = "/signup")
@@ -32,6 +33,8 @@ public class RegistrationServlet
         {
             HttpSession session     = req.getSession();
             Date        currentDate = new Date();
+            PrintWriter writer      = resp.getWriter();
+
 
             String      userName    = req.getParameter("name");
             String      userSurname = req.getParameter("surname");
@@ -43,7 +46,7 @@ public class RegistrationServlet
             bean.setPhone(userPhone);
             bean.setEmail(userEmail);
 
-            addSignUpCookies(resp, currentDate);
+//            addSignUpCookies(resp, currentDate);
 
             addDataToSession(
                 session,
@@ -55,9 +58,11 @@ public class RegistrationServlet
 
             RequestDispatcher requestDispatcher =
                 req.getRequestDispatcher(
+
                     "resources/jsp/signin.jsp"
                 );
             requestDispatcher.forward(req, resp);
+
         }
         catch (Exception e)
         {
@@ -85,6 +90,7 @@ public class RegistrationServlet
                     String.valueOf(currentDate)
                 );
 
+        cookie.setSecure(true);
         cookie.setMaxAge(300);
         resp.addCookie(cookie);
     }
@@ -103,6 +109,23 @@ public class RegistrationServlet
         session.setAttribute("email",   userEmail );
 
         session.getLastAccessedTime();
+    }
+
+    private boolean isSignUpSuccess(
+            String name,
+            String phone,
+            String email
+        )
+    {
+        if (name == null)
+            return false;
+        else
+        {
+            if(phone == null || email == null)
+                return false;
+
+            return true;
+        }
     }
 
     private UserBean bean;
