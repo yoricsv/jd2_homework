@@ -5,10 +5,12 @@ import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
-import pro.yoric.registration.data.UserBean;
+import pro.yoric.registration.bean.UserBean;
+import pro.yoric.registration.data.UserDAO;
 
-import java.io.PrintWriter;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
 
 @WebServlet(name = "RegistrationServlet", urlPatterns = "/signup")
 public class RegistrationServlet
@@ -20,7 +22,7 @@ public class RegistrationServlet
     {
         super.init(config);
 
-        bean = new UserBean();
+        dao = UserDAO.getInstance();
     }
 
     @Override
@@ -32,37 +34,51 @@ public class RegistrationServlet
         try
         {
             HttpSession session     = req.getSession();
-            Date        currentDate = new Date();
-            PrintWriter writer      = resp.getWriter();
-
-
             String      userName    = req.getParameter("name");
             String      userSurname = req.getParameter("surname");
             String      userPhone   = req.getParameter("phone");
             String      userEmail   = req.getParameter("email");
+            String      reference   = req.getHeader("Referer");
 
-            bean.setName(userName);
-            bean.setSurname(userSurname);
-            bean.setPhone(userPhone);
-            bean.setEmail(userEmail);
+            resp.setContentType("text/html; charset=UTF-8");
 
-//            addSignUpCookies(resp, currentDate);
+            if ( !isSignUpSuccess(
+                    userName,
+                    userPhone,
+                    userEmail
+                ))
+                path = "resources/jsp/failure.jsp";
+            else
+            {
+                bean = new UserBean (
+                            userName,
+                            userSurname,
+                            userPhone,
+                            userEmail
+                        );
+                dao.addUser(bean);
 
-            addDataToSession(
-                session,
-                userName,
-                userSurname,
-                userPhone,
-                userEmail
-            );
+                addSignUpCookies(resp, reference);
+
+                addDataToSession(
+                    session,
+                    userName,
+                    userSurname,
+                    userPhone,
+                    userEmail
+                );
+
+                path = "resources/jsp/signin.jsp";
+            }
+
+            req.setAttribute("name",    userName);
+            req.setAttribute("surname", userSurname );
+            req.setAttribute("phone",   userPhone );
+            req.setAttribute("email",   userEmail );
 
             RequestDispatcher requestDispatcher =
-                req.getRequestDispatcher(
-
-                    "resources/jsp/signin.jsp"
-                );
+                req.getRequestDispatcher(path);
             requestDispatcher.forward(req, resp);
-
         }
         catch (Exception e)
         {
@@ -79,19 +95,35 @@ public class RegistrationServlet
         doGet(req, resp);
     }
 
+    private boolean isSignUpSuccess(
+            String name,
+            String phone,
+            String email
+        )
+    {
+        return
+            name != null
+        && !name.isEmpty()
+        && (
+                    phone != null
+                && !phone.isEmpty()
+                ||  email != null
+                && !email.isEmpty()
+            );
+    }
+
     private void addSignUpCookies (
             HttpServletResponse resp,
-            Date                currentDate
+            String              reference
         )
     {
         Cookie cookie =
                 new Cookie(
                     "SIGNUP",
-                    String.valueOf(currentDate)
+                    reference
                 );
-
-        cookie.setSecure(true);
-        cookie.setMaxAge(300);
+        cookie.setPath("/resources/cookies");
+        cookie.setMaxAge(-1);
         resp.addCookie(cookie);
     }
 
@@ -109,26 +141,29 @@ public class RegistrationServlet
         session.setAttribute("email",   userEmail );
 
         session.getLastAccessedTime();
+
+        session.setMaxInactiveInterval(86400);
+        session.setMaxInactiveInterval(-1);
     }
 
-    private boolean isSignUpSuccess(
-            String name,
-            String phone,
-            String email
-        )
+    private List<String> getAllFromSession(HttpSession session)
     {
-        if (name == null)
-            return false;
-        else
-        {
-            if(phone == null || email == null)
-                return false;
+        List<String> sessionList = new ArrayList<>();
 
-            return true;
+        Enumeration<String> keys = session.getAttributeNames();
+
+        while(keys.hasMoreElements())
+        {
+            sessionList.add(keys.nextElement());
         }
+
+        return sessionList;
     }
 
     private UserBean bean;
+    private UserDAO  dao;
+    private String   path;
+
     private static final org.slf4j.Logger logger =
         org
         .slf4j

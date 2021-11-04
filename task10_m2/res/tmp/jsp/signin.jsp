@@ -24,16 +24,53 @@
                 </div>
 
                 <p>
-                    Hello, <% out.print(request.getAttribute("name")); %>!
+                    Hello, 'name'!
                     <br/>
                     Below, is the information you entered:
                 </p>
+<%-- 
+                <jsp:useBean id="reqFault" class="pro.yoric.registration.bean.UserBean" scope="request" />
 
+                    <% if ( !"name".isEmpty()) { %>
+                        <li>
+                            Name is: <jsp:getProperty name="reqFault" property="name"/>
+                        </li>
+                    <% } %>
+                                    <% if ( !"name".isEmpty()) { %>
+                        <li>
+                            Name is: <jsp:getProperty name="reqFault" property="name"/>
+                        </li>
+                    <% } %>
+
+                    <% if ( !"surname".isEmpty()) { %>
+                        <li>
+                            Surname is: <jsp:getProperty name="reqFault" property="name"/>
+                        </li>
+                    <% } %>
+
+                    <% if ( !"phone".isEmpty()) { %>
+                        <li>
+                            Phone is: <jsp:getProperty name="reqFault" property="name"/>
+                        </li>
+                    <% } %>
+                    
+                    <% if ( !"email".isEmpty()) { %>
+                        <li>
+                            E-mail is: <jsp:getProperty name="reqFault" property="name"/>
+                        </li>
+                    <% } %>
+ --%>
                 <ul>
-                    <li>Name is: <% out.print(request.getAttribute("name")); %>
-                    </li>
 
                     <%
+                        if (request.getAttribute("name") != null)
+                        {
+                            out.println(
+                                "<li>Name is: "                 +
+                                    request.getAttribute("name")    +
+                                "</li>"
+                            );
+                        }
                         if (request.getAttribute("surname") != null)
                         {
                             out.println(

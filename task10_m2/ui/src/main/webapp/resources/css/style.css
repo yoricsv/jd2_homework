@@ -71,7 +71,7 @@ body #wrapper .content form fieldset legend {
 }
 body #wrapper .content form fieldset legend p {
     font-family             : Geneva, Tahoma, sans-serif;
-    font-size               : 3vmax;
+    font-size               : 2.5vmax;
     overflow                : hidden;
     padding                 : .8em;
     text-align              : left;

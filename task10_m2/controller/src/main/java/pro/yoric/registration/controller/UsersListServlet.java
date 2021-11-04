@@ -5,7 +5,9 @@ import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
-import pro.yoric.registration.data.UserBean;
+import pro.yoric.registration.data.UserDAO;
+
+import java.util.List;
 
 @WebServlet(name = "UsersListServlet", urlPatterns = "/users")
 public class UsersListServlet
@@ -17,6 +19,7 @@ public class UsersListServlet
     {
         super.init(config);
 
+        dao = UserDAO.getInstance();
     }
 
     @Override
@@ -27,10 +30,9 @@ public class UsersListServlet
     {
         try
         {
-//            bean.getName();
-//            bean.getSurname();
-//            bean.getPhone();
-//            bean.getEmail();
+            List<String> names = dao.getUsersList();
+
+            req.setAttribute("userNames", names);
 
             RequestDispatcher requestDispatcher =
                     req.getRequestDispatcher(
@@ -53,7 +55,8 @@ public class UsersListServlet
         doGet(req, resp);
     }
 
-    private UserBean bean;
+    private UserDAO  dao;
+
     private static final org.slf4j.Logger logger =
             org
             .slf4j

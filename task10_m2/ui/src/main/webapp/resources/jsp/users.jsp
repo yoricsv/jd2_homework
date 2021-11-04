@@ -23,12 +23,26 @@
                     </p>
                 </div>
 
-<%-- 
-                <jsp:useBean id="list" class="pro.yoric.controller.UsersListServlet" scope="application" />
-                <jsp:getProperty name="list" property="name" /> 
---%>
                 <ul class = "users">
-                    <li>
+
+                    <%
+                        List<String> names = (List<String>) req.getAttribute("userNames");
+
+                        if (    names != null
+ //                           && !names.isEmpty()
+                            )
+                        {
+                            for (String userNames : names)
+                            {
+                                out.println(
+                                    "<li>" +
+                                        userNames +
+                                    "</li>"
+                                );
+                            }
+                        }
+                    %>
+                    <%-- <li>
                         Anton
                         <!-- Anton -->
                     </li>
@@ -39,7 +53,7 @@
                     <li>
                         Barbara
                         <!-- Barbara -->
-                    </li>
+                    </li> --%>
 
                 </ul>
 

@@ -1,4 +1,4 @@
-package pro.yoric.registration.data;
+package pro.yoric.registration.bean;
 
 public class UserBean
 {
@@ -22,38 +22,38 @@ public class UserBean
         this.userEmail   = email;
     }
 
-    public String getName()
+    public String getName    ()
     {
         return userName;
     }
-    public String getSurname()
+    public String getSurname ()
     {
         return userSurname;
     }
-    public String getPhone()
+    public String getPhone   ()
     {
         return userPhone;
     }
-    public String getEmail()
+    public String getEmail   ()
     {
         return userEmail;
     }
 
-    public void setName (String name)
+    public void setName    (String name   )
     {
-        this.userName = name;
+        this.userName    = name;
     }
     public void setSurname (String surname)
     {
         this.userSurname = surname;
     }
-    public void setPhone (String phone)
+    public void setPhone   (String phone  )
     {
-        this.userPhone = phone;
+        this.userPhone   = phone;
     }
-    public void setEmail (String email)
+    public void setEmail   (String email  )
     {
-        this.userEmail = email;
+        this.userEmail   = email;
     }
 
     @Override
@@ -61,10 +61,10 @@ public class UserBean
     {
         return
             "User {"           +
-                "Name = \""    + userName    + "\", " +
+                "Name    = \"" + userName    + "\", " +
                 "Surname = \"" + userSurname + "\", " +
-                "Phone = \""   + userPhone   + "\", " +
-                "E-mail = \""  + userEmail   + "\""   +
+                "Phone   = \"" + userPhone   + "\", " +
+                "E-mail  = \"" + userEmail   + "\""   +
             "}";
     }
 }
