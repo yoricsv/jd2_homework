@@ -84,11 +84,11 @@
                 <nav class = "err">                                                 <!--users.jsp-->
                 <nav class = "err">                                                 <!--failure.jsp-->
 --%>
-                    <button onclick = "location.href = '/'">
+                    <button onclick = "location.href = '/ui'">
                         Back to main
                     </button>
 
-                    <button onclick = "location.href = '/users'">
+                    <button onclick = "location.href = '/ui/users'">
                         See users list
                     </button>
                 </nav>

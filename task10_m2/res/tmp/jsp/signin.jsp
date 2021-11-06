@@ -24,79 +24,65 @@
                 </div>
 
                 <p>
-                    Hello, 'name'!
+                    Hello, <% out.print(request.getAttribute("name")); %>!
                     <br/>
                     Below, is the information you entered:
                 </p>
-<%-- 
-                <jsp:useBean id="reqFault" class="pro.yoric.registration.bean.UserBean" scope="request" />
 
-                    <% if ( !"name".isEmpty()) { %>
-                        <li>
-                            Name is: <jsp:getProperty name="reqFault" property="name"/>
-                        </li>
-                    <% } %>
-                                    <% if ( !"name".isEmpty()) { %>
-                        <li>
-                            Name is: <jsp:getProperty name="reqFault" property="name"/>
-                        </li>
-                    <% } %>
-
-                    <% if ( !"surname".isEmpty()) { %>
-                        <li>
-                            Surname is: <jsp:getProperty name="reqFault" property="name"/>
-                        </li>
-                    <% } %>
-
-                    <% if ( !"phone".isEmpty()) { %>
-                        <li>
-                            Phone is: <jsp:getProperty name="reqFault" property="name"/>
-                        </li>
-                    <% } %>
-                    
-                    <% if ( !"email".isEmpty()) { %>
-                        <li>
-                            E-mail is: <jsp:getProperty name="reqFault" property="name"/>
-                        </li>
-                    <% } %>
- --%>
                 <ul>
+                    <li>
+                        Name is: <% out.print(request.getAttribute("name")); %>
+                    </li>
+
+                <% if (    request.getAttribute("surname") != null
+                        && request.getAttribute("surname") != "") { %>
+                    <li>
+                        Surname is: <% out.print(request.getAttribute("surname")); %>
+                    </li>
+                <% } %>
+
+                <% if (    request.getAttribute("phone") != null
+                        && request.getAttribute("phone") != "") { %>
+                    <li>
+                        Phone is: <% out.print(request.getAttribute("phone")); %>
+                    </li>
+                <% } %>
+                <% if (    request.getAttribute("email") != null
+                        && request.getAttribute("email") != "") { %>
+                    <li>
+                        E-mail is: <% out.print(request.getAttribute("email")); %>
+                    </li>
+                <% } %>
 
                     <%
-                        if (request.getAttribute("name") != null)
-                        {
-                            out.println(
-                                "<li>Name is: "                 +
-                                    request.getAttribute("name")    +
-                                "</li>"
-                            );
-                        }
-                        if (request.getAttribute("surname") != null)
-                        {
-                            out.println(
-                                "<li>Surname is: "              +
-                                    request.getAttribute("surname") +
-                                "</li>"
-                            );
-                        }
-                        if (request.getAttribute("phone") != null)
-                        {
-                            out.println(
-                                "<li>Phone is: "                +
-                                    request.getAttribute("phone")   +
-                                "</li>"
-                            );
-                        }
-
-                        if (request.getAttribute("email") != null)
-                        {
-                            out.println(
-                                "<li>E-mail is: "               +
-                                    request.getAttribute("email")   +
-                                "</li>"
-                            );
-                        }
-
+//                        if (request.getAttribute("surname") != null && request.getAttribute("surname") != "")
+//                        {
+//                            out.println(
+//                                "<li>Surname is: "              +
+//                                    request.getAttribute("surname") +
+//                                "</li>"
+//                            );
+//                        }
+//                        if (   request.getAttribute("phone") != null
+//                            && request.getAttribute("phone") != "" )
+//                        {
+//                            out.println(
+//                                "<li>Phone is: "                +
+//                                    request.getAttribute("phone")   +
+//                                "</li>"
+//                            );
+//                        }
+//
+//                        if (    request.getAttribute("email") != null
+//                             && request.getAttribute("email") != "" )
+//                        {
+//                            out.println(
+//                                "<li>E-mail is: "               +
+//                                    request.getAttribute("email")   +
+//                                "</li>"
+//                            );
+//                        }
+//
                     %>
 
                 </ul>

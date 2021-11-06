@@ -1,4 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<%@ page
+    contentType = "text/html;
+                   charset=UTF-8"
+    language    = "java"
+%>
+
+<%
+    String surname = (String) request.getAttribute("surname");
+    String phone   = (String) request.getAttribute("phone");
+    String email   = (String) request.getAttribute("email");
+%>
 
 <!DOCTYPE html>
 <html lang = "en">
@@ -24,43 +34,32 @@
                 </div>
 
                 <p>
-                    Hello, <% out.print(request.getAttribute("name")); %>!
+                    Hello, ${name}!
                     <br/>
                     Below, is the information you entered:
                 </p>
 
                 <ul>
-                    <li>Name is: <% out.print(request.getAttribute("name")); %>
+                    <li>
+                        Name is: ${name}
                     </li>
 
-                    <%
-                        if (request.getAttribute("surname") != null)
-                        {
-                            out.println(
-                                "<li>Surname is: "              +
-                                    request.getAttribute("surname") +
-                                "</li>"
-                            );
-                        }
-                        if (request.getAttribute("phone") != null)
-                        {
-                            out.println(
-                                "<li>Phone is: "                +
-                                    request.getAttribute("phone")   +
-                                "</li>"
-                            );
-                        }
+                <% if ( surname != null && surname != "") { %>
+                    <li>
+                        Surname is: ${surname}
+                    </li>
+                <% } %>
 
-                        if (request.getAttribute("email") != null)
-                        {
-                            out.println(
-                                "<li>E-mail is: "               +
-                                    request.getAttribute("email")   +
-                                "</li>"
-                            );
-                        }
-
-                    %>
+                <% if ( phone != null && phone != "") { %>
+                    <li>
+                        Phone is: ${phone}
+                    </li>
+                <% } %>
+                <% if ( email != null && email != "") { %>
+                    <li>
+                        E-mail is: ${email}
+                    </li>
+                <% } %>
 
                 </ul>
 

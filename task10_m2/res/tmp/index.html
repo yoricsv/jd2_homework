@@ -21,14 +21,14 @@
 
         <header>
             <h1>
-                Welcome!<br/>
-                Please, sign up before using.
+                Welcome! Please, sign up before using.
             </h1>
         </header>
 
         <div class = "content">
 
-            <form method = "get">
+            <form action = "/ui/signup"
+                  method = "get">
                 <fieldset>
                     <legend>
                         <p>
@@ -41,10 +41,9 @@
                             Name:
                     </label>
                     <br/>
-                    <input minlength   = "3"
-                           name        = "name" required
-                           placeholder = "(min 3 characters)"
-                           type        = "text"  
+                    <input name        = "name" required
+                           placeholder = "required your name or nickname"
+                           type        = "text"
                     >
                     <br/>
 
@@ -62,25 +61,26 @@
                     </label>
                     <br/>
                     <input name        = "phone"
-                           placeholder = "+_ (___) ___-__-__"
+                           placeholder = "enter your phone"
                            type        = "tel"  
                     >
                     <br/>
 
-                    <label  class = "required"
-                            for   = "email">
+                    <label for = "email">
                         E-mail:
                     </label>
                     <br/>
-                    <input name        = "email" required
-                           placeholder = "email@adress.net"
-                           type        = "email"  
+                    <input name        = "email"
+                           placeholder = "enter your e-mail"
+                           type        = "email"
                     >
                     <br/>
 
-                    <button onclick = "location.href = '/signup'">
-                        Sign Up
-                    </button>
+                    <nav>
+                        <button onclick = "location.href = '/ui/signup'">
+                            Sign Up
+                        </button>
+                    </nav>
                 </fieldset>
             </form>
            

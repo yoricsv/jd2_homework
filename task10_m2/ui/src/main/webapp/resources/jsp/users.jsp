@@ -1,4 +1,11 @@
-<%@ page language="java" %>
+<%@ page
+    contentType = "text/html;
+                   charset=UTF-8"
+    import      = "java.util.List"
+    language    = "java"
+%>
+
+<% List<String> names = (List<String>) request.getAttribute("userNames"); %>
 
 <!DOCTYPE html>
 <html lang = "en">
@@ -26,34 +33,16 @@
                 <ul class = "users">
 
                     <%
-                        List<String> names = (List<String>) req.getAttribute("userNames");
-
                         if (    names != null
- //                           && !names.isEmpty()
+                            && !names.isEmpty()
                             )
-                        {
-                            for (String userNames : names)
-                            {
+                            for (String userName : names)
                                 out.println(
-                                    "<li>" +
-                                        userNames +
+                                    "<li> " +
+                                        userName +
                                     "</li>"
                                 );
-                            }
-                        }
                     %>
-                    <%-- <li>
-                        Anton
-                        <!-- Anton -->
-                    </li>
-                    <li>
-                        Tanya
-                        <!-- Tanya -->
-                    </li>
-                    <li>
-                        Barbara
-                        <!-- Barbara -->
-                    </li> --%>
 
                 </ul>
 

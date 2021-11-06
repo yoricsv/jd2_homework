@@ -1,13 +1,18 @@
 package pro.yoric.registration.controller;
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.*;
-import pro.yoric.registration.data.UserDAO;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import java.util.List;
+
+import pro.yoric.registration.data.UserDAO;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @WebServlet(name = "UsersListServlet", urlPatterns = "/users")
 public class UsersListServlet
@@ -34,11 +39,9 @@ public class UsersListServlet
 
             req.setAttribute("userNames", names);
 
-            RequestDispatcher requestDispatcher =
-                    req.getRequestDispatcher(
-                        "resources/jsp/users.jsp"
-                    );
-            requestDispatcher.forward(req, resp);
+            req.getRequestDispatcher(
+                "resources/jsp/users.jsp"
+            ).forward(req, resp);
         }
         catch (Exception e)
         {
@@ -57,14 +60,12 @@ public class UsersListServlet
 
     private UserDAO  dao;
 
-    private static final org.slf4j.Logger logger =
-            org
-            .slf4j
-            .LoggerFactory
-            .getLogger(
-                    RegistrationServlet.class
-            );
-
+    private static final long   serialVersionUID = 2L;
+    private static final Logger logger =
+        LoggerFactory
+        .getLogger(
+            RegistrationServlet.class
+        );
 }
 
 

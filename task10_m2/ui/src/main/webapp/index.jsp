@@ -1,3 +1,16 @@
+<%@ page
+    contentType = "text/html;
+                   charset=UTF-8"
+    language    = "java"
+%>
+
+<%
+    String name    = request.getParameter("name");
+    String surname = request.getParameter("surname");
+    String phone   = request.getParameter("phone");
+    String email   = request.getParameter("email");
+%>
+
 <!DOCTYPE html>
 <html lang = "en">
 
@@ -44,6 +57,14 @@
                     <input name        = "name" required
                            placeholder = "required your name or nickname"
                            type        = "text"
+                           value       = "<%
+                                if(    name == null
+                                    || name.equals("")
+                                    || name.equals("null")
+                                    )
+                                    out.print("");
+                                else
+                                    out.print(name); %>"
                     >
                     <br/>
 
@@ -52,7 +73,15 @@
                     </label>
                     <br/>
                     <input name        = "surname"
-                           type        = "text"  
+                           type        = "text"
+                           value       = "<%
+                                if(    surname == null
+                                    || surname.equals("")
+                                    || surname.equals("null")
+                                    )
+                                    out.print("");
+                                else
+                                    out.print(surname); %>" 
                     >
                     <br/>
 
@@ -62,18 +91,33 @@
                     <br/>
                     <input name        = "phone"
                            placeholder = "enter your phone"
-                           type        = "tel"  
+                           type        = "tel"
+                           value       = "<%
+                                if(    phone == null
+                                    || phone.equals("")
+                                    || phone.equals("null")
+                                    )
+                                    out.print("");
+                                else
+                                    out.print(phone); %>" 
                     >
                     <br/>
 
-                    <label  class = "required"
-                            for   = "email">
+                    <label for   = "email">
                         E-mail:
                     </label>
                     <br/>
-                    <input name        = "email" required
+                    <input name        = "email"
                            placeholder = "enter your e-mail"
-                           type        = "email"  
+                           type        = "email"
+                           value       = "<%
+                                if(    email == null
+                                    || email.equals("")
+                                    || email.equals("null")
+                                    )
+                                    out.print("");
+                                else
+                                    out.print(email); %>" 
                     >
                     <br/>
 
@@ -87,38 +131,7 @@
            
         </div>
 
-        <footer>
-            <p>
-                <b>
-                    Developed by: 
-                </b>
-                Sergei Selivonchyk
-            </p>
-
-            <p>
-                <b>
-                    Contact information:
-                </b>
-                
-                <br/>
-                <b>
-                    Follow Me:
-                </b>
-                <a href="https://www.linkedin.com/in/yoric/">
-                     LinkedIn
-                </a>
-                <br/>
-
-                <b>
-                    E-mail:
-                </b>
-                
-                <a href = "my e-mail:" onclick = "this.href = 'mailto:yoricsv@yandex.ru'">
-                    yoricsv@yandex.ru
-                </a>
-                .
-            </p>
-        </footer>
+<%@ include file="resources/blocks/footer.jsp" %>
     </div>
 
 </body>

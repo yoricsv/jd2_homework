@@ -1,4 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<%@ page
+    contentType = "text/html;
+                   charset=UTF-8"
+    language    = "java"
+%>
+
+<%
+    final   String WARNING = "<span></span>";
+            String name    = (String) request.getAttribute("name");
+            String surname = (String) request.getAttribute("surname");
+            String phone   = (String) request.getAttribute("phone");
+            String email   = (String) request.getAttribute("email");
+%>
 
 <!DOCTYPE html>
 <html lang = "en">
@@ -29,105 +41,57 @@
                     Please, go back and fill in all required fields.
                 </p>
 
-                <%! final String WARNING = "<span></span>"; %>
-<%-- 
-                <jsp:useBean id="reqFault" class="pro.yoric.registration.bean.UserBean" scope="request" />
+                
                 <ul>
                     <li>
                         Name is: 
-                        <% if ( !"name".isEmpty()) { %>
-                            <jsp:getProperty name="reqFault" property="name"/>
-                        <% } else { %>
-                            <%= WARNING %>
-                        <% } %>
+                        <%
+                            if (    name != null
+                                && !name.equals("")
+                                )
+                                out.print(name); 
+                            else
+                                out.print(WARNING);
+                        %>
                     </li>
                     <li>
                         Surname is: 
-                        <% if ( !"surname".isEmpty()) { %>
-                            <jsp:getProperty name="reqFault" property="name"/>
-                        <% } else { %>
-                            <%= WARNING %>
-                        <% } %>
+                        <%
+                            if (    surname != null
+                                && !surname.equals("")
+                                )
+                                out.print(surname); 
+                            else
+                                out.print(WARNING);
+                        %>
                     </li>
                     <li>
                         Phone is: 
-                        <% if ( !"".isEmpty()) { %>
-                            <jsp:getProperty name="reqFault" property="name"/>
-                        <% } else { %>
-                            <%= WARNING %>
-                        <% } %>
+                        <%
+                            if (    phone != null
+                                && !phone.equals("")
+                                )
+                                out.print(phone); 
+                            else
+                                out.print(WARNING);
+                        %>
                     </li>
                     <li>
                         E-mail is: 
-                        <% if ( !"email".isEmpty()) { %>
-                            <jsp:getProperty name="reqFault" property="name"/>
-                        <% } else { %>
-                            <%= WARNING %>    
-                        <% } %>
+                        <%
+                            if (    email != null
+                                && !email.equals("")
+                                )
+                                out.print(email); 
+                            else
+                                out.print(WARNING);
+                        %>
                     </li>
-                </ul>
---%>
-                <ul> 
-
-                    <%-- <%
-                        if (req.getAttribute("name") != null)
-                            out.println(
-                                "<li>Name is: "                 +
-                                    req.getAttribute("name")    +
-                                "</li>"
-                            );
-                        else
-                            out.println(
-                                "<li>Name is: "                 +
-                                    WARNING                     +
-                                "</li>"
-                            );
-
-                        if (req.getAttribute("surname") != null)
-                            out.println(
-                                "<li>Surname is: "              +
-                                    req.getAttribute("surname") +
-                                "</li>"
-                            );
-                        else
-                            out.println(
-                                "<li>Surname is: "              +
-                                    WARNING                     +
-                                "</li>"
-                            );
-
-                        if (req.getAttribute("phone") != null)
-                            out.println(
-                                "<li>Phone is: "                +
-                                    req.getAttribute("phone")   +
-                                "</li>"
-                            );
-                        else
-                            out.println(
-                                "<li>Phone is: "                +
-                                    WARNING                     +
-                                "</li>"
-                            );
-
-                        if (req.getAttribute("email") != null)
-                            out.println(
-                                "<li>E-mail is: "               +
-                                    req.getAttribute("email")   +
-                                "</li>"
-                            );
-                        else
-                            out.println(
-                                "<li>E-mail is: "               +
-                                    WARNING                     +
-                                "</li>"
-                            );
-
-                    %> --%>
-
                 </ul>
 
                 <nav class = "err">
-                    <button onclick = "location.href = '/ui'">
+                    <button onclick = "location.href =
+                        '/ui/index.jsp?name=<%= name %>&surname=<%= surname %>&phone=<%= phone %>&email=<%= email %>'">
                         Back to main
                     </button>
 

@@ -35,6 +35,6 @@ public class UserDAO
             );
     }
 
-    private       List<UserBean> usersList;
+    private        final List<UserBean> usersList;
     private static final UserDAO instance = new UserDAO();
 }
