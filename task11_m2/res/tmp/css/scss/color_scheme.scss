@@ -1,0 +1,60 @@
+$color-black               : rgb(0,   0,   0)   #000000;
+
+$color-darkslategray       : rgb(47,  79,  79)  #2f4f4f;
+$color-slategray           : rgb(112, 128, 144) #708090;
+$color-lightslategray      : rgb(119, 136, 153) #778899;
+$color-dimgray             : rgb(105, 105, 105) #696969;
+$color-gray                : rgb(80,  80,  80)  #808080;
+$color-darkgray            : rgb(169, 169, 169) #a9a9a9;
+$color-silver              : rgb(192, 192, 192) #c0c0c0;
+$color-lightgray           : rgb(211, 211, 211) #d3d3d3;
+$color-gainsboro           : rgb(220, 220, 220) #dcdcdc;
+
+$color-saddlebrown         : rgb(139, 69,  19)  #8b4513;
+$color-maroon              : rgb(128, 0,   0)   #800000;
+$color-crimson             : rgb(220, 20,  60)  #dc143c;
+$color-red                 : rgb(255, 0,   0)   #ff0000;
+$color-darkorange          : rgb(255, 140, 0)   #ff8c00;
+$color-orange              : rgb(255, 165, 0)   #ffa500;
+$color-moccasin            : rgb(255, 228, 181) #FFE4B5;
+$color-white               : rgb(255, 255, 255) #ffffff;
+$color-whitesmoke          : rgb(245, 245, 245) #f5f5f5;
+$color-linen               : rgb(250, 240, 230) #faf0e6;
+$color-beige               : rgb(245, 245, 220) #f5f5dc;
+$color-lightcyan           : rgb(224, 255, 255) #e0ffff;
+$color-lavender            : rgb(230, 230, 250) #e6e6fa;
+$color-yellow              : rgb(255, 255, 0)   #ffff00;
+$color-gold                : rgb(255, 215, 0)   #ffd700;
+$color-goldrod             : rgb(218, 165, 32)  #daa520;
+$color-forestgreen         : rgb(34,  139, 34)  #228b22;
+$color-seagreen            : rgb(46,  139, 87)  #2e8b57;
+$color-mediumseagreen      : rgb(60,  179, 113) #3cb371;
+$color-skyblue             : rgb(135, 206, 235) #87ceeb;
+$color-cadetblue           : rgb(95,  158, 160) #5f9ea0;
+$color-steelblue           : rgb(70,  130, 180) #4682b4;
+$color-slateblue           : rgb(106, 90,  205) #6a5acd;
+$color-darkslateblue       : rgb(72,  61,  139) #483d8b;
+$color-mediumblue          : rgb(0,   0,   200) #0000cd;
+$color-midnightblue        : rgb(25,  25,  112) #191970;
+
+// ------------- REGISTRATION COLOR SCHEME -------------
+
+// BACKGROUND
+$bg_color-white                  : rgb(255, 255, 255);
+$bg_color-whitesmoke             : rgb(245, 245, 245);
+$bg_color-lavender               : rgb(230, 230, 250);
+$bg_color-darkslategray          : rgb(47,  79,  79);
+$bg_color-steelblue              : rgb(70,  130, 180);
+$bg_color-skyblue                : rgb(135, 206, 235);
+$bg_color-mediumseagreen         : rgb(60,  179, 113);
+$bg_color-forestgreen            : rgb(34,  139, 34);
+
+// TEXT
+$text_color-white                : rgb(255, 255, 255);
+$text_color-dimgrey              : rgb(105, 105, 105);
+$text_color-red                  : rgb(255, 0,   0);
+$text_color-steelblue            : rgb(70,  130, 180);
+
+// SHADOWS
+$shadow_color-steelblue          : rgba(70,  130, 180, 0.15);
+$shadow_color-slateblue          : rgba(106, 90,  205, 0.3);
