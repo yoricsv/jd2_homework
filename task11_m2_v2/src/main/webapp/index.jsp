@@ -1,11 +1,4 @@
-<%@ page
-    contentType = "text/html;
-                   charset=UTF-8"
-    language    = "java"
-%>
-
-<% String agent = (String) request.getHeader("User-agent"); %>
-<%-- <% String useragent = (String) request.getAttribute("uas"); %> --%>
+<%@ page contentType="text/html; charset=UTF-8" language="java"%>
 
 <!DOCTYPE html>
 <html lang = "en">
@@ -22,7 +15,7 @@
 
     <title>
         User-Agent Parser
-    </title> 
+    </title>
 </head>
 
 <body>
@@ -40,18 +33,19 @@
                 </div>
 
                 <p>
-                    Servlet response : 
+                    Servlet response :
                     <%
                         if(request.getAttribute("uas") == null)
                             out.println("uas is null");
-                        else if (request.getAttribute("uas").isEmpty())
+                        else if (String.valueOf(request.getAttribute("uas")).isEmpty())
                             out.println("uas isn't null, but empty");
                         else
-                            out.println(uas);
+                            out.println(String.valueOf(request.getAttribute("uas")));
                     %>
-                    ${uas}<br/>
 
-                    Hello, html response : <% if(agent != null && !agent.isEmpty()) out.println(agent); %> user!
+                    <br/>
+
+                    Output of EL tag: ${uas}
                 </p>
 
                 <nav>
@@ -60,7 +54,7 @@
                     </button>
                 </nav>
             </div>
-           
+
         </div>
 
 <%@ include file="resources/blocks/footer.jsp" %>
