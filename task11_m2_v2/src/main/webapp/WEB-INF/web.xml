@@ -9,9 +9,9 @@
          version = "4.0"
 >
 
-    <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
-    </welcome-file-list>
+<!--    <welcome-file-list>-->
+<!--        <welcome-file>index.jsp</welcome-file>-->
+<!--    </welcome-file-list>-->
 
     <servlet>
         <servlet-name>UserAgentParser</servlet-name>
@@ -22,13 +22,13 @@
         <url-pattern>/parser</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>index</servlet-name>
-        <jsp-file>/index.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>index</servlet-name>
-        <url-pattern>/parser-jsp</url-pattern>
-    </servlet-mapping>
+<!--    <servlet>-->
+<!--        <servlet-name>index</servlet-name>-->
+<!--        <jsp-file>/index.jsp</jsp-file>-->
+<!--    </servlet>-->
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>index</servlet-name>-->
+<!--        <url-pattern>/parser-jsp</url-pattern>-->
+<!--    </servlet-mapping>-->
 
 </web-app>
