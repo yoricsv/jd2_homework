@@ -26,10 +26,9 @@ Create a servlet that will detect by the content of the User-Agent which browser
 
 |          **Plugins** | **Version**    |
 | ---------------------: | :--------------- |
-|  jakarta.servlet-api | v.5.0.0        |
+|  jakarta.servlet.jsp.jstl-api | v.2.0.0        |
 |     maven-war-plugin | v.3.3.1        |
 | tomcat7-maven-plugin | v.2.2          |
-|    junit-jupiter-api | v.5.8.1        |
 |                junit | v.4.13.2       |
 |            slf4j-api | v.2.0.0-alpha1 |
 
@@ -42,7 +41,7 @@ Create a servlet that will detect by the content of the User-Agent which browser
 3. Copy the link below:
 
 ```url
-http://localhost:8080/ui
+http://localhost:8080/parser/detect
 ```
 
 4. Paste it into the address bar

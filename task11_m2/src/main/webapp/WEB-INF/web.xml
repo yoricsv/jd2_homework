@@ -19,7 +19,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>UserAgentParser</servlet-name>
-        <url-pattern>/parser</url-pattern>
+        <url-pattern>/detect</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -28,7 +28,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>index</servlet-name>
-        <url-pattern>/parser-jsp</url-pattern>
+        <url-pattern>/detect-jsp</url-pattern>
     </servlet-mapping>
 
 </web-app>

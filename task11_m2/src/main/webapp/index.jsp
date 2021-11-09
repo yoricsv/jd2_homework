@@ -5,7 +5,7 @@
 %>
 
 <% String agent = (String) request.getHeader("User-agent"); %>
-<%-- <% String useragent = (String) request.getAttribute("uas"); %> --%>
+<% String uas = (String) request.getAttribute("uas"); %>
 
 <!DOCTYPE html>
 <html lang = "en">
@@ -42,9 +42,9 @@
                 <p>
                     Servlet response : 
                     <%
-                        if(request.getAttribute("uas") == null)
+                        if(uas == null)
                             out.println("uas is null");
-                        else if (request.getAttribute("uas").isEmpty())
+                        else if (uas.isEmpty())
                             out.println("uas isn't null, but empty");
                         else
                             out.println(uas);
@@ -55,7 +55,7 @@
                 </p>
 
                 <nav>
-                    <button onclick = "location.href = '/parser'">
+                    <button onclick = "location.href = '/parser/detect'">
                         Update page
                     </button>
                 </nav>
