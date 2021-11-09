@@ -30,6 +30,7 @@ public class UserAgentParserServlet
         try
         {
             req.setAttribute("uas", req.getHeader("User-agent"));
+            
 //            PrintWriter out = resp.getWriter();
 //            String uas = (String) req.getAttribute("uas");
 //            out.println(
@@ -54,7 +55,6 @@ public class UserAgentParserServlet
 //                    "</body>\n" +
 //                    "</html>"
 //            );
-
 
             req.getRequestDispatcher("/index.jsp").forward(req, resp);
 //            getServletContext().getRequestDispatcher("/parser/index.jsp").forward(req, resp);
