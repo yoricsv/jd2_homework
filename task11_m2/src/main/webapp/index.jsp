@@ -50,7 +50,7 @@
                         else
                             out.println("Servlet response: " + uas);
                     --%>
-                    Hello, ${uas} user!
+                    Hello, ${uas}!
                 </p>
 
                 <nav>

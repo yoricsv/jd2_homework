@@ -6,7 +6,7 @@ Create a servlet that will detect by the content of the User-Agent which browser
 
 ---
 
-## CONTENTS:
+## CONTENTS
 
 * [web.xml template][5] structure
 
