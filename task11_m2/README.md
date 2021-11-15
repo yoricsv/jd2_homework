@@ -56,7 +56,7 @@ http://localhost:8080/parser/detect
 
 ## Project UML Class Diagram
 
-<!-- ![UML Class Diagram][4] -->
+![UML Class Diagram][4]
 
 ---
 
@@ -70,6 +70,6 @@ http://localhost:8080/parser/detect
 
 [1]: https://github.com/yoricsv/001_JMaven_/blob/master/res/read/Maven_Configuration.md
 [2]: https://github.com/yoricsv/002_JMvnWebapp_/blob/master/README.md
-[3]: res/img/task10_mod2_01.png
-[7]: res/img/UMLHitCounterServlet.png
+[3]: res/img/task11_mod2.png
+[4]: res/img/UML_Parser.png
 [8]: res/read/web.xml_template_structure.md
