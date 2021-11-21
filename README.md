@@ -11,9 +11,12 @@ Module 2:
 * [Module 2 Task 7][m2t7]
 * [Module 2 Task 8][m2t8] *(finished)*
 * [Module 2 Task 9][m2t9] *(finished)*
-* [Module 2 Task 10][m2t10] *(design UI)*
-* [Module 2 Task 11][m2t11]
+* [Module 2 Task 10][m2t10] *(finished)*
+* [Module 2 Task 11][m2t11] *(not finished yet)*
 * [Module 2 Task 12][m2t12] *(finished)*
+* [Module 3 Task 6][m3t6]
+* [Module 3 Task 7][m3t7]
+* [Module 3 Task 8][m3t8]
 
 [m2t4]: https://github.com/yoricsv/jd2_homework/tree/master/task4_m2
 [m2t5]: https://github.com/yoricsv/jd2_homework/tree/master/task5_m2
@@ -24,3 +27,6 @@ Module 2:
 [m2t10]: https://github.com/yoricsv/jd2_homework/tree/master/task10_m2
 [m2t11]: https://github.com/yoricsv/jd2_homework/tree/master/task11_m2
 [m2t12]: https://github.com/yoricsv/jd2_homework/tree/master/task12_m2
+[m3t6]: https://github.com/yoricsv/jd2_homework/tree/master/task6_m3
+[m3t7]: https://github.com/yoricsv/jd2_homework/tree/master/task7_m3
+[m3t8]: https://github.com/yoricsv/jd2_homework/tree/master/task8_m3
