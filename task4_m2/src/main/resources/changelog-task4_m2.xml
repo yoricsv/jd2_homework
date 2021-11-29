@@ -14,7 +14,7 @@
             CREATE TABLE IF NOT EXISTS t_expenses
             (
                 expenses_id INT(5),
-                pay_date    VARCHAR(20),
+                pay_date    DATE,
                 receiver    INT(5),
                 value       DEC
             );

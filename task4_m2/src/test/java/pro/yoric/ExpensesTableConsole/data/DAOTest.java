@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.junit.After;
 import pro.yoric.ExpensesTableConsole.beans.Expense;
 
+import java.sql.Date;
 import java.sql.SQLException;
 
 import static org.junit.Assert.*;
@@ -45,7 +46,7 @@ public class DAOTest
         Expense newExpense = new Expense();
 
         newExpense.setExpensesId(1234);
-        newExpense.setPayDate("29.11.2021");
+        newExpense.setPayDate(Date.valueOf("29-11-2021").toLocalDate());
         newExpense.setReceiver(1);
         newExpense.setValue(12540.0);
 
@@ -58,7 +59,10 @@ public class DAOTest
         assertNotNull(expense);
 
         assertEquals(1234,         expense.getExpensesId());
-        assertEquals("29.11.2021", expense.getPayDate());
+        assertEquals(
+            Date.valueOf("29-11-2021").toLocalDate(),
+            Date.valueOf(expense.getPayDate()).toLocalDate()
+        );
         assertEquals(1,            expense.getReceiver());
         assertEquals("12540.0",    String.valueOf(expense.getValue()));
 

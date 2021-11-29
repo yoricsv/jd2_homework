@@ -1,16 +1,16 @@
 package pro.yoric.ExpensesTableConsole.beans;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Expense
 {
    // CONSTRUCTORS
    public Expense() { }
    public Expense(
-           int    expenses_id,
-           String pay_date,
-           int    receiver,
-           double value
+           int       expenses_id,
+           LocalDate pay_date,
+           int       receiver,
+           double    value
       )
    {
       this.expenses_id = expenses_id;
@@ -21,19 +21,19 @@ public class Expense
 
 
    // GETTERS
-   public int    getExpensesId()
+   public int       getExpensesId()
    {
       return expenses_id;
    }
-   public String getPayDate()
+   public LocalDate getPayDate()
    {
       return pay_date;
    }
-   public int    getReceiver()
+   public int       getReceiver()
    {
       return receiver;
    }
-   public double getValue()
+   public double    getValue()
    {
       return value;
    }
@@ -44,7 +44,7 @@ public class Expense
    {
       this.expenses_id = expenses_id;
    }
-   public void setPayDate(String pay_date)
+   public void setPayDate(LocalDate pay_date)
    {
       this.pay_date = pay_date;
    }
@@ -72,8 +72,8 @@ public class Expense
    }
 
    // FIELDS
-   private int    expenses_id;
-   private String pay_date;
-   private int    receiver;
-   private double value;
+   private int       expenses_id;
+   private LocalDate pay_date;
+   private int       receiver;
+   private double    value;
 }

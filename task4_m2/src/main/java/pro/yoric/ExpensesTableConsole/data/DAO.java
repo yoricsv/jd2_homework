@@ -31,7 +31,7 @@ public class DAO
 
         ResultSet resultSet   =
             statement.executeQuery(
-                "SELECT "           +
+                "SELECT "               +
                     "pay_date, "        +
                     "value, "           +
                     "name "             +
@@ -49,7 +49,7 @@ public class DAO
             Expense expense =
                 new Expense(
                     resultSet.getInt("expenses_id"),
-                    resultSet.getString("pay_date"),
+                    resultSet.getDate("pay_date").toLocalDate(),
                     resultSet.getInt("receiver_no"),
                     resultSet.getDouble("value")
                 );
@@ -95,7 +95,7 @@ public class DAO
             expense =
                 new Expense(
                     resultSet.getInt("expenses_id"),
-                    resultSet.getString("pay_date"),
+                    resultSet.getDate("pay_date").toLocalDate(),
                     resultSet.getInt("receiver_no"),
                     resultSet.getDouble("value")
                 );
@@ -121,7 +121,7 @@ public class DAO
                 "VALUES (?,?,?,?);"
             );
         statement.setInt   (1, expense.getExpensesId());
-        statement.setString(2, expense.getPayDate());
+        statement.setDate  (2, Date.valueOf(expense.getPayDate()));
         statement.setInt   (3, expense.getReceiver());
         statement.setDouble(4, expense.getValue());
 
@@ -149,7 +149,7 @@ public class DAO
                     ")"              +
                 "VALUES (?,?,?);"
             );
-        statement.setString(1, pay_date);
+        statement.setDate  (2, Date.valueOf(pay_date));
         statement.setInt   (2, receiver);
         statement.setDouble(3, value);
 
