@@ -1,0 +1,50 @@
+<?xml version  = "1.0"
+      encoding = "UTF-8"
+?>
+
+<databaseChangeLog
+    xmlns              = "http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi          = "http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation = "http://www.liquibase.org/xml/ns/dbchangelog
+                          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd"
+>
+
+    <changeSet id = "1" author = "yoric">
+        <sql>
+            CREATE TABLE IF NOT EXISTS t_expenses
+            (
+                expenses_id INT(5),
+                pay_date    VARCHAR(20),
+                receiver    INT(5),
+                value       DEC
+            );
+
+            CREATE TABLE IF NOT EXISTS t_receivers
+            (
+                receiver_no INT(5),
+                name        VARCHAR(255)
+            );
+
+            COMMIT;
+        </sql>
+    </changeSet>
+
+    <changeSet id = "2" author = "yoric">
+        <sql>
+            ALTER TABLE t_expenses
+            ADD
+                PRIMARY KEY (expenses_id),
+            MODIFY expenses_id
+                INT(5) NOT NULL AUTO_INCREMENT;
+
+            ALTER TABLE t_receivers
+            ADD
+                PRIMARY KEY (receiver_no),
+            MODIFY receiver_no
+                INT(5) NOT NULL AUTO_INCREMENT;
+
+            COMMIT;
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>
