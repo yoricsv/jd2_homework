@@ -58,13 +58,13 @@ public class DAOTest
 
         assertNotNull(expense);
 
-        assertEquals(1234,         expense.getExpensesId());
+        assertEquals(1234,      expense.getExpensesId());
         assertEquals(
             Date.valueOf("29-11-2021").toLocalDate(),
             Date.valueOf(expense.getPayDate()).toLocalDate()
         );
-        assertEquals(1,            expense.getReceiver());
-        assertEquals("12540.0",    String.valueOf(expense.getValue()));
+        assertEquals(1,         expense.getReceiver());
+        assertEquals("12540.0", String.valueOf(expense.getValue()));
 
         dao.deleteAllExpenses();
     }

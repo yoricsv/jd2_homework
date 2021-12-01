@@ -3,6 +3,10 @@ package pro.yoric.ExpensesTableConsole.beans;
 public class Receiver
 {
     // CONSTRUCTORS
+    public Receiver(String name)
+    {
+        this.name = name;
+    }
     public Receiver(
             int    receiver_no,
             String name
@@ -14,7 +18,7 @@ public class Receiver
 
 
     // GETTERS
-    public int    getReceiver_no()
+    public int    getReceiverNo()
     {
         return receiver_no;
     }
@@ -25,7 +29,7 @@ public class Receiver
 
 
     // SETTERS
-    public void setReceiver_no(int receiver_no)
+    public void setReceiverNo(int receiver_no)
     {
         this.receiver_no = receiver_no;
     }
