@@ -5,7 +5,7 @@ Enterprise homeworks
 
 ## CONTENTS:
 Module 2: 
-* [Module 2 Task 4][m2t4] *(begin)*
+* [Module 2 Task 4][m2t4] *(in process)*
 * [Module 2 Task 5][m2t5]
 * [Module 2 Task 6][m2t6]
 * [Module 2 Task 7][m2t7]
