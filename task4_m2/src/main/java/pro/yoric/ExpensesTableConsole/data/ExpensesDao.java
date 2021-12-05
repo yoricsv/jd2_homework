@@ -1,17 +1,19 @@
 package pro.yoric.ExpensesTableConsole.data;
 
 import pro.yoric.ExpensesTableConsole.beans.Expense;
+import pro.yoric.ExpensesTableConsole.validation.EasyDBChecker;
+import pro.yoric.ExpensesTableConsole.validation.ISimpleChecker;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * CRUD (Create Read Update Delete)
- */
 public class ExpensesDao
+    extends DAO<Expense>
 {
-    /** CREATE */
+    // INSTANCES
+    ISimpleChecker<Expense> checker = new EasyDBChecker<>();
+
     // CONSTRUCTORS
     public ExpensesDao()
     {
@@ -19,18 +21,65 @@ public class ExpensesDao
     }
     public ExpensesDao(boolean useTestDataSource)
     {
-        dataSource = new DataSource(useTestDataSource);
+        DataSource dataSource = new DataSource(useTestDataSource);
     }
 
-    /** READ */
-    public List<Expense> getAllExpenses()
+    /** CREATE */
+    @Override
+    public void createRecord(Expense expense)
         throws SQLException
     {
-        Connection connection = dataSource.getConnection();
-        Statement statement   = connection.createStatement();
+        expenses_id = expense.getExpensesId();
+        pay_date    = Date.valueOf(expense.getPayDate());
+        receiver_no = expense.getReceiver();
+        value       = expense.getValue();
 
-        ResultSet resultSet   =
-            statement.executeQuery(
+        handleQuery(
+            "INSERT INTO "      +
+                "t_expenses "   +
+            "VALUES ("          +
+                expenses_id     +
+                ","             +
+                pay_date        +
+                ","             +
+                receiver_no     +
+                ","             +
+                value           +
+            ");"
+        );
+    }
+    public void createRecord(
+            String payDate,
+            int    receiver,
+            Double value
+        )
+        throws SQLException
+    {
+        handleQuery(
+            "INSERT INTO "       +
+                "t_expenses ("   +
+                    "pay_date, " +
+                    "receiver, " +
+                    "value"      +
+                ")"              +
+            "VALUES ("           +
+                payDate          +
+                ","              +
+                receiver         +
+                ","              +
+                value            +
+            ");"
+        );
+    }
+
+
+    /** READ */
+    @Override
+    public List<Expense> getAllRecords()
+        throws SQLException
+    {
+        return
+            handleQueryGetList(
                 "SELECT "               +
                     "pay_date, "        +
                     "value, "           +
@@ -41,36 +90,13 @@ public class ExpensesDao
                 "WHERE "                +
                     "receiver = receiver_no;"
             );
-
-        List<Expense> expenseList = new ArrayList<>();
-
-        while (resultSet.next())
-        {
-            Expense expense =
-                new Expense(
-                    resultSet.getInt("expenses_id"),
-                    resultSet.getDate("pay_date").toLocalDate(),
-                    resultSet.getInt("receiver_no"),
-                    resultSet.getDouble("value")
-                );
-
-            expenseList.add(expense);
-
-//            System.out.println(expense.toString());
-        }
-
-        statement.close();
-        connection.close();
-
-        return expenseList;
     }
-    public Expense getExpenseById(int expenses_id)
+    @Override
+    public Expense getRecord(int recordId)
         throws SQLException
     {
-        Connection connection = dataSource.getConnection();
-
-        PreparedStatement statement =
-            connection.prepareStatement(
+        return
+            handleQueryGetObject(
                 "SELECT "               +
                     "expenses_id, "     +
                     "pay_date, "        +
@@ -80,117 +106,98 @@ public class ExpensesDao
                     "t_expenses, "      +
                     "t_receivers "      +
                 "WHERE "                +
-                    "expenses_id = ? "  +
+                    "expenses_id = "    + recordId +
                 "AND "                  +
                     "receiver = receiver_no;"
             );
-        statement.setInt(1, expenses_id);
-
-        ResultSet resultSet = statement.executeQuery();
-
-        Expense expense = null;
-
-        if(resultSet.next())
-        {
-            expense =
-                new Expense(
-                    resultSet.getInt("expenses_id"),
-                    resultSet.getDate("pay_date").toLocalDate(),
-                    resultSet.getInt("receiver_no"),
-                    resultSet.getDouble("value")
-                );
-        }
-
-        statement.close();
-        connection.close();
-
-        return expense;
     }
 
 
     /** UPDATE */
-    public void saveNewExpense(Expense expense)
+    @Override
+    public void updateRecord(int recordId)
         throws SQLException
     {
-        Connection connection = dataSource.getConnection();
+        Expense expense = getRecord(recordId);
 
-        PreparedStatement statement =
-            connection.prepareStatement(
-                "INSERT INTO "      +
-                    "t_expenses "   +
-                "VALUES (?,?,?,?);"
-            );
-        statement.setInt   (1, expense.getExpensesId());
-        statement.setDate  (2, Date.valueOf(expense.getPayDate()));
-        statement.setInt   (3, expense.getReceiver());
-        statement.setDouble(4, expense.getValue());
+        checker.isDBRecordExist(expense, recordId);
 
-        statement.executeUpdate();
+        expenses_id = expense.getExpensesId();
+        pay_date    = Date.valueOf(expense.getPayDate());
+        receiver_no = expense.getReceiver();
+        value       = expense.getValue();
 
-        statement.close();
-        connection.close();
-    }
-    public void saveNewExpense(
-            String pay_date,
-            int    receiver,
-            Double value
-        )
-        throws SQLException
-    {
-        Connection connection = dataSource.getConnection();
-
-        PreparedStatement statement =
-            connection.prepareStatement(
-                "INSERT INTO "      +
-                    "t_expenses ("   +
-                        "pay_date, " +
-                        "receiver, " +
-                        "value"      +
-                    ")"              +
-                "VALUES (?,?,?);"
-            );
-        statement.setDate  (2, Date.valueOf(pay_date));
-        statement.setInt   (2, receiver);
-        statement.setDouble(3, value);
-
-        statement.executeUpdate();
-
-        statement.close();
-        connection.close();
+        handleQuery(
+            "UPDATE "            +
+                "t_expenses ("   +
+            "SET "               +
+                "pay_date = "    + pay_date    +
+                "receiver = "    + receiver_no +
+                "value    = "    + value       +
+            "WHERE "             +
+                "expenses_id = " + expenses_id + " ;"
+        );
     }
 
 
     /** DELETE */
-    public void deleteAllExpenses()
+    @Override
+    public void deleteAllRecords()
         throws SQLException
     {
-        Connection connection = dataSource.getConnection();
-
-        connection.prepareStatement(
-            "TRUNCATE TABLE t_expenses"
-        ).execute();
-
-        connection.close();
+        handleQuery(
+            "TRUNCATE TABLE " +
+                "t_expenses"
+        );
     }
-    public void deleteExpenseById(int expenses_id)
+    @Override
+    public void deleteRecord(int recordId)
         throws SQLException
     {
-        Connection connection = dataSource.getConnection();
+        handleQuery(
+            "DELETE FROM "       +
+                "t_expenses "    +
+            "WHERE "             +
+                "expenses_id = " + recordId + ";"
+        );
+    }
 
-        PreparedStatement statement =
-            connection.prepareStatement(
-                "DELETE FROM "      +
-                    "t_expenses "   +
-                "WHERE "            +
-                    "expenses_id = ?;"
+    private Expense getBean(ResultSet resultSet)
+            throws SQLException
+    {
+        return
+            !resultSet.next() ?
+                null          :
+                new Expense(
+                    resultSet.getInt   ("expenses_id"),
+                    resultSet.getDate  ("pay_date").toLocalDate(),
+                    resultSet.getInt   ("receiver_no"),
+                    resultSet.getDouble("value")
+                );
+    }
+    private List<Expense> getList(ResultSet resultSet)
+            throws SQLException
+    {
+        List<Expense> list = new ArrayList<>();
+
+        while (resultSet.next())
+        {
+            list.add(
+                new Expense(
+                    resultSet.getInt   ("expenses_id"),
+                    resultSet.getDate  ("pay_date").toLocalDate(),
+                    resultSet.getInt   ("receiver_no"),
+                    resultSet.getDouble("value")
+                )
             );
-        statement.setInt(1, expenses_id);
-        statement.execute();
+        }
 
-        statement.close();
-        connection.close();
+        return list;
     }
 
     // FIELDS
-    private final DataSource dataSource;
+    private int    expenses_id;
+    private Date   pay_date;
+    private int    receiver_no;
+    private double value;
 }

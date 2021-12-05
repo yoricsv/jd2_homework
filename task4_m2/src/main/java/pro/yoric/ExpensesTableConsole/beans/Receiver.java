@@ -1,7 +1,6 @@
 package pro.yoric.ExpensesTableConsole.beans;
 
-public class Receiver
-{
+public class Receiver implements IObjectModel {
     // CONSTRUCTORS
     public Receiver(String name)
     {

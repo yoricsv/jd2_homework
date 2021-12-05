@@ -13,13 +13,13 @@ import static org.junit.Assert.*;
 public class DAOTest
 {
     // INSTANCES
-    DAO dao;
+    DAO<Expense> dao;
 
     @Before
     public void setUp()
         throws Exception
     {
-        dao = new DAO(true);
+        dao = new DAO<Expense>(true);
     }
 
     @Test
@@ -51,10 +51,10 @@ public class DAOTest
         newExpense.setValue(12540.0);
 
         // WHEN
-        dao.saveNewExpense(newExpense);
+        dao.createRecord(newExpense);
 
         // THEN
-        Expense expense = dao.getAllExpenses().get(1234);
+        Expense expense = (Expense) dao.getAllRecords().get(1234);
 
         assertNotNull(expense);
 
@@ -66,7 +66,7 @@ public class DAOTest
         assertEquals(1,         expense.getReceiver());
         assertEquals("12540.0", String.valueOf(expense.getValue()));
 
-        dao.deleteAllExpenses();
+        dao.deleteAllRecords();
     }
 
     @Test

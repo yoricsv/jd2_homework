@@ -1,13 +1,22 @@
 package pro.yoric.ExpensesTableConsole.data;
 
 import pro.yoric.ExpensesTableConsole.beans.Receiver;
+import pro.yoric.ExpensesTableConsole.validation.EasyDBChecker;
+import pro.yoric.ExpensesTableConsole.validation.ISimpleChecker;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * CRUD (Create Read Update Delete)
+ */
 public class ReceiversDao
+    extends DAO<Receiver>
 {
+    // INSTANCES
+    ISimpleChecker<Receiver> checker = new EasyDBChecker<>();
+
     /** CREATE */
     // CONSTRUCTORS
     public ReceiversDao()
@@ -16,153 +25,149 @@ public class ReceiversDao
     }
     public ReceiversDao(boolean useTestDataSource)
     {
-        dataSource = new DataSource(useTestDataSource);
+        DataSource dataSource = new DataSource(useTestDataSource);
     }
+
+    @Override
+    public void createRecord(Receiver receiver)
+        throws SQLException
+    {
+        receiver_no = receiver.getReceiverNo();
+        name        = receiver.getName();
+
+        handleQuery(
+            "INSERT INTO "      +
+                "t_receivers "  +
+            "VALUES ("          +
+                receiver_no     +
+                ","             +
+                name            +
+            ");"
+        );
+    }
+
+    public void createRecord(String name)
+        throws SQLException
+    {
+        handleQuery(
+            "INSERT INTO "      +
+                "t_receivers "  +
+            "VALUES ("          +
+                name            +
+            ");"
+        );
+    }
+
 
     /** READ */
-    public List<Receiver> getAllReceivers()
+    @Override
+    public List<Receiver> getAllRecords()
         throws SQLException
     {
-        Connection connection = dataSource.getConnection();
-        Statement statement   = connection.createStatement();
-
-        ResultSet resultSet   =
-            statement.executeQuery(
-                "SELECT "               +
-                    "receiver_no, "     +
-                    "name "             +
-                "FROM "                 +
+        return
+            handleQueryGetList(
+                "SELECT "           +
+                    "receiver_no, " +
+                    "name "         +
+                "FROM "             +
                     "t_receivers;"
             );
-
-        List<Receiver> receiversList = new ArrayList<>();
-
-        while (resultSet.next())
-        {
-            Receiver receiver =
-                new Receiver(
-                    resultSet.getInt   ("receiver_no"),
-                    resultSet.getString("name")
-                );
-
-            receiversList.add(receiver);
-
-//            System.out.println(receiver.toString());
-        }
-
-        statement.close();
-        connection.close();
-
-        return receiversList;
     }
-    public Receiver getReceiverById(int receiverNumber)
+    @Override
+    public Receiver getRecord(int recordId)
         throws SQLException
     {
-        Connection connection = dataSource.getConnection();
-
-        PreparedStatement statement =
-            connection.prepareStatement(
-                "SELECT "               +
-                    "receiver_no, "     +
-                    "name "             +
-                "FROM "                 +
-                    "t_receivers "      +
-                "WHERE "                +
-                    "receiver_no = ? "
+        return
+            handleQueryGetObject(
+                "SELECT "            +
+                    "receiver_no, "  +
+                    "name "          +
+                "FROM "              +
+                    "t_receivers "   +
+                "WHERE "             +
+                    "receiver_no = " + recordId + ";"
             );
-        statement.setInt(1, receiverNumber);
-
-        ResultSet resultSet = statement.executeQuery();
-
-        Receiver receiver = null;
-
-        if(resultSet.next())
-        {
-            receiver =
-                new Receiver(
-                    resultSet.getInt   ("receiver_no"),
-                    resultSet.getString("name")
-                );
-        }
-
-        statement.close();
-        connection.close();
-
-        return receiver;
     }
 
 
     /** UPDATE */
-    public void saveNewReceiver(Receiver receiver)
+    @Override
+    public void updateRecord(int recordId)
         throws SQLException
     {
-        Connection connection = dataSource.getConnection();
+        Receiver receiver = getRecord(recordId);
 
-        PreparedStatement statement =
-            connection.prepareStatement(
-                "INSERT INTO "      +
-                    "t_receivers "   +
-                "VALUES (?,?);"
-            );
-        statement.setInt    (1, receiver.getReceiverNo());
-        statement.setString (2, receiver.getName());
+        checker.isDBRecordExist(receiver, recordId);
 
-        statement.executeUpdate();
+        receiver_no = receiver.getReceiverNo();
+        name        = receiver.getName();
 
-        statement.close();
-        connection.close();
-    }
-    public void saveNewReceiver(String receiverName)
-        throws SQLException
-    {
-        Connection connection = dataSource.getConnection();
-
-        PreparedStatement statement =
-            connection.prepareStatement(
-                "INSERT INTO "           +
-                    "t_receivers (name)" +
-                "VALUES (?);"
-            );
-        statement.setString (1, receiverName);
-
-        statement.executeUpdate();
-
-        statement.close();
-        connection.close();
+        handleQuery(
+            "UPDATE "            +
+                "t_receivers ("  +
+            "SET "               +
+                "receiver_no = " + receiver_no +
+                ", "             +
+                "name = "        + name        +
+            "WHERE "             +
+                "receiver_no = " + recordId    + " ;"
+        );
     }
 
 
     /** DELETE */
-    public void deleteAllReceivers()
+    @Override
+    public void deleteAllRecords()
         throws SQLException
     {
-        Connection connection = dataSource.getConnection();
-
-        connection.prepareStatement(
-            "TRUNCATE TABLE t_receivers"
-        ).execute();
-
-        connection.close();
+        handleQuery(
+            "TRUNCATE TABLE " +
+                "t_receivers"
+        );
     }
-    public void deleteReceiverById(int receiverNumber)
+    @Override
+    public void deleteRecord(int recordId)
         throws SQLException
     {
-        Connection connection = dataSource.getConnection();
+        handleQuery(
+            "DELETE FROM "       +
+                "t_receivers "   +
+            "WHERE "             +
+                "receiver_no = " + recordId + ";"
+        );
+    }
 
-        PreparedStatement statement =
-            connection.prepareStatement(
-                "DELETE FROM "      +
-                    "t_receivers "   +
-                "WHERE "            +
-                    "receiver_no = ?;"
+
+    private List<Receiver> getList(ResultSet resultSet)
+            throws SQLException
+    {
+        List<Receiver> list = new ArrayList<>();
+
+        while (resultSet.next())
+        {
+            list.add(
+                new Receiver(
+                    resultSet.getInt   ("receiver_no"),
+                    resultSet.getString("name")
+                )
             );
-        statement.setInt(1, receiverNumber);
-        statement.execute();
+        }
 
-        statement.close();
-        connection.close();
+        return list;
+    }
+    private Receiver getBean(ResultSet resultSet)
+            throws SQLException
+    {
+        return
+            !resultSet.next() ?
+                null          :
+                new Receiver(
+                    resultSet.getInt   ("receiver_no"),
+                    resultSet.getString("name")
+                );
     }
 
     // FIELDS
-    private final DataSource dataSource;
+    private int    receiver_no;
+    private String name;
 }
