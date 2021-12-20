@@ -58,7 +58,7 @@ public class DAOTest
 
         assertNotNull(expense);
 
-        assertEquals(1234,      expense.getExpensesId());
+        assertEquals(1234,      expense.getId());
         assertEquals(
             Date.valueOf("29-11-2021").toLocalDate(),
             Date.valueOf(expense.getPayDate()).toLocalDate()

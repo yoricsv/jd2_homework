@@ -30,7 +30,7 @@ public class ExpensesController
             System.out.format(
                 "| %5d | %20s | %30s | %.2f |\n" +
                 separator,
-                expense.getExpensesId(),
+                expense.getId(),
                 expense.getPayDate(),
                 expense.getReceiver(),//.getName(),
                 expense.getValue()

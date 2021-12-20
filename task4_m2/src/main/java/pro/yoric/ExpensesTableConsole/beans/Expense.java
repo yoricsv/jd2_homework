@@ -2,7 +2,9 @@ package pro.yoric.ExpensesTableConsole.beans;
 
 import java.time.LocalDate;
 
-public class Expense implements IObjectModel {
+public class Expense
+     implements IObjectModel<Expense>
+{
    // CONSTRUCTORS
    public Expense() { }
    public Expense(
@@ -20,7 +22,8 @@ public class Expense implements IObjectModel {
 
 
    // GETTERS
-   public int       getExpensesId()
+   @Override
+   public int       getId()
    {
       return expenses_id;
    }
@@ -69,6 +72,7 @@ public class Expense implements IObjectModel {
               ", value = "     + value       +
            '}';
    }
+
 
    // FIELDS
    private int       expenses_id;

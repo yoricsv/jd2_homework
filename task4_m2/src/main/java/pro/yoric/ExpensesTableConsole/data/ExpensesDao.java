@@ -29,7 +29,7 @@ public class ExpensesDao
     public void createRecord(Expense expense)
         throws SQLException
     {
-        expenses_id = expense.getExpensesId();
+        expenses_id = expense.getId();
         pay_date    = Date.valueOf(expense.getPayDate());
         receiver_no = expense.getReceiver();
         value       = expense.getValue();
@@ -122,7 +122,7 @@ public class ExpensesDao
 
         checker.isDBRecordExist(expense, recordId);
 
-        expenses_id = expense.getExpensesId();
+        expenses_id = expense.getId();
         pay_date    = Date.valueOf(expense.getPayDate());
         receiver_no = expense.getReceiver();
         value       = expense.getValue();

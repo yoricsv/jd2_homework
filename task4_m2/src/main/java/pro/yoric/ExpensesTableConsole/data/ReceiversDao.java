@@ -32,7 +32,7 @@ public class ReceiversDao
     public void createRecord(Receiver receiver)
         throws SQLException
     {
-        receiver_no = receiver.getReceiverNo();
+        receiver_no = receiver.getId();
         name        = receiver.getName();
 
         handleQuery(
@@ -99,7 +99,7 @@ public class ReceiversDao
 
         checker.isDBRecordExist(receiver, recordId);
 
-        receiver_no = receiver.getReceiverNo();
+        receiver_no = receiver.getId();
         name        = receiver.getName();
 
         handleQuery(

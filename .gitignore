@@ -1,3 +1,6 @@
+# My Own
+res/tmp/
+
 # Artifact Package Files
 *.jar
 *.war
@@ -17,6 +20,7 @@ logs/
 
 # IntelliJ files
 .idea/
+.jpb/
 *.iws
 *.iml
 *.ipr

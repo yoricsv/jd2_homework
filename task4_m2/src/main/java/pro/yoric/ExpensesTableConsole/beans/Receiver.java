@@ -1,6 +1,8 @@
 package pro.yoric.ExpensesTableConsole.beans;
 
-public class Receiver implements IObjectModel {
+public class Receiver
+    implements IObjectModel<Receiver>
+{
     // CONSTRUCTORS
     public Receiver(String name)
     {
@@ -17,7 +19,8 @@ public class Receiver implements IObjectModel {
 
 
     // GETTERS
-    public int    getReceiverNo()
+    @Override
+    public int    getId()
     {
         return receiver_no;
     }
